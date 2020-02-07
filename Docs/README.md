@@ -1,5 +1,5 @@
 ## Содержание
-1. [Требования](../docs/requirements.md)  
-2. [Диаграммы](../docs/Image/diagrams)  
-3. [Мокапы](../docs/Image/mockups)  
+1. [Требования](../Docs/requirements.md)  
+2. [Диаграммы](../Docs/Image/diagrams)  
+3. [Мокапы](../Docs/Image/mockups)  
 
