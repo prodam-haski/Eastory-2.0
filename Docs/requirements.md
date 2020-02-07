@@ -66,7 +66,7 @@
 
 ## 2.3 Интерфейс пользователя
   
-![Основной экран](../Docs/Image/mockups/New Mockup 1.png)  
+![Основной экран](../Docs/Image/mockups/StartWindow.png)  
   
  Функция |Действие 
 --- | :-: 
