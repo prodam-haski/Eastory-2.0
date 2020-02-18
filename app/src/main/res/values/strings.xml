@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Eastory</string>
+
+    <string name="start_ru">Начать</string>
+    <string name="change_ru">Сменить язык</string>
+    <string name="start_by">Пачаць</string>
+    <string name="change_by">Змяніць мову</string>
+    <string name="answer_by">Адказаць</string>
+    <string name="answer_ru">Ответить</string>
+    <string name="network_ru">Тестирование по сети</string>
+    <string name="network_by">Тэставанне па сетцы</string>
+
+
+    <string name="antiquity_ru">История Беларуси с древнейших времен до середины ХІІІ в.</string>
+    <string name="antiquity_by">Гісторыя Беларусі са старажытных часоў да сярэдзіны ХІІІ ст.</string>
+    <string name="medival_ru">История Беларуси в середине ХІІІ — первой половине XVI в.</string>
+    <string name="medival_by">Гісторыя Беларусі ў сярэдзіне ХІІІ — першай палове XVI ст.</string>
+    <string name="new_ru">Белорусские земли во второй половине ХVІ – ХVІІІ в.</string>
+    <string name="new_by">Беларускія землі ў другой палове ХVІ-ХVІІІ ст.</string>
+    <string name="newtime_ru">История Беларуси в ХІХ — начале ХХ в.</string>
+    <string name="newtime_by">Гісторыя Беларусі ў ХІХ — пачатку ХХ ст.</string>
+    <string name="soviets_ru">Беларусь в Советский период.</string>
+    <string name="soviets_by">Беларусь у Савецкі перыяд.</string>
+    <string name="newesttime_ru">Республика Беларусь в 1991–2013 гг.</string>
+    <string name="newesttime_by">Рэспубліка Беларусь у 1991–2013 гг.</string>
+    <string name="common_ru">Комплексный тест.</string>
+    <string name="common_by">Комплексны тэст</string>
+
+</resources>

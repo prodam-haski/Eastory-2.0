@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Eastory2.OldVersion.StartActivities.MainActivity">
+
+    <ImageView
+        android:id="@+id/mainBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:src="@drawable/startbackground" />
+
+    <LinearLayout
+        android:id="@+id/startLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/startButton"
+            android:layout_width="238dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/style_btn_start"
+            android:text="@string/start_ru"
+            android:textAllCaps="false"
+            android:textColor="@color/stred"
+            android:textStyle="italic" />
+
+
+        <Button
+            android:id="@+id/networkButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/style_btn_start"
+            android:text="@string/network_ru"
+            android:textAllCaps="false"
+            android:textColor="@color/stred"
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/changeLanguage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/style_btn_start"
+            android:text="@string/change_ru"
+            android:textAllCaps="false"
+            android:textColor="@color/stred"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+</RelativeLayout>
