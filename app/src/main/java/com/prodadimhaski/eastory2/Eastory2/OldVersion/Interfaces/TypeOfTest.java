@@ -13,28 +13,22 @@ public interface TypeOfTest {
     class TestSetting{
         /*type of test   0- common 1-antiquity 2-medival 3-newtime1 4 -newtime2 5-soviets 6-newest*/
         int type;
+        String period;
 
         public int getType(){return type;}
         public void setType(int value){type=value;}
+        public String getPeriod(){return  period;}
 
-       public int backgroundInstall() {
-           switch (type) {
-               case 0:
-                   return R.drawable.commonback;
-               case 1:
-                   return R.drawable.polotsk1;
-               case 2:
-                   return R.drawable.polotsk2;
-               case 3:
-                   return R.drawable.new1;
-               case 4:
-                   return R.drawable.newback;
-               case 5:
-                   return R.drawable.newestback;
-               case 6:
-                   return R.drawable.library;
-           }
-           return 0;
-       }
+        public void setPeriod(){
+            switch (type){
+                //  case 0: listTask.add(createTask());break;
+                case 1: period = "TaskAntiquity";break;
+                case 2: period = "TaskMedival";break;
+                case 3: period = "TaskNew1";break;
+                case 4: period = "TaskNew2";break;
+                case 5: period = "TaskSoviets";break;
+                case 6: period = "TaskNewest";break;
+            }
+        }
     }
 }

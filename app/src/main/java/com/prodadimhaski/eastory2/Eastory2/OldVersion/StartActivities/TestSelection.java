@@ -29,7 +29,7 @@ public class TestSelection extends AppCompatActivity implements Language, TypeOf
         final Button buttonNew2 = (Button)findViewById(R.id.buttonNew2);
         final Button buttonSoviets = (Button)findViewById(R.id.buttonSoviets);
         final Button buttonNewest = (Button)findViewById(R.id.buttonNewest);
-        final ImageButton buttonBack = (ImageButton)findViewById(R.id.buttonBack);
+
 
         if(change.getLanguage().equals("by")){
             buttonCommon.setText(R.string.common_by);
@@ -41,113 +41,34 @@ public class TestSelection extends AppCompatActivity implements Language, TypeOf
             buttonNewest.setText(R.string.newesttime_by);
         }
 
-        buttonBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                    Intent intent = new Intent(TestSelection.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }catch (Exception e){}
-            }
-        });
+        Button buttons[] = new Button[] {buttonCommon, buttonAnciety,
+                buttonMedival, buttonNew1, buttonNew2, buttonSoviets, buttonNewest};
 
-        buttonCommon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                    setting.setType(0);
-                    Intent intent = new Intent(TestSelection.this, TestWindow.class);
-                    startActivity(intent);
-                    finish();
-                }catch (Exception e){}
-            }
-        });
-
-        buttonAnciety.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                    setting.setType(1);
-                    Intent intent = new Intent(TestSelection.this, TestWindow.class);
-                    startActivity(intent);
-                    finish();
-                }catch (Exception e){}
-            }
-        });
-
-        buttonMedival.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                    setting.setType(2);
-                    Intent intent = new Intent(TestSelection.this, TestWindow.class);
-                    startActivity(intent);
-                    finish();
-                }catch (Exception e){}
-            }
-        });
-
-        buttonNew1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                    setting.setType(3);
-                    Intent intent = new Intent(TestSelection.this, TestWindow.class);
-                    startActivity(intent);
-                    finish();
-                }catch (Exception e){}
-            }
-        });
-
-        buttonNew2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                    setting.setType(4);
-                    Intent intent = new Intent(TestSelection.this, TestWindow.class);
-                    startActivity(intent);
-                    finish();
-                }catch (Exception e){}
-            }
-        });
-
-        buttonSoviets.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                    setting.setType(5);
-                    Intent intent = new Intent(TestSelection.this, TestWindow.class);
-                    startActivity(intent);
-                    finish();
-                }catch (Exception e){}
-            }
-        });
-
-        buttonNewest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                    setting.setType(6);
-                    Intent intent = new Intent(TestSelection.this, TestWindow.class);
-                    startActivity(intent);
-                    finish();
-                }catch (Exception e){}
-            }
-        });
+        for (int i = 0; i < buttons.length; i ++) {
+            buttons[i].setOnClickListener(startTest(i));
+        }
 
         Window w=getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+    private View.OnClickListener startTest(final int type) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setting.setType(type);
+                setting.setPeriod();
+                Intent intent = new Intent(getApplicationContext(), TestWindow.class);
+                startActivity(intent);
+            }
+        };
     }
 
     //System button back
 
     @Override
     public void onBackPressed(){
-        try{
-            Intent intent = new Intent(TestSelection.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        }catch (Exception e){}
+        finish();
     }
 }
+

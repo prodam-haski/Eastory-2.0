@@ -1,175 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:background="#e0e0e0"
+    tools:context=".Eastory2.OldVersion.TestActivities.TestWindow">
 
     <ImageView
         android:id="@+id/testBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/container21"
+    <Button
+        android:id="@+id/buttonPrevios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="1"
+        android:background="@android:drawable/ic_media_rew"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_weight="1"
+        android:background="@android:drawable/ic_media_ff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/buttonAnswer"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/style_btn_start"
+        android:text="@string/answer_ru"
+        android:textAllCaps="false"
+        android:textColor="@color/stred"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/buttonNext"
+        app:layout_constraintStart_toEndOf="@id/buttonPrevios" />
+
+    <RadioGroup
+        android:id="@+id/radioButtons"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@id/buttonAnswer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <LinearLayout
-            android:id="@+id/container22"
+        <RadioButton
+            android:id="@+id/radioButton1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:layout_weight="1"
+            android:background="@drawable/style_btn_answer"
+            android:text="RadioButtondsadsadasasfvbgdbdsdascdff33342"
+            android:textColor="@color/answerColor"
+            android:textSize="20dp" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/buttonImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:drawable/ic_menu_gallery"
-
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-
-                android:layout_centerHorizontal="true">
-
-                <Button
-                    android:id="@+id/buttonDescription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:drawable/ic_menu_help" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/container23"
+        <RadioButton
+            android:id="@+id/radioButton2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/style_btn_answer"
+            android:text="RadioButton34222222222243542524dsgsfdsfsdf"
+            android:textColor="@color/answerColor"
+            android:textSize="20dp" />
 
-            <TextView
-                android:id="@+id/textTask"
-                android:layout_width="match_parent"
-                android:layout_height="398dp"
-                android:textSize="20dp"
-                android:gravity="center"
-                android:background="@drawable/style_task_field"
-                android:textColor="@color/answerColor"
-                android:text="TextViewadsssssssssssssssssssssssssssfsddfhajkfhakfjaklckncmncajksncjkanjcnasckadajnajkadjcknadjkcnjadknc" />
+        <RadioButton
+            android:id="@+id/radioButton3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/style_btn_answer"
+            android:text="RadioButtonfeewrwe"
+            android:textColor="@color/answerColor"
+            android:textSize="20dp" />
 
-            <LinearLayout
-                android:id="@+id/container24"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+        <RadioButton
+            android:id="@+id/radioButton4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/style_btn_answer"
+            android:text="RadioButtonfsdfdsfsdfsdfsd"
+            android:textColor="@color/answerColor"
+            android:textSize="20dp" />
+    </RadioGroup>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+    <Button
+        android:id="@+id/buttonDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="@android:drawable/ic_menu_help"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="180dp">
+    <Button
+        android:id="@+id/buttonImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="@android:drawable/ic_menu_gallery"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-                        <RadioButton
-                            android:id="@+id/radioButton1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textColor="@color/answerColor"
-                            android:textSize="20dp"
-                            android:background="@drawable/style_btn_answer"
-                            android:text="RadioButtondsadsadasasfvbgdbdsdascdff33342" />
 
-                        <RadioButton
-                            android:id="@+id/radioButton2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textColor="@color/answerColor"
-                            android:textSize="20dp"
-                            android:background="@drawable/style_btn_answer"
-                            android:text="RadioButton34222222222243542524dsgsfdsfsdf" />
+    <TextView
+        android:id="@+id/textTask"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/style_task_field"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="TextViewadsssssssssssssssssssssssssssfsddfhajkfhakfjaklckncmncajksncjkanjcnasckadajnajkadjcknadjkcnjadknc"
+        android:textColor="@color/answerColor"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/radioButtons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonDescription" />
 
-                        <RadioButton
-                            android:id="@+id/radioButton3"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textColor="@color/answerColor"
-                            android:textSize="20dp"
-                            android:background="@drawable/style_btn_answer"
-                            android:text="RadioButtonfeewrwe" />
 
-                        <RadioButton
-                            android:id="@+id/radioButton4"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/answerColor"
-                            android:layout_weight="1"
-                            android:textSize="20dp"
-                            android:background="@drawable/style_btn_answer"
-                            android:text="RadioButtonfsdfdsfsdfsdfsd" />
-                    </RadioGroup>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="69dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <Button
-                            android:id="@+id/buttonPrevios"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@android:drawable/ic_media_rew" />
-
-                        <Button
-                            android:id="@+id/buttonAnswer"
-                            android:layout_width="197dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/style_btn_start"
-                            android:text="@string/answer_ru"
-                            android:textAllCaps="false"
-                            android:textColor="@color/stred"
-                            android:textStyle="italic" />
-
-                        <Button
-                            android:id="@+id/buttonNext"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@android:drawable/ic_media_ff" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-        </LinearLayout>
-
-    </LinearLayout>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

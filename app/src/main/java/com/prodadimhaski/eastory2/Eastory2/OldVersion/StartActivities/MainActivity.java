@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements Language {
                 try{
                     Intent intent = new Intent(MainActivity.this, TestSelection.class);
                     startActivity(intent);
-                    finish();
 
                 }catch (Exception e){}
             }

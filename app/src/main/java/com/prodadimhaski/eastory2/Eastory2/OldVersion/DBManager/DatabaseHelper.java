@@ -25,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements TypeOfTest {
 
     private static String DB_PATH; // полный путь к базе данных
     private static String DB_NAME = "ForEastory.db";
-    private static final int SCHEMA = 1; // версия базы данных
+    private static final int SCHEMA = 2; // версия базы данных
 
     // названия столбцов
     static final String COLUMN_ID = "_id";
