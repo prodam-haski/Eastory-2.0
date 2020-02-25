@@ -4,14 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -136,18 +141,29 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
                     else Toast.makeText(TestWindow.this, R.string.noImage_by, Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Dialog imageDialog = new Dialog(TestWindow.this);
-                    imageDialog.setContentView(R.layout.image_window);
+                    Dialog imageWindow = new Dialog(TestWindow.this);
+                    imageWindow.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    imageWindow.getWindow().setBackgroundDrawable(
+                            new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                    imageWindow.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialogInterface) {
+                            //nothing;
+                        }
+                    });
 
-                    ImageView imageTask = findViewById(R.id.imageTask);
-                   // imageTask.setImageResource(tasks[taskNumber].getImage());
 
+                    ImageView imageTask = new ImageView(TestWindow.this);
                     Bitmap imageResult = BitmapFactory.decodeByteArray(tasks[taskNumber].getImage(),0,tasks[taskNumber].getImage().length);
-                    System.out.println(tasks[taskNumber].getImage().toString());
-                    //imageTask.
-
                     imageTask.setImageBitmap(imageResult);
-                    imageDialog.show();
+                    imageWindow.addContentView(imageTask, new RelativeLayout.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.MATCH_PARENT));
+                    imageWindow.show();
+                    int width = (int)(getResources().getDisplayMetrics().widthPixels*0.90);
+                    int height = (int)(getResources().getDisplayMetrics().heightPixels*0.90);
+
+                    imageWindow.getWindow().setLayout(width, height);
                 }
             }
         });
