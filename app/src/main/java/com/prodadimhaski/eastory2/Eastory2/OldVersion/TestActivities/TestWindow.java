@@ -78,7 +78,8 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
         initButtons();
 
         TaskManager manager = new TaskManager(getApplicationContext());
-        tasks = manager.createList();
+        if(setting.getType()==0)tasks = manager.createMixedList();
+        else tasks= manager.createList();
 
         paint();
     }
@@ -195,9 +196,9 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
         }
 
         private void toNext () {
-            if (tapCounter == 10) finishTest();
+            if (tapCounter == setting.getSizeOfTest()) finishTest();
             else {
-                if (taskNumber == 9) taskNumber = 0;
+                if (taskNumber == setting.getSizeOfTest()-1) taskNumber = 0;
                 else taskNumber++;
                 if (control.getIsAnswered(taskNumber)) {
                     toNext();
@@ -205,9 +206,9 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
             }
         }
         private void toPrev () {
-            if (tapCounter == 10) finishTest();
+            if (tapCounter == setting.getSizeOfTest()) finishTest();
             else {
-                if (taskNumber == 0) taskNumber = 9;
+                if (taskNumber == 0) taskNumber = setting.getSizeOfTest()-1;
                 else taskNumber--;
                 if (control.getIsAnswered(taskNumber)) {
                     toPrev();

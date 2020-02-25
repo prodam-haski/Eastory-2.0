@@ -14,8 +14,7 @@ import java.util.Random;
 
 public class TaskManager implements Language, TypeOfTest {
 
-    //private List<Task> listTask;
-    private Task[] listTask = new Task[SIZE];
+    private Task[] listTask = new Task[setting.getSizeOfTest()];
     private DatabaseHelper myDBHelper;
     private SQLiteDatabase myDb;
     private Context context;
@@ -33,15 +32,40 @@ public class TaskManager implements Language, TypeOfTest {
         cursor.moveToLast();
         int tableSize = cursor.getPosition();
         final Random random = new Random();
-        int[] position = sampleRandomNumbersWithoutRepetition(0,tableSize,SIZE);
+        int[] position = sampleRandomNumbersWithoutRepetition(0,tableSize,setting.getSizeOfTest());
 
-        for (int i = 0; i < SIZE; i++) {
-
+        for (int i = 0; i < setting.getSizeOfTest(); i++) {
             cursor.moveToPosition(position[i]);
             listTask[i] = createTask(cursor);
         }
 
         cursor.close();
+        myDb.close();
+        return listTask;
+    }
+
+    public Task[]createMixedList(){
+        myDBHelper = new DatabaseHelper(context);
+        myDBHelper.create_db();
+        try {
+            myDb = myDBHelper.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        int i = 0;
+        for (String s : TYPEOFTTEST) {
+            Cursor cursor = myDb.rawQuery("SELECT * FROM " + s, null);
+            cursor.moveToLast();
+            int tableSize = cursor.getPosition();
+            int[] position = sampleRandomNumbersWithoutRepetition(0, tableSize, 2);
+            for(int j=0;j<2;j++){
+                cursor.moveToPosition(position[j]);
+                listTask[i]=createTask(cursor);
+                i++;
+            }
+            cursor.close();
+        }
         myDb.close();
         return listTask;
     }
