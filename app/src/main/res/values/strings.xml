@@ -10,6 +10,19 @@
     <string name="network_ru">Тестирование по сети</string>
     <string name="network_by">Тэставанне па сетцы</string>
 
+    <string name="description_ru">Объяснение правильного ответа</string>
+    <string name="description_by">Тлумачэнне правільнага адказу</string>
+    <string name="finish_ru">Закончить тест</string>
+    <string name="finish_by">Скончыць тэст</string>
+    <string name="result_ru">Ваш результат </string>
+    <string name="result_by">Ваш вынік </string>
+    <string name="noDescription_ru">Объясненение будет доступно после ответа </string>
+    <string name="noDescription_by">Тлумачэнне будзе даступна пасля адказу </string>
+    <string name="noImage_by">Пытанне без выявы </string>
+    <string name="noImage_ru"> Вопрос без изображения  </string>
+    <string name="hasImage_by">Пытанне без выявы </string>
+    <string name="hasImage_ru"> Вопрос с изображением. Нажмите на кнопку в верхнем левом углу экрана  </string>
+
 
     <string name="antiquity_ru">История Беларуси с древнейших времен до середины ХІІІ в.</string>
     <string name="antiquity_by">Гісторыя Беларусі са старажытных часоў да сярэдзіны ХІІІ ст.</string>

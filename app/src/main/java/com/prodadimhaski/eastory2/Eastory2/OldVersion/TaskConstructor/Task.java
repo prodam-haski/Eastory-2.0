@@ -1,5 +1,6 @@
 package com.prodadimhaski.eastory2.Eastory2.OldVersion.TaskConstructor;
 
+import java.sql.Blob;
 import java.util.List;
 
 public class Task {
@@ -31,11 +32,12 @@ public class Task {
         return description;
     }
 
-    public Task(String[] answers, int rightAnswer, String text, String description) {
+    Task(String[] answers, int rightAnswer, String text, String description, byte[] image) {
         this.answers = answers;
         this.rightAnswer = rightAnswer;
         this.taskText = text;
         this.description = description;
+        this.image = image;
     }
 
 }

@@ -70,7 +70,7 @@ public class TaskManager implements Language, TypeOfTest {
         rightAnswer = cursor.getInt(11);
         image = cursor.getBlob(12);
 
-        Task task = new Task(answers, rightAnswer, text, textDescription);
+        Task task = new Task(answers, rightAnswer, text, textDescription, image);
         return task;
     }
 

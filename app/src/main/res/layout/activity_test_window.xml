@@ -71,7 +71,7 @@
             android:layout_weight="1"
             android:background="@drawable/style_btn_answer"
             android:text="RadioButtondsadsadasasfvbgdbdsdascdff33342"
-            android:textColor="@color/answerColor"
+            android:textColor="@android:color/black"
             android:textSize="20dp" />
 
         <RadioButton
@@ -81,7 +81,7 @@
             android:layout_weight="1"
             android:background="@drawable/style_btn_answer"
             android:text="RadioButton34222222222243542524dsgsfdsfsdf"
-            android:textColor="@color/answerColor"
+            android:textColor="@android:color/black"
             android:textSize="20dp" />
 
         <RadioButton
@@ -91,7 +91,7 @@
             android:layout_weight="1"
             android:background="@drawable/style_btn_answer"
             android:text="RadioButtonfeewrwe"
-            android:textColor="@color/answerColor"
+            android:textColor="@android:color/black"
             android:textSize="20dp" />
 
         <RadioButton
@@ -101,7 +101,7 @@
             android:layout_weight="1"
             android:background="@drawable/style_btn_answer"
             android:text="RadioButtonfsdfdsfsdfsdfsd"
-            android:textColor="@color/answerColor"
+            android:textColor="@android:color/black"
             android:textSize="20dp" />
     </RadioGroup>
 
@@ -129,10 +129,11 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/style_task_field"
-        android:gravity="center"
+        android:gravity="center_horizontal"
+
         android:padding="8dp"
         android:text="TextViewadsssssssssssssssssssssssssssfsddfhajkfhakfjaklckncmncajksncjkanjcnasckadajnajkadjcknadjkcnjadknc"
-        android:textColor="@color/answerColor"
+        android:textColor="@android:color/black"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/radioButtons"
         app:layout_constraintEnd_toEndOf="parent"
