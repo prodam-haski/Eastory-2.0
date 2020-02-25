@@ -30,9 +30,14 @@ public class TaskManager implements Language, TypeOfTest {
         }
 
         Cursor cursor = myDb.rawQuery("SELECT * FROM " + setting.getPeriod(), null);
+        cursor.moveToLast();
+        int tableSize = cursor.getPosition();
+        final Random random = new Random();
+        int[] position = sampleRandomNumbersWithoutRepetition(0,tableSize,SIZE);
 
         for (int i = 0; i < SIZE; i++) {
-            cursor.moveToPosition(i);
+
+            cursor.moveToPosition(position[i]);
             listTask[i] = createTask(cursor);
         }
 
@@ -42,14 +47,12 @@ public class TaskManager implements Language, TypeOfTest {
     }
 
     private Task createTask(Cursor cursor) {
-        final Random random = new Random();
+
         String text = new String();
         byte[] image;
         String[] answers = new String[4];
         int rightAnswer;
         String textDescription = new String();
-
-        //cursor.moveToPosition(random.nextInt(20));
 
         if (change.getLanguage().equals("by")) {
             text = cursor.getString(2);
@@ -76,5 +79,22 @@ public class TaskManager implements Language, TypeOfTest {
 
     public TaskManager(Context context) {
         this.context = context;
+    }
+
+    public static int[] sampleRandomNumbersWithoutRepetition(int start, int end, int count) {
+        Random rng = new Random();
+
+        int[] result = new int[count];
+        int cur = 0;
+        int remaining = end - start;
+        for (int i = start; i < end && count > 0; i++) {
+            double probability = rng.nextDouble();
+            if (probability < ((double) count) / (double) remaining) {
+                count--;
+                result[cur++] = i;
+            }
+            remaining--;
+        }
+        return result;
     }
 }

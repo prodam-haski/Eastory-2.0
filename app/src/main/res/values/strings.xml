@@ -20,7 +20,7 @@
     <string name="noDescription_by">Тлумачэнне будзе даступна пасля адказу </string>
     <string name="noImage_by">Пытанне без выявы </string>
     <string name="noImage_ru"> Вопрос без изображения  </string>
-    <string name="hasImage_by">Пытанне без выявы </string>
+    <string name="hasImage_by">Пытанне з выявай. Націсніце на кнопку ў верхнім левым куце экрана </string>
     <string name="hasImage_ru"> Вопрос с изображением. Нажмите на кнопку в верхнем левом углу экрана  </string>
 
 
