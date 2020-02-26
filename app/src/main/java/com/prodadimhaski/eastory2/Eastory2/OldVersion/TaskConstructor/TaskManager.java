@@ -9,7 +9,6 @@ import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.Language;
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.TypeOfTest;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Random;
 
 public class TaskManager implements Language, TypeOfTest {

@@ -1,12 +1,13 @@
 package com.prodadimhaski.eastory2.Eastory2.OldVersion.TestActivities;
 
-class Checking {
-    private static int SIZE = 10;
+import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.TypeOfTest;
+
+class Checking implements TypeOfTest {
 
     private int rightAnswer;
     private int score = 0;
     private boolean userIsRight=false;
-    private boolean[] isAnswered = new boolean[SIZE];
+    private boolean[] isAnswered = new boolean[setting.getSizeOfTest()];
 
     void setRightAnswer(int value){rightAnswer=value;}
     int getRightAnswer(){return rightAnswer;}
@@ -16,7 +17,7 @@ class Checking {
     boolean getIsAnswered(int number){return isAnswered[number];}
 
     Checking(){
-        for (int i= 0;i<SIZE;i++){
+        for (int i= 0;i<setting.getSizeOfTest();i++){
             isAnswered[i]=false;
         }
     }

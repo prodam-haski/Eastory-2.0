@@ -317,7 +317,7 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
             if (change.getLanguage().equals("ru")) {
                 descriptionText.setText(R.string.result_ru);
             } else descriptionText.setText(R.string.result_by);
-            descriptionText.append(" " + control.getScore() + "/10");
+            descriptionText.append(" " + control.getScore() + "/"+setting.getSizeOfTest());
 
 
             Button buttonFinish = descriptionDialog.findViewById(R.id.buttonFinish);
