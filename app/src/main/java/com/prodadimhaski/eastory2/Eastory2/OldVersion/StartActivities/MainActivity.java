@@ -11,18 +11,24 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.Language;
+import com.prodadimhaski.eastory2.New.NetworkActivities.NetworkSelection;
 import com.prodadimhaski.eastory2.R;
 
 public class MainActivity extends AppCompatActivity implements Language {
+
+    Button startButton ;
+    Button networkButton ;
+    Button changeButton ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final Button startButton = (Button)findViewById(R.id.startButton);
-        final Button networkButton = (Button)findViewById(R.id.networkButton) ;
-        final Button changeButton = (Button)findViewById(R.id.changeLanguage);
+        startButton = findViewById(R.id.startButton);
+        networkButton = findViewById(R.id.networkButton) ;
+        changeButton = findViewById(R.id.changeLanguage);
+        initButton();
 
         if(change.getLanguage().equals("by")){
             startButton.setText(R.string.start_by);
@@ -31,6 +37,12 @@ public class MainActivity extends AppCompatActivity implements Language {
 
         }
 
+        Window w=getWindow();
+        w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+    }
+
+    private void initButton(){
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,8 +75,13 @@ public class MainActivity extends AppCompatActivity implements Language {
             }
         });
 
-        Window w=getWindow();
-        w.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        networkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, NetworkSelection.class);
+                startActivity(intent);
+            }
+        });
     }
 
     //System button back double pressed

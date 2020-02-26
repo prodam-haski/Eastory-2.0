@@ -16,33 +16,18 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 public class DatabaseHelper extends SQLiteOpenHelper implements TypeOfTest {
-    public static final String TABLEANTIQUITY = "Antiquity";// название таблицы в бд
-    public static final String TABLEMEDIVAL = "Medival";
-    public static final String TABLENEW1 = "New1";
-    public static final String TABLENEW2 = "New2";
-    public static final String TABLENEWEST = "Newest";
-    public static final String TABLESOVIETS = "Soviets";
+    public static final String TABLEANTIQUITY = "TaskAntiquity";// название таблицы в бд
+    public static final String TABLEMEDIVAL = "TaskMedival";
+    public static final String TABLENEW1 = "TaskNew1";
+    public static final String TABLENEW2 = "TaskNew2";
+    public static final String TABLENEWEST = "TaskNewest";
+    public static final String TABLESOVIETS = "TaskSoviets";
 
     private static String DB_PATH; // полный путь к базе данных
     private static String DB_NAME = "ForEastory.db";
     private static final int SCHEMA = 2; // версия базы данных
 
-    // названия столбцов
-    static final String COLUMN_ID = "_id";
-    static final String COLUMN_TASKRU = "task_ru";
-    static final String COLUMN_TASKBY = "task_by";
-    static final String COLUMN_ANSWER1RU = "answer1_ru";
-    static final String COLUMN_ANSWER2RU = "answer2_ru";
-    static final String COLUMN_ANSWER3RU = "answer3_ru";
-    static final String COLUMN_ANSWER4RU = "answer4_ru";
-    static final String COLUMN_ANSWER1BY = "answer1_by";
-    static final String COLUMN_ANSWER2BY = "answer2_by";
-    static final String COLUMN_ANSWER3BY = "answer3_by";
-    static final String COLUMN_ANSWER4BY = "answer4_by";
-    static final String COLUMN_DESCRIPTIONRU = "description_ru";
-    static final String COLUMN_DESCRIPTIONBY = "description_by";
-    static final String COLUMN_RIGHTANSWER = "rightAnswer";
-    static final String COLUMN_IMAGE = "image";
+
     private Context myContext;
 
     public DatabaseHelper(Context context) {

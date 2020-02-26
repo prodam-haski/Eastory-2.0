@@ -15,19 +15,13 @@ public class Task {
     public String getTaskText() {
         return taskText;
     }
-
     public int getRightAnswer() {
         return rightAnswer;
     }
-
     public String[] getAnswers() {
         return answers;
     }
-
-    public byte[] getImage() {
-        return image;
-    }
-
+    public byte[] getImage() { return image; }
     public String getDescription() {
         return description;
     }
