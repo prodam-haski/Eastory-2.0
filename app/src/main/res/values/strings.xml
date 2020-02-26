@@ -22,6 +22,8 @@
     <string name="noImage_ru"> Вопрос без изображения  </string>
     <string name="hasImage_by">Пытанне з выявай. Націсніце на кнопку ў верхнім левым куце экрана </string>
     <string name="hasImage_ru"> Вопрос с изображением. Нажмите на кнопку в верхнем левом углу экрана  </string>
+    <string name="hasAnswer_by">Выберыце варыянт адказу </string>
+    <string name="hasAnswer_ru"> Выберите вариант ответа  </string>
 
 
     <string name="antiquity_ru">История Беларуси с древнейших времен до середины ХІІІ в.</string>

@@ -49,6 +49,7 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
     Button buttonNext;
     Button buttonPrev;
     ImageView backgroundImage;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,9 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
 
         backgroundImage = findViewById(R.id.testBackground);
         backgroundImage.setImageResource(installBackground());
+
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setMax(setting.getSizeOfTest());
 
         if (change.getLanguage().equals("by")) {
             answer.setText(R.string.answer_by);
@@ -127,10 +131,17 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
             @Override
             public void onClick(View v) {
 
-                wasAnswer();
-                tapCounter++;
-                answer.setClickable(false);
-                control.setUserIsRight();
+                if(wasAnswered()){
+                    tapCounter++;
+                    answer.setClickable(false);
+                    control.setUserIsRight();
+                    progressBar.incrementProgressBy(1);
+                }
+                else{
+                    if(change.getLanguage().equals("ru"))
+                        Toast.makeText(TestWindow.this, R.string.hasAnswer_ru, Toast.LENGTH_SHORT).show();
+                    else Toast.makeText(TestWindow.this, R.string.hasAnswer_by, Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -243,7 +254,7 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
         }
 
         @SuppressLint("ResourceAsColor")
-        private void wasAnswer () {
+        private boolean wasAnswered () {
 
             int userAnswer = 0;
             switch (userAnswers.getCheckedRadioButtonId()) {
@@ -259,6 +270,7 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
                 case R.id.radioButton4:
                     userAnswer = 4;
                     break;
+                default: return false;
             }
             userAnswers.setClickable(false);
             control.checkAnswer(userAnswer, taskNumber);
@@ -308,6 +320,7 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
                 }
             }
             userAnswers.clearCheck();
+            return true;
         }
 
         private void finishTest () {
