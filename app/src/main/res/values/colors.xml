@@ -10,5 +10,6 @@
     <color name="litebrown">#80530E0E</color>
     <color name="answerColor">#B71C1C</color>
     <color name="rightAnwer">#1DD818</color>
+    <color name="taskNew">#DFE610</color>
 
 </resources>

@@ -7,8 +7,11 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -95,6 +98,7 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
             if (change.getLanguage().equals("ru"))Toast.makeText(this, R.string.hasImage_ru, Toast.LENGTH_SHORT).show();
             else Toast.makeText(this, R.string.hasImage_by, Toast.LENGTH_SHORT).show();
         }
+
         textTask.setText(tasks[taskNumber].getTaskText());
 
         userAnswer1.setText(tasks[taskNumber].getAnswers()[0]);
@@ -134,8 +138,8 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
                 if(wasAnswered()){
                     tapCounter++;
                     answer.setClickable(false);
-                    control.setUserIsRight();
                     progressBar.incrementProgressBy(1);
+                    control.setUserIsRight();
                 }
                 else{
                     if(change.getLanguage().equals("ru"))

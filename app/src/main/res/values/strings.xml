@@ -25,6 +25,12 @@
     <string name="hasAnswer_by">Выберыце варыянт адказу </string>
     <string name="hasAnswer_ru"> Выберите вариант ответа  </string>
 
+    <string name="join_by">Пытанне без выявы </string>
+    <string name="join_ru"> Подключиться к тестированию  </string>
+    <string name="create_by">Пытанне з выявай. Націсніце на кнопку ў верхнім левым куце экрана </string>
+    <string name="create_ru"> Создать сервер  </string>
+    <string name="constructor_by">Выберыце варыянт адказу </string>
+    <string name="contructor_ru"> Конструктор тестов  </string>
 
     <string name="antiquity_ru">История Беларуси с древнейших времен до середины ХІІІ в.</string>
     <string name="antiquity_by">Гісторыя Беларусі са старажытных часоў да сярэдзіны ХІІІ ст.</string>

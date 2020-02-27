@@ -41,7 +41,7 @@ public class TestSelection extends AppCompatActivity implements Language, TypeOf
             buttonNewest.setText(R.string.newesttime_by);
         }
 
-        Button buttons[] = new Button[] {buttonCommon, buttonAnciety,
+        Button[] buttons = new Button[]{buttonCommon, buttonAnciety,
                 buttonMedival, buttonNew1, buttonNew2, buttonSoviets, buttonNewest};
 
         for (int i = 0; i < buttons.length; i ++) {
