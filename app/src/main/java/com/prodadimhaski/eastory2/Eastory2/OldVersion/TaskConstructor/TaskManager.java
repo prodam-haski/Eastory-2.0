@@ -29,8 +29,7 @@ public class TaskManager implements Language, TypeOfTest {
 
         Cursor cursor = myDb.rawQuery("SELECT * FROM " + setting.getPeriod(), null);
         cursor.moveToLast();
-        int tableSize = cursor.getPosition();
-        final Random random = new Random();
+        int tableSize = cursor.getPosition()+1;
         int[] position = sampleRandomNumbersWithoutRepetition(0,tableSize,setting.getSizeOfTest());
 
         for (int i = 0; i < setting.getSizeOfTest(); i++) {
