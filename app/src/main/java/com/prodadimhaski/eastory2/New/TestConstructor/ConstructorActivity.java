@@ -1,23 +1,27 @@
 package com.prodadimhaski.eastory2.New.TestConstructor;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.Language;
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.TypeOfTest;
+import com.prodadimhaski.eastory2.New.TestConstructor.DataAdapter.DataAdapter;
+import com.prodadimhaski.eastory2.New.TestConstructor.FullListConstructor.FullListConstructor;
+import com.prodadimhaski.eastory2.New.TestConstructor.FullListConstructor.Question;
 import com.prodadimhaski.eastory2.R;
 
 public class ConstructorActivity extends AppCompatActivity implements Language, TypeOfTest {
     String[] periods;
-    Questions questions;
+    Question[] questions;
     Spinner periodsSpinner;
-    ListView questionView;
+
+    RecyclerView questionView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,52 +46,21 @@ public class ConstructorActivity extends AppCompatActivity implements Language, 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, periods);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         periodsSpinner.setAdapter(adapter);
+
         questionView = findViewById(R.id.questionList);
-
-/*
-        periodsSpinner.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    FullListConstructor fullListConstructor = new FullListConstructor(getApplicationContext());
-                    questions = fullListConstructor.createFullList(TYPEOFTTEST[periodsSpinner.getSelectedItemPosition()]);
-                    ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                            android.R.layout.simple_list_item_1, questions);
-                    questionView.setAdapter(listViewAdapter);
-                }
-                return false;
-            }
-        });
-*/
-
-/*
-        periodsSpinner.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
-                    FullListConstructor fullListConstructor = new FullListConstructor(getApplicationContext());
-                    questions = fullListConstructor.createFullList(TYPEOFTTEST[periodsSpinner.getSelectedItemPosition()]);
-                    ArrayAdapter<Question> listViewAdapter = new ArrayAdapter<Question>(getApplicationContext(),
-                            android.R.layout.simple_list_item_1, questions);
-                    questionView.setAdapter(listViewAdapter);
-                    questionView.deferNotifyDataSetChanged();
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });
-*/
 
         periodsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 FullListConstructor fullListConstructor = new FullListConstructor(getApplicationContext());
                 questions = fullListConstructor.createFullList(TYPEOFTTEST[periodsSpinner.getSelectedItemPosition()]);
-                ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                /*ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(getApplicationContext(),
                         android.R.layout.simple_list_item_1, questions.getQuestion());
                 questionView.setAdapter(listViewAdapter);
-                questionView.deferNotifyDataSetChanged();
+                questionView.deferNotifyDataSetChanged();*/
+                DataAdapter dataAdapter = new DataAdapter(getApplicationContext(),questions);
+                questionView.setAdapter(dataAdapter);
+
             }
 
             @Override
@@ -95,14 +68,6 @@ public class ConstructorActivity extends AppCompatActivity implements Language, 
 
             }
         });
-
-        questionView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               // SparseBooleanArray sp = questionView.getCheckedItemPositions();
-            }
-        });
-
     }
 
     @Override

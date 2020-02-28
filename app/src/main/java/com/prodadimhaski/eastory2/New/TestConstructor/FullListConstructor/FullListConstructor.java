@@ -1,4 +1,4 @@
-package com.prodadimhaski.eastory2.New.TestConstructor;
+package com.prodadimhaski.eastory2.New.TestConstructor.FullListConstructor;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -6,11 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.DBManager.DatabaseHelper;
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.Language;
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.TaskConstructor.Task;
 
 import java.sql.SQLException;
-
-import static com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.TypeOfTest.setting;
 
 public class FullListConstructor implements Language {
 
@@ -22,7 +19,7 @@ public class FullListConstructor implements Language {
         this.context = context;
     }
 
-    public Questions createFullList(String period){
+    public Question[] createFullList(String period){
 
         myDBHelper = new DatabaseHelper(context);
         myDBHelper.create_db();
@@ -35,7 +32,7 @@ public class FullListConstructor implements Language {
         Cursor cursor = myDb.rawQuery("SELECT * FROM " +period, null);
         cursor.moveToLast();
         int tableSize = cursor.getPosition()+1;
-        Questions fullList = new Questions(tableSize);
+        Question[] fullList = new Question[tableSize];
         cursor.moveToFirst();
 
         for (int i=0;i<tableSize;i++)
@@ -44,8 +41,7 @@ public class FullListConstructor implements Language {
             String question;
             if(change.getLanguage().equals("ru"))question = cursor.getString(1);
             else question = cursor.getString(2);
-            fullList.setQuestions(i,question);
-            fullList.setQuestionsId(i,id);
+            fullList[i] = new Question( question,id);
             cursor.moveToNext();
         }
 
