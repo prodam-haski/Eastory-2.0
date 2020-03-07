@@ -7,11 +7,8 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.ColorFilter;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -23,7 +20,6 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.Language;
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.TypeOfTest;
@@ -165,7 +161,6 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
                     imageWindow.setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @Override
                         public void onDismiss(DialogInterface dialogInterface) {
-                            //nothing;
                         }
                     });
 
@@ -190,12 +185,9 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
             public void onClick(View v) {
                 if (control.getIsAnswered(taskNumber)) {
                     Dialog descriptionDialog = new Dialog(TestWindow.this);
+                    descriptionDialog.getWindow();
+                    descriptionDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                     descriptionDialog.setContentView(R.layout.description_window);
-
-                    if (change.getLanguage().equals("ru")) {
-                        descriptionDialog.setTitle(R.string.description_ru);
-                    } else descriptionDialog.setTitle(R.string.description_by);
-
                     TextView descriptionText = descriptionDialog.findViewById(R.id.textDescription);
                     descriptionText.setText(tasks[taskNumber].getDescription());
                     descriptionDialog.show();
@@ -329,6 +321,8 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
 
         private void finishTest () {
             Dialog descriptionDialog = new Dialog(TestWindow.this);
+            descriptionDialog.getWindow();
+            descriptionDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             descriptionDialog.setContentView(R.layout.result_window);
 
             TextView descriptionText = descriptionDialog.findViewById(R.id.textResult);

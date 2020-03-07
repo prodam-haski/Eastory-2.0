@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.Language;
-import com.prodadimhaski.eastory2.New.TestConstructor.ConstructorActivity;
+import com.prodadimhaski.eastory2.New.TestConstructor.Activity.ConstructorActivity;
 import com.prodadimhaski.eastory2.R;
 
 public class NetworkSelection extends AppCompatActivity implements Language {
