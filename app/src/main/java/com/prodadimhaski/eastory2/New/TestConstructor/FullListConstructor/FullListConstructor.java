@@ -8,6 +8,8 @@ import com.prodadimhaski.eastory2.Eastory2.OldVersion.DBManager.DatabaseHelper;
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.Language;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FullListConstructor implements Language {
 
@@ -19,7 +21,7 @@ public class FullListConstructor implements Language {
         this.context = context;
     }
 
-    public Question[] createFullList(String period){
+    public List<Question> createFullList(String period){
 
         myDBHelper = new DatabaseHelper(context);
         myDBHelper.create_db();
@@ -32,7 +34,7 @@ public class FullListConstructor implements Language {
         Cursor cursor = myDb.rawQuery("SELECT * FROM " +period, null);
         cursor.moveToLast();
         int tableSize = cursor.getPosition()+1;
-        Question[] fullList = new Question[tableSize];
+        List<Question> fullList = new ArrayList<>();
         cursor.moveToFirst();
 
         for (int i=0;i<tableSize;i++)
@@ -41,7 +43,7 @@ public class FullListConstructor implements Language {
             String question;
             if(change.getLanguage().equals("ru"))question = cursor.getString(1);
             else question = cursor.getString(2);
-            fullList[i] = new Question( question,id);
+            fullList.add(new Question(question, id));
             cursor.moveToNext();
         }
 
