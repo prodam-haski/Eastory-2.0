@@ -9,6 +9,8 @@ import android.widget.Button;
 
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.Language;
 import com.prodadimhaski.eastory2.New.TestConstructor.Activity.ConstructorActivity;
+import com.prodadimhaski.eastory2.New.TestConstructor.Activity.ListOfTestsActivity;
+import com.prodadimhaski.eastory2.New.TestConstructor.DataAdapter.ListOfTestsAdapter;
 import com.prodadimhaski.eastory2.R;
 
 public class NetworkSelection extends AppCompatActivity implements Language {
@@ -37,7 +39,7 @@ public class NetworkSelection extends AppCompatActivity implements Language {
             @Override
             public void onClick(View v) {
                 try{
-                    Intent intent = new Intent(NetworkSelection.this, ConstructorActivity.class);
+                    Intent intent = new Intent(NetworkSelection.this, ListOfTestsActivity.class);
                     startActivity(intent);
 
                 }catch (Exception e){}

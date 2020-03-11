@@ -32,6 +32,9 @@
     <string name="constructor_by">Выберыце варыянт адказу </string>
     <string name="contructor_ru"> Конструктор тестов  </string>
 
+    <string name="buttonCreate_ru"> Создать тест</string>
+    <string name="buttonDelete_ru"> Удалить тест</string>
+
     <string name="antiquity_ru">История Беларуси с древнейших времен до середины ХІІІ в.</string>
     <string name="antiquity_by">Гісторыя Беларусі са старажытных часоў да сярэдзіны ХІІІ ст.</string>
     <string name="medival_ru">История Беларуси в середине ХІІІ — первой половине XVI в.</string>
