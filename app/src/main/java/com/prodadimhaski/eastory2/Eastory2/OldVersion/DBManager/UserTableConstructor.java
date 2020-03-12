@@ -68,7 +68,7 @@ public class UserTableConstructor implements SelectedList {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        System.out.println("DROP TABLE " + test.getTestName());
         myDb.execSQL("DROP TABLE " + test.getTestName());
 
         myDb.close();
