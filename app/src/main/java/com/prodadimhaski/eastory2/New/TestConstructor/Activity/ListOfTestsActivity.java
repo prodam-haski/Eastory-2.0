@@ -57,9 +57,11 @@ public class ListOfTestsActivity extends AppCompatActivity implements SelectedLi
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                tableList.remove(viewHolder.getAdapterPosition());
+                Test swiped = tableList.get(viewHolder.getAdapterPosition());
                 UserTableConstructor constructor = new UserTableConstructor(getApplicationContext());
-                constructor.deleteUserTest(viewHolder.getAdapterPosition());
+                constructor.deleteUserTest(swiped);
+                tableList.remove(swiped);
+                adapter.notifyDataSetChanged();
             }
         };
 
