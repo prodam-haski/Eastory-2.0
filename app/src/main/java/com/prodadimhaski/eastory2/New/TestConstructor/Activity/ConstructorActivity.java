@@ -1,9 +1,12 @@
 package com.prodadimhaski.eastory2.New.TestConstructor.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +16,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.prodadimhaski.eastory2.Eastory2.OldVersion.DBManager.UserTableConstructor;
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.Language;
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.TypeOfTest;
 import com.prodadimhaski.eastory2.New.TestConstructor.DataAdapter.QuestionAdapter;
@@ -89,8 +93,9 @@ public class ConstructorActivity extends AppCompatActivity implements Language, 
                 else{
                     userList.setSelectedList(selectedQuestions);
                     userList.setSelectedTable(TYPEOFTTEST[periodsSpinner.getSelectedItemPosition()]);
-                    Intent intent = new Intent(ConstructorActivity.this,ListOfTestsActivity.class);
-                    startActivity(intent);
+                    UserTableConstructor constructor = new UserTableConstructor(getApplicationContext());
+                    constructor.createUserTest();
+                    finish();
                 }
             }
         });

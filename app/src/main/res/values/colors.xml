@@ -11,5 +11,7 @@
     <color name="answerColor">#B71C1C</color>
     <color name="rightAnwer">#1DD818</color>
     <color name="taskNew">#DFE610</color>
+    <color name="borderblack">#221E22</color>
+
 
 </resources>

@@ -11,6 +11,8 @@ public interface SelectedList {
     class UserSelectidList{
         List<Integer> selectedList;
         String selectedTable;
+        String nameOfUserTable;
+
 
         UserSelectidList(){
             selectedList = new ArrayList<Integer>();
@@ -28,8 +30,17 @@ public interface SelectedList {
             this.selectedTable = selectedTable;
         }
 
+        public void setNameOfUserTable(String nameOfUserTable) {
+            this.nameOfUserTable = nameOfUserTable;
+        }
+
+        public String getNameOfUserTable() {
+            return nameOfUserTable;
+        }
+
         public String getSelectedTable() {
             return selectedTable;
         }
+
     }
 }

@@ -2,6 +2,7 @@ package com.prodadimhaski.eastory2.New.TestConstructor.DataAdapter;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,25 +19,30 @@ import java.util.List;
 
 public class ListOfTestsAdapter extends RecyclerView.Adapter<ListOfTestsAdapter.ViewHolder> {
 
-    private LayoutInflater inflater;
-    private List<String> listOfTests;
+    private List<Test> listOfTests;
 
-    public ListOfTestsAdapter(Context context, List<String> list) {
+    public ListOfTestsAdapter(Context context, List<Test> list) {
         this.listOfTests = list;
-        this.inflater = LayoutInflater.from(context);
-
     }
 
     @Override
     public ListOfTestsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.layout_list_of_test, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_list_of_test, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ListOfTestsAdapter.ViewHolder holder, final int position) {
-        String name = listOfTests.get(position);
-        holder.testName.setText(name);
+    public void onBindViewHolder(final ListOfTestsAdapter.ViewHolder holder, final int position) {
+        final Test test = listOfTests.get(position);
+        holder.testName.setText(test.getTestName());
+        holder.itemView.setBackgroundColor(test.isSelected() ? Color.RED : Color.WHITE);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                test.setSelected(!test.isSelected());
+                holder.itemView.setBackgroundColor(test.isSelected() ? Color.RED : Color.WHITE);
+            }
+        });
     }
 
     @Override
