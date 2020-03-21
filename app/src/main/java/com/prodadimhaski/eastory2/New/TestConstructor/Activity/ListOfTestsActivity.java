@@ -63,7 +63,6 @@ public class ListOfTestsActivity extends AppCompatActivity implements SelectedLi
                 tableList.remove(swiped);
                 adapter.notifyDataSetChanged();
 
-
                 final AlertDialog nameDialog = new AlertDialog.Builder(ListOfTestsActivity.this).create();
                 LayoutInflater inflater = getLayoutInflater();
                 View nameView = inflater.inflate(R.layout.create_window, null);
