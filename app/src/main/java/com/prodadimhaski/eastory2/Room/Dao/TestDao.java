@@ -11,6 +11,6 @@ import java.util.List;
 @Dao
 public interface TestDao {
     @Transaction
-    @Query("SELECT * FROM tests WHERE topicId = :id")
-    List<TopicWithQuestions> getTopicWithQuestions(int id);
+    @Query("SELECT * FROM tests WHERE topic_id = :id")
+    TopicWithQuestions getTopicWithQuestionsById(int id);
 }

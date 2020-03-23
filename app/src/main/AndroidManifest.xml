@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".New.TestConstructor.Activity.ListOfTestsActivity"></activity>
+        <activity android:name=".Room.RoomTest"></activity>
+        <activity android:name=".New.TestConstructor.Activity.ListOfTestsActivity" />
         <activity android:name=".New.TestConstructor.Activity.ConstructorActivity" />
         <activity android:name=".New.NetworkActivities.NetworkSelection" />
         <activity android:name=".Eastory2.OldVersion.TestActivities.TestWindow" />

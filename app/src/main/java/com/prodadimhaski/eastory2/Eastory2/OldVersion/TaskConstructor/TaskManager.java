@@ -19,7 +19,7 @@ public class TaskManager implements Language, TypeOfTest {
     private Context context;
 
     public Task[] createList() {
-        myDBHelper = new DatabaseHelper(context);
+        myDBHelper = new DatabaseHelper(context, DatabaseHelper.DB_OLD);
         myDBHelper.create_db();
         try {
             myDb = myDBHelper.open();
@@ -43,7 +43,7 @@ public class TaskManager implements Language, TypeOfTest {
     }
 
     public Task[]createMixedList(){
-        myDBHelper = new DatabaseHelper(context);
+        myDBHelper = new DatabaseHelper(context, DatabaseHelper.DB_OLD);
         myDBHelper.create_db();
         try {
             myDb = myDBHelper.open();

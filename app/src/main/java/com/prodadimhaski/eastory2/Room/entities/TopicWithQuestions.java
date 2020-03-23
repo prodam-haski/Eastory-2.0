@@ -10,8 +10,8 @@ public class TopicWithQuestions {
     @Embedded private Topic topic;
 
     @Relation(
-            parentColumn = "topicId",
-            entityColumn = "questionId",
+            parentColumn = "topic_id",
+            entityColumn = "question_id",
             associateBy = @Junction(Test.class)
     )
     private List<Question> question;

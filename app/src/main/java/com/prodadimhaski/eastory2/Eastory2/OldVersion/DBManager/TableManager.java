@@ -22,7 +22,7 @@ public class TableManager {
     }
 
     public List<Test> getListOfTable() {
-        myDBHelper = new DatabaseHelper(context);
+        myDBHelper = new DatabaseHelper(context, DatabaseHelper.DB_OLD);
         myDBHelper.create_db();
         try {
             myDb = myDBHelper.open();

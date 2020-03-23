@@ -7,16 +7,16 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Topic {
     @PrimaryKey
-    private int topicId;
+    private int topic_id;
 
     private String topic;
 
-    public int getTopicId() {
-        return topicId;
+    public int getTopic_id() {
+        return topic_id;
     }
 
-    public void setTopicId(int topicId) {
-        this.topicId = topicId;
+    public void setTopic_id(int topic_id) {
+        this.topic_id = topic_id;
     }
 
     public String getTopic() {

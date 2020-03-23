@@ -19,7 +19,7 @@ public class UserTableConstructor implements SelectedList {
     }
 
     public void createUserTest() {
-        myDBHelper = new DatabaseHelper(context);
+        myDBHelper = new DatabaseHelper(context, DatabaseHelper.DB_OLD);
         myDBHelper.create_db();
         try {
             myDb = myDBHelper.open();
@@ -46,7 +46,7 @@ public class UserTableConstructor implements SelectedList {
     }
 
     public void deleteUserTest(List<Test> list) {
-        myDBHelper = new DatabaseHelper(context);
+        myDBHelper = new DatabaseHelper(context, DatabaseHelper.DB_OLD);
         myDBHelper.create_db();
         try {
             myDb = myDBHelper.open();
@@ -61,7 +61,7 @@ public class UserTableConstructor implements SelectedList {
     }
 
     public void deleteUserTest(Test test) {
-        myDBHelper = new DatabaseHelper(context);
+        myDBHelper = new DatabaseHelper(context, DatabaseHelper.DB_OLD);
         myDBHelper.create_db();
         try {
             myDb = myDBHelper.open();

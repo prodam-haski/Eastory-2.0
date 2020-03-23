@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 public class Question {
 
     @PrimaryKey
-    private int questionId;
+    private int question_id;
 
     private String question;
 
@@ -28,12 +28,12 @@ public class Question {
 
     private int language_id;
 
-    public int getQuestionId() {
-        return questionId;
+    public int getQuestion_id() {
+        return question_id;
     }
 
-    public void setQuestionId(int questionId) {
-        this.questionId = questionId;
+    public void setQuestion_id(int question_id) {
+        this.question_id = question_id;
     }
 
     public String getQuestion() {

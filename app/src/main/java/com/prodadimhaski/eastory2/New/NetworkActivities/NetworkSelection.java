@@ -12,13 +12,12 @@ import com.prodadimhaski.eastory2.New.TestConstructor.Activity.ConstructorActivi
 import com.prodadimhaski.eastory2.New.TestConstructor.Activity.ListOfTestsActivity;
 import com.prodadimhaski.eastory2.New.TestConstructor.DataAdapter.ListOfTestsAdapter;
 import com.prodadimhaski.eastory2.R;
+import com.prodadimhaski.eastory2.Room.RoomTest;
 
 public class NetworkSelection extends AppCompatActivity implements Language {
-
     Button createServer;
     Button joinServer;
     Button testConstructor;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +48,11 @@ public class NetworkSelection extends AppCompatActivity implements Language {
         createServer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
+                    Intent intent = new Intent(NetworkSelection.this, RoomTest.class);
+                    startActivity(intent);
 
+                }catch (Exception e){}
             }
         });
 
