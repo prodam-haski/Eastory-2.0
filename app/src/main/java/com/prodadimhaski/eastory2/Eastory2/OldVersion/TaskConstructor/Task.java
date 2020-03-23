@@ -1,8 +1,5 @@
 package com.prodadimhaski.eastory2.Eastory2.OldVersion.TaskConstructor;
 
-import java.sql.Blob;
-import java.util.List;
-
 public class Task {
 
     public static final int AMOUNT_OF_ANSWERS = 4;

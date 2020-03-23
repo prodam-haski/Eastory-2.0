@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.DBManager.DatabaseHelper;
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.Language;
+import com.prodadimhaski.eastory2.Room.Database;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class FullListConstructor implements Language {
 
     public List<Question> createFullList(String period){
 
-        myDBHelper = new DatabaseHelper(context);
+        myDBHelper = new DatabaseHelper(context, DatabaseHelper.DB_OLD);
         myDBHelper.create_db();
         try {
             myDb = myDBHelper.open();

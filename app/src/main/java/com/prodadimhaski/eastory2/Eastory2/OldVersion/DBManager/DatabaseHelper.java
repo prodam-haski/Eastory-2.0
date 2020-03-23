@@ -24,16 +24,19 @@ public class DatabaseHelper extends SQLiteOpenHelper implements TypeOfTest {
     public static final String TABLESOVIETS = "TaskSoviets";
 
     private static String DB_PATH; // полный путь к базе данных
-    private static String DB_NAME = "ForEastory.db";
+    private static String DB_NAME;
     private static final int SCHEMA = 2; // версия базы данных
 
+    public static final String DB_OLD = "ForEastory.db";
+    public static final String DB_NEW = "ForEastoryNewBD.db";
 
     private Context myContext;
 
-    public DatabaseHelper(Context context) {
+    public DatabaseHelper(Context context, String dbName) {
         super(context, DB_NAME, null, SCHEMA);
         this.myContext=context;
-        DB_PATH =context.getFilesDir().getPath() + "/"+DB_NAME;
+        DB_NAME = dbName;
+        DB_PATH =context.getFilesDir().getPath() + "/"+ DB_NAME;
     }
 
        @Override

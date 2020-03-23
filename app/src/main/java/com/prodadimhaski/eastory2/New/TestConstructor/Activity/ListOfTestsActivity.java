@@ -62,6 +62,37 @@ public class ListOfTestsActivity extends AppCompatActivity implements SelectedLi
                 constructor.deleteUserTest(swiped);
                 tableList.remove(swiped);
                 adapter.notifyDataSetChanged();
+
+                final AlertDialog nameDialog = new AlertDialog.Builder(ListOfTestsActivity.this).create();
+                LayoutInflater inflater = getLayoutInflater();
+                View nameView = inflater.inflate(R.layout.create_window, null);
+
+                final EditText testName = nameView.findViewById(R.id.editText);
+                final Button create = nameView.findViewById(R.id.buttonCreateTest);
+                final Button cancel = nameView.findViewById(R.id.buttonCancel);
+
+                create.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        nameDialog.dismiss();
+                        if (!testName.getText().toString().trim().equals("" )) {
+                            userList.setNameOfUserTable(testName.getText().toString());
+                            Intent intent = new Intent(ListOfTestsActivity.this, ConstructorActivity.class);
+                            startActivity(intent);
+                        } else
+                            Toast.makeText(ListOfTestsActivity.this, "фвла", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        nameDialog.cancel();
+                    }
+                });
+
+                nameDialog.setView(nameView);
+                nameDialog.show();
             }
         };
 
@@ -84,7 +115,6 @@ public class ListOfTestsActivity extends AppCompatActivity implements SelectedLi
 
     public void initButton() {
         create = findViewById(R.id.buttonCreate);
-        delete = findViewById(R.id.buttonDelete);
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,23 +152,7 @@ public class ListOfTestsActivity extends AppCompatActivity implements SelectedLi
 
         });
 
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                UserTableConstructor constructor = new UserTableConstructor(getApplicationContext());
-                List<Test> selectedTests = new ArrayList<Test>();
 
-                for (Test test: tableList) {
-                    if (test.isSelected()) {
-                        selectedTests.add(test);
-                    }
-                }
-                constructor.deleteUserTest(selectedTests);
-                tableList = (new TableManager(getApplicationContext()).getListOfTable());
-                adapter = new ListOfTestsAdapter(getApplicationContext(), tableList);
-                recyclerView.setAdapter(adapter);
-            }
-        });
     }
 
     @Override

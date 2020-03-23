@@ -35,14 +35,6 @@ public class ListOfTestsAdapter extends RecyclerView.Adapter<ListOfTestsAdapter.
     public void onBindViewHolder(final ListOfTestsAdapter.ViewHolder holder, final int position) {
         final Test test = listOfTests.get(position);
         holder.testName.setText(test.getTestName());
-        holder.itemView.setBackgroundColor(test.isSelected() ? Color.RED : Color.WHITE);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                test.setSelected(!test.isSelected());
-                holder.itemView.setBackgroundColor(test.isSelected() ? Color.RED : Color.WHITE);
-            }
-        });
     }
 
     @Override
