@@ -17,6 +17,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+    viewBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -35,7 +42,9 @@ dependencies {
 
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
+    testImplementation "androidx.room:room-testing:$room_version"
 
     implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
 
+    implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'
 }

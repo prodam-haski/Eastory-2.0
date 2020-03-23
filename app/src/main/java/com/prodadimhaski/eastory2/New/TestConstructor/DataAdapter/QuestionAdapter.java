@@ -20,7 +20,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     private LayoutInflater inflater;
     private List<Question> questions;
     boolean[] checked;
-    List<Integer> numberChecked = new ArrayList<Integer>();
+    List<Integer> numberChecked = new ArrayList<>();
 
     public QuestionAdapter(Context context, List<Question> foodItems) {
         this.questions = foodItems;
@@ -38,14 +38,11 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         Question question = questions.get(position);
         holder.nameView.setText(question.getQuestion());
         holder.checkBox.setChecked(checked[position]);
-        holder.checkBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checked[position] = !checked[position];
-                if(checked[position])numberChecked.add(position);
-                else for (Integer s :numberChecked
-                          ) {if(s==position) {numberChecked.remove(s);break;}
-                }
+        holder.checkBox.setOnClickListener(v -> {
+            checked[position] = !checked[position];
+            if(checked[position])numberChecked.add(position);
+            else for (Integer s :numberChecked
+                      ) {if(s==position) {numberChecked.remove(s);break;}
             }
         });
 

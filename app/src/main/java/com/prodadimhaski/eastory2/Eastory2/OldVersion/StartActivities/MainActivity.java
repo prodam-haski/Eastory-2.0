@@ -43,44 +43,35 @@ public class MainActivity extends AppCompatActivity implements Language {
     }
 
     private void initButton(){
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                    Intent intent = new Intent(MainActivity.this, TestSelection.class);
-                    startActivity(intent);
-
-                }catch (Exception e){}
-            }
-        });
-
-        changeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                    if (change.getLanguage().equals("ru")) {
-                        startButton.setText(R.string.start_by);
-                        changeButton.setText(R.string.change_by);
-                        networkButton.setText(R.string.network_by);
-                        change.swipeLanguage();
-                    }
-                    else {
-                        startButton.setText(R.string.start_ru);
-                        changeButton.setText(R.string.change_ru);
-                        networkButton.setText(R.string.network_ru);
-                        change.swipeLanguage();
-                    }
-
-                }catch (Exception e){}
-            }
-        });
-
-        networkButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, NetworkSelection.class);
+        startButton.setOnClickListener(v -> {
+            try{
+                Intent intent = new Intent(MainActivity.this, TestSelection.class);
                 startActivity(intent);
-            }
+
+            }catch (Exception e){}
+        });
+
+        changeButton.setOnClickListener(v -> {
+            try{
+                if (change.getLanguage().equals("ru")) {
+                    startButton.setText(R.string.start_by);
+                    changeButton.setText(R.string.change_by);
+                    networkButton.setText(R.string.network_by);
+                    change.swipeLanguage();
+                }
+                else {
+                    startButton.setText(R.string.start_ru);
+                    changeButton.setText(R.string.change_ru);
+                    networkButton.setText(R.string.network_ru);
+                    change.swipeLanguage();
+                }
+
+            }catch (Exception e){}
+        });
+
+        networkButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, NetworkSelection.class);
+            startActivity(intent);
         });
     }
 

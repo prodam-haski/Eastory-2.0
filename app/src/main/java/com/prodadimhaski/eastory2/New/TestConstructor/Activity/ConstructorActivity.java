@@ -81,22 +81,18 @@ public class ConstructorActivity extends AppCompatActivity implements Language, 
         });
 
         buttonAdd = findViewById(R.id.buttonAdd);
-        buttonAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                List<Integer> selectedQuestions = new ArrayList<>();
-                selectedQuestions= recyclerAdapter.getNumberChecked();
-                if(selectedQuestions.isEmpty()){
-                    Toast.makeText(ConstructorActivity.this, "пустой список", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    userList.setSelectedList(selectedQuestions);
-                    userList.setSelectedTable(TYPEOFTTEST[periodsSpinner.getSelectedItemPosition()]);
-                    UserTableConstructor constructor = new UserTableConstructor(getApplicationContext());
-                    constructor.createUserTest();
-                    finish();
-                }
+        buttonAdd.setOnClickListener(v -> {
+            List<Integer> selectedQuestions;
+            selectedQuestions = recyclerAdapter.getNumberChecked();
+            if(selectedQuestions.isEmpty()){
+                Toast.makeText(ConstructorActivity.this, "пустой список", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                userList.setSelectedList(selectedQuestions);
+                userList.setSelectedTable(TYPEOFTTEST[periodsSpinner.getSelectedItemPosition()]);
+                UserTableConstructor constructor = new UserTableConstructor(getApplicationContext());
+                constructor.createUserTest();
+                finish();
             }
         });
     }

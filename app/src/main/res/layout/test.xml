@@ -11,8 +11,8 @@
         android:inputType="numberSigned" />
 
     <Button
-        android:id="@+id/getQuestions"
+        android:id="@+id/get_questions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Get" />
 </LinearLayout>

@@ -27,7 +27,7 @@ import java.util.List;
 
 public class ListOfTestsActivity extends AppCompatActivity implements SelectedList {
 
-    List<Test> tableList = new ArrayList<Test>();
+    List<Test> tableList = new ArrayList<>();
     RecyclerView recyclerView;
     ListOfTestsAdapter adapter;
 
@@ -71,25 +71,17 @@ public class ListOfTestsActivity extends AppCompatActivity implements SelectedLi
                 final Button create = nameView.findViewById(R.id.buttonCreateTest);
                 final Button cancel = nameView.findViewById(R.id.buttonCancel);
 
-                create.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        nameDialog.dismiss();
-                        if (!testName.getText().toString().trim().equals("" )) {
-                            userList.setNameOfUserTable(testName.getText().toString());
-                            Intent intent = new Intent(ListOfTestsActivity.this, ConstructorActivity.class);
-                            startActivity(intent);
-                        } else
-                            Toast.makeText(ListOfTestsActivity.this, "фвла", Toast.LENGTH_SHORT).show();
-                    }
+                create.setOnClickListener(v -> {
+                    nameDialog.dismiss();
+                    if (!testName.getText().toString().trim().equals("" )) {
+                        userList.setNameOfUserTable(testName.getText().toString());
+                        Intent intent = new Intent(ListOfTestsActivity.this, ConstructorActivity.class);
+                        startActivity(intent);
+                    } else
+                        Toast.makeText(ListOfTestsActivity.this, "фвла", Toast.LENGTH_SHORT).show();
                 });
 
-                cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        nameDialog.cancel();
-                    }
-                });
+                cancel.setOnClickListener(v -> nameDialog.cancel());
 
                 nameDialog.setView(nameView);
                 nameDialog.show();
@@ -115,41 +107,32 @@ public class ListOfTestsActivity extends AppCompatActivity implements SelectedLi
 
     public void initButton() {
         create = findViewById(R.id.buttonCreate);
-        create.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final AlertDialog nameDialog = new AlertDialog.Builder(ListOfTestsActivity.this).create();
-                LayoutInflater inflater = getLayoutInflater();
-                View nameView = inflater.inflate(R.layout.create_window, null);
+        create.setOnClickListener(v -> {
+            final AlertDialog nameDialog = new AlertDialog.Builder(ListOfTestsActivity.this).create();
+            LayoutInflater inflater = getLayoutInflater();
+            View nameView = inflater.inflate(R.layout.create_window, null);
 
-                final EditText testName = nameView.findViewById(R.id.editText);
-                final Button create = nameView.findViewById(R.id.buttonCreateTest);
-                final Button cancel = nameView.findViewById(R.id.buttonCancel);
+            final EditText testName = nameView.findViewById(R.id.editText);
+            final Button create = nameView.findViewById(R.id.buttonCreateTest);
+            final Button cancel = nameView.findViewById(R.id.buttonCancel);
 
-                create.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        nameDialog.dismiss();
-                        if (!testName.getText().toString().trim().equals("" )) {
-                            userList.setNameOfUserTable(testName.getText().toString());
-                            Intent intent = new Intent(ListOfTestsActivity.this, ConstructorActivity.class);
-                            startActivity(intent);
-                        } else
-                            Toast.makeText(ListOfTestsActivity.this, "фвла", Toast.LENGTH_SHORT).show();
-                    }
-                });
+            create.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    nameDialog.dismiss();
+                    if (!testName.getText().toString().trim().equals("" )) {
+                        userList.setNameOfUserTable(testName.getText().toString());
+                        Intent intent = new Intent(ListOfTestsActivity.this, ConstructorActivity.class);
+                        startActivity(intent);
+                    } else
+                        Toast.makeText(ListOfTestsActivity.this, "фвла", Toast.LENGTH_SHORT).show();
+                }
+            });
 
-                cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        nameDialog.cancel();
-                    }
-                });
+            cancel.setOnClickListener(v1 -> nameDialog.cancel());
 
-                nameDialog.setView(nameView);
-                nameDialog.show();
-            }
-
+            nameDialog.setView(nameView);
+            nameDialog.show();
         });
 
 

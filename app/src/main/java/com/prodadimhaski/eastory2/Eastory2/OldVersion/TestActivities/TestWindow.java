@@ -113,93 +113,71 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
 
     private void initButtons() {
 
-        buttonNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toNext();
+        buttonNext.setOnClickListener(v -> toNext());
+        buttonPrev.setOnClickListener(v -> toPrev());
+
+        answer.setOnClickListener(v -> {
+            if(wasAnswered()){
+                tapCounter++;
+                answer.setClickable(false);
+                progressBar.incrementProgressBy(1);
+                control.setUserIsRight();
             }
-        });
-        buttonPrev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toPrev();
-            }
-        });
-
-        answer.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceType")
-            @Override
-            public void onClick(View v) {
-
-                if(wasAnswered()){
-                    tapCounter++;
-                    answer.setClickable(false);
-                    progressBar.incrementProgressBy(1);
-                    control.setUserIsRight();
-                }
-                else{
-                    if(change.getLanguage().equals("ru"))
-                        Toast.makeText(TestWindow.this, R.string.hasAnswer_ru, Toast.LENGTH_SHORT).show();
-                    else Toast.makeText(TestWindow.this, R.string.hasAnswer_by, Toast.LENGTH_SHORT).show();
-                }
-
+            else{
+                if(change.getLanguage().equals("ru"))
+                    Toast.makeText(TestWindow.this, R.string.hasAnswer_ru, Toast.LENGTH_SHORT).show();
+                else Toast.makeText(TestWindow.this, R.string.hasAnswer_by, Toast.LENGTH_SHORT).show();
             }
         });
 
-        image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(tasks[taskNumber].getImage()==null){
-                    if (change.getLanguage().equals("ru")) Toast.makeText(TestWindow.this, R.string.noImage_ru, Toast.LENGTH_SHORT).show();
-                    else Toast.makeText(TestWindow.this, R.string.noImage_by, Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Dialog imageWindow = new Dialog(TestWindow.this);
-                    imageWindow.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    imageWindow.getWindow().setBackgroundDrawable(
-                            new ColorDrawable(android.graphics.Color.TRANSPARENT));
-                    imageWindow.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                        @Override
-                        public void onDismiss(DialogInterface dialogInterface) {
-                        }
-                    });
-
-
-                    ImageView imageTask = new ImageView(TestWindow.this);
-                    Bitmap imageResult = BitmapFactory.decodeByteArray(tasks[taskNumber].getImage(),0,tasks[taskNumber].getImage().length);
-                    imageTask.setImageBitmap(imageResult);
-                    imageWindow.addContentView(imageTask, new RelativeLayout.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.MATCH_PARENT));
-                    imageWindow.show();
-                    int width = (int)(getResources().getDisplayMetrics().widthPixels*0.90);
-                    int height = (int)(getResources().getDisplayMetrics().heightPixels*0.90);
-
-                    imageWindow.getWindow().setLayout(width, height);
-                }
+        image.setOnClickListener(v -> {
+            if(tasks[taskNumber].getImage()==null){
+                if (change.getLanguage().equals("ru")) Toast.makeText(TestWindow.this, R.string.noImage_ru, Toast.LENGTH_SHORT).show();
+                else Toast.makeText(TestWindow.this, R.string.noImage_by, Toast.LENGTH_SHORT).show();
             }
-        });
-
-        description.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (control.getIsAnswered(taskNumber)) {
-                    Dialog descriptionDialog = new Dialog(TestWindow.this);
-                    descriptionDialog.getWindow();
-                    descriptionDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    descriptionDialog.setContentView(R.layout.description_window);
-                    TextView descriptionText = descriptionDialog.findViewById(R.id.textDescription);
-                    descriptionText.setText(tasks[taskNumber].getDescription());
-                    descriptionDialog.show();
-                }
-                else{
-                        if (change.getLanguage().equals("ru"))
-                            Toast.makeText(TestWindow.this, R.string.noDescription_ru, Toast.LENGTH_SHORT).show();
-                        else
-                            Toast.makeText(TestWindow.this, R.string.noDescription_by, Toast.LENGTH_SHORT).show();
+            else{
+                Dialog imageWindow = new Dialog(TestWindow.this);
+                imageWindow.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                imageWindow.getWindow().setBackgroundDrawable(
+                        new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                imageWindow.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
                     }
+                });
 
+
+                ImageView imageTask = new ImageView(TestWindow.this);
+                Bitmap imageResult = BitmapFactory.decodeByteArray(tasks[taskNumber].getImage(),0,tasks[taskNumber].getImage().length);
+                imageTask.setImageBitmap(imageResult);
+                imageWindow.addContentView(imageTask, new RelativeLayout.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT));
+                imageWindow.show();
+                int width = (int)(getResources().getDisplayMetrics().widthPixels*0.90);
+                int height = (int)(getResources().getDisplayMetrics().heightPixels*0.90);
+
+                imageWindow.getWindow().setLayout(width, height);
+            }
+        });
+
+        description.setOnClickListener(v -> {
+            if (control.getIsAnswered(taskNumber)) {
+                Dialog descriptionDialog = new Dialog(TestWindow.this);
+                descriptionDialog.getWindow();
+                descriptionDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                descriptionDialog.setContentView(R.layout.description_window);
+                TextView descriptionText = descriptionDialog.findViewById(R.id.textDescription);
+                descriptionText.setText(tasks[taskNumber].getDescription());
+                descriptionDialog.show();
+            }
+            else{
+                    if (change.getLanguage().equals("ru"))
+                        Toast.makeText(TestWindow.this, R.string.noDescription_ru, Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(TestWindow.this, R.string.noDescription_by, Toast.LENGTH_SHORT).show();
                 }
+
             });
         }
 
@@ -337,12 +315,7 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
                 buttonFinish.setText(R.string.finish_ru);
             } else buttonFinish.setText(R.string.finish_by);
             buttonFinish.setVisibility(View.VISIBLE);
-            buttonFinish.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            });
+            buttonFinish.setOnClickListener(v -> finish());
 
             descriptionDialog.show();
 
