@@ -31,6 +31,7 @@ public abstract class Database extends RoomDatabase {
                         Database.class,
                         "AppDB.db")
                         .createFromFile(new File(ASSET_DIR))
+                        .allowMainThreadQueries()
                         .build();
             }
             catch (Exception e) {

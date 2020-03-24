@@ -32,15 +32,14 @@ public class Question {
     @NonNull
     private int right_answer;
 
-    @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
-    private byte[] image;
-
     @NonNull
     private int language_id;
 
     @NonNull
     private String description;
 
+    @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
+    private byte[] image;
 
     public int getQuestion_id() {
         return question_id;

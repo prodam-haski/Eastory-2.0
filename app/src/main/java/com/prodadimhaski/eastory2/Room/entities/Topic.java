@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(tableName = "topics")
 public class Topic {
     @PrimaryKey
     private int topic_id;
