@@ -3,6 +3,7 @@ package com.prodadimhaski.eastory2.Eastory2.OldVersion.TaskConstructor;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.DBManager.DatabaseHelper;
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.Language;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static java.lang.String.valueOf;
+
 public class TaskManager implements Language, TypeOfTest {
 
     private Task[] listTask = new Task[setting.getSizeOfTest()];
@@ -25,6 +28,7 @@ public class TaskManager implements Language, TypeOfTest {
     private SQLiteDatabase myDb;
     private Context context;
     private Database db;
+    private TestDao testDao;
 
     public Task[] createList() {
         myDBHelper = new DatabaseHelper(context, DatabaseHelper.DB_NEW);
@@ -36,7 +40,7 @@ public class TaskManager implements Language, TypeOfTest {
         }
 
         db = Database.getInstance(context);
-        TestDao testDao = db.testDao();
+        testDao = db.testDao();
 
         TopicWithQuestions topicWithQuestions = testDao.getTopicWithQuestionsById(setting.getType());
         List<Question> questions = getQuestionsByLanguage(topicWithQuestions.getQuestion());
@@ -50,7 +54,7 @@ public class TaskManager implements Language, TypeOfTest {
         myDb.close();
         return listTask;
     }
-/*
+
     public Task[] createMixedList() {
         myDBHelper = new DatabaseHelper(context, DatabaseHelper.DB_OLD);
         myDBHelper.create_db();
@@ -60,23 +64,25 @@ public class TaskManager implements Language, TypeOfTest {
             e.printStackTrace();
         }
 
+        db = Database.getInstance(context);
+        testDao = db.testDao();
+
         int i = 0;
-        for (String s : TYPEOFTTEST) {
-            Cursor cursor = myDb.rawQuery("SELECT * FROM " + s, null);
-            cursor.moveToLast();
-            int tableSize = cursor.getPosition() + 1;
-            int[] position = sampleRandomNumbersWithoutRepetition(0, tableSize, 2);
+        for (int period : TYPEOFTTEST_INT) {
+            TopicWithQuestions topicWithQuestions = testDao.getTopicWithQuestionsById(period);
+            List<Question> questions = getQuestionsByLanguage(topicWithQuestions.getQuestion());
+
+            int[] position = sampleRandomNumbersWithoutRepetition(0, questions.size(), 2);
+
             for (int j = 0; j < 2; j++) {
-                cursor.moveToPosition(position[j]);
-                listTask[i] = createTask(cursor);
+                listTask[i] = createTask(questions.get(position[j]));
                 i++;
             }
-            cursor.close();
         }
         myDb.close();
         return listTask;
     }
-*/
+
     private Task createTask(Question question) {
 
         String text = new String();
