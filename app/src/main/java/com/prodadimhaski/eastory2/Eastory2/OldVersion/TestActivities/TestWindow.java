@@ -82,7 +82,7 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
         initButtons();
 
         TaskManager manager = new TaskManager(getApplicationContext());
-        if(setting.getType()==0)tasks = manager.createMixedList();
+        if(setting.getType()==0)tasks = manager.createList();
         else tasks= manager.createList();
 
         paint();

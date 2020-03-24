@@ -13,6 +13,6 @@ public interface QuestionDao {
     @Query("SELECT * FROM questions")
     List<Question> getAll();
 
-    @Query("SELECT * FROM questions WHERE questionId = :id")
+    @Query("SELECT * FROM questions WHERE question_id = :id")
     Question getQuestion(int id);
 }

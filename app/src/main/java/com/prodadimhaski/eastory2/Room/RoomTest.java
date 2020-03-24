@@ -1,20 +1,18 @@
 package com.prodadimhaski.eastory2.Room;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Activity;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.DBManager.AssetDatabaseOpenHelper;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.DBManager.DatabaseHelper;
 import com.prodadimhaski.eastory2.R;
 import com.prodadimhaski.eastory2.Room.Dao.TestDao;
+import com.prodadimhaski.eastory2.Room.entities.Language;
 import com.prodadimhaski.eastory2.Room.entities.Question;
 import com.prodadimhaski.eastory2.Room.entities.TopicWithQuestions;
 
@@ -23,10 +21,9 @@ import java.util.List;
 
 public class RoomTest extends AppCompatActivity {
     EditText testNum;
-
     Button getQuestions;
+    TextView resultText;
     SQLiteDatabase myDb;
-    AssetDatabaseOpenHelper adb;
     Database db;
     TestDao testDao;
 
@@ -37,6 +34,7 @@ public class RoomTest extends AppCompatActivity {
 
         testNum = findViewById(R.id.testNum);
         getQuestions = findViewById(R.id.get_questions);
+        resultText = findViewById(R.id.result_text);
 
         DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext(), DatabaseHelper.DB_NEW);
         databaseHelper.create_db();
@@ -57,14 +55,19 @@ public class RoomTest extends AppCompatActivity {
                 int id = Integer.parseInt(testNum.getText().toString());
                 System.out.println(id);
 
-                Log.d("Copied path",
-                        getApplicationContext().getFilesDir().getPath() + "/" + DatabaseHelper.DB_NEW);
-
                 TopicWithQuestions topicWithQuestions = testDao.getTopicWithQuestionsById(id);
                 List<Question> questionList = topicWithQuestions.getQuestion();
+/*
+                StringBuilder result = new StringBuilder();
 
                 for (Question question : questionList) {
-                    System.out.println(question.getQuestion());
+                    result.append(question.getQuestion()).append("\n");
+                }
+                resultText.setText(result);
+*/
+                for (Question question : questionList) {
+                    if (question.getLanguage_id() == 2)
+                        System.out.println(question.getQuestion());
                 }
             } catch (Exception e) {
                 e.printStackTrace();

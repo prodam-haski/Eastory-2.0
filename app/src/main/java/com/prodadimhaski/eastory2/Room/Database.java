@@ -7,18 +7,21 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.DBManager.DatabaseHelper;
+import com.prodadimhaski.eastory2.Room.Dao.LanguageDao;
 import com.prodadimhaski.eastory2.Room.Dao.TestDao;
+import com.prodadimhaski.eastory2.Room.entities.Language;
 import com.prodadimhaski.eastory2.Room.entities.Question;
 import com.prodadimhaski.eastory2.Room.entities.Test;
 import com.prodadimhaski.eastory2.Room.entities.Topic;
 
 import java.io.File;
 
-@androidx.room.Database(entities = {Question.class, Topic.class, Test.class}, version = 1, exportSchema = false)
+@androidx.room.Database(entities = {Question.class, Topic.class, Test.class, Language.class}, version = 1, exportSchema = false)
 public abstract class Database extends RoomDatabase {
     private static Database instance;
 
     public abstract TestDao testDao();
+    public abstract LanguageDao languageDao();
 
     public static String ASSET_DIR;
 

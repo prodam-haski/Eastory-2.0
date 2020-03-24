@@ -7,8 +7,15 @@ import android.database.sqlite.SQLiteDatabase;
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.DBManager.DatabaseHelper;
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.Language;
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.TypeOfTest;
+import com.prodadimhaski.eastory2.Room.Dao.LanguageDao;
+import com.prodadimhaski.eastory2.Room.Dao.TestDao;
+import com.prodadimhaski.eastory2.Room.Database;
+import com.prodadimhaski.eastory2.Room.entities.Question;
+import com.prodadimhaski.eastory2.Room.entities.TopicWithQuestions;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class TaskManager implements Language, TypeOfTest {
@@ -17,9 +24,10 @@ public class TaskManager implements Language, TypeOfTest {
     private DatabaseHelper myDBHelper;
     private SQLiteDatabase myDb;
     private Context context;
+    private Database db;
 
     public Task[] createList() {
-        myDBHelper = new DatabaseHelper(context, DatabaseHelper.DB_OLD);
+        myDBHelper = new DatabaseHelper(context, DatabaseHelper.DB_NEW);
         myDBHelper.create_db();
         try {
             myDb = myDBHelper.open();
@@ -27,22 +35,23 @@ public class TaskManager implements Language, TypeOfTest {
             e.printStackTrace();
         }
 
-        Cursor cursor = myDb.rawQuery("SELECT * FROM " + setting.getPeriod(), null);
-        cursor.moveToLast();
-        int tableSize = cursor.getPosition()+1;
-        int[] position = sampleRandomNumbersWithoutRepetition(0,tableSize,setting.getSizeOfTest());
+        db = Database.getInstance(context);
+        TestDao testDao = db.testDao();
+
+        TopicWithQuestions topicWithQuestions = testDao.getTopicWithQuestionsById(setting.getType());
+        List<Question> questions = getQuestionsByLanguage(topicWithQuestions.getQuestion());
+
+        int[] position = sampleRandomNumbersWithoutRepetition(0, questions.size(), setting.getSizeOfTest());
 
         for (int i = 0; i < setting.getSizeOfTest(); i++) {
-            cursor.moveToPosition(position[i]);
-            listTask[i] = createTask(cursor);
+            listTask[i] = createTask(questions.get(position[i]));
         }
 
-        cursor.close();
         myDb.close();
         return listTask;
     }
-
-    public Task[]createMixedList(){
+/*
+    public Task[] createMixedList() {
         myDBHelper = new DatabaseHelper(context, DatabaseHelper.DB_OLD);
         myDBHelper.create_db();
         try {
@@ -55,11 +64,11 @@ public class TaskManager implements Language, TypeOfTest {
         for (String s : TYPEOFTTEST) {
             Cursor cursor = myDb.rawQuery("SELECT * FROM " + s, null);
             cursor.moveToLast();
-            int tableSize = cursor.getPosition()+1;
+            int tableSize = cursor.getPosition() + 1;
             int[] position = sampleRandomNumbersWithoutRepetition(0, tableSize, 2);
-            for(int j=0;j<2;j++){
+            for (int j = 0; j < 2; j++) {
                 cursor.moveToPosition(position[j]);
-                listTask[i]=createTask(cursor);
+                listTask[i] = createTask(cursor);
                 i++;
             }
             cursor.close();
@@ -67,8 +76,8 @@ public class TaskManager implements Language, TypeOfTest {
         myDb.close();
         return listTask;
     }
-
-    private Task createTask(Cursor cursor) {
+*/
+    private Task createTask(Question question) {
 
         String text = new String();
         byte[] image;
@@ -76,24 +85,14 @@ public class TaskManager implements Language, TypeOfTest {
         int rightAnswer;
         String textDescription = new String();
 
-        if (change.getLanguage().equals("by")) {
-            text = cursor.getString(2);
-            textDescription = cursor.getString(14);
-            for (int j = 7, i = 0; j < 11; j++, i++) {
-                answers[i] = cursor.getString(j);
-            }
-        }
-
-        if (change.getLanguage().equals("ru")) {
-            text = cursor.getString(1);
-            textDescription = cursor.getString(13);
-            for (int j = 3, i = 0; j < 7; j++, i++) {
-                answers[i] = cursor.getString(j);
-            }
-        }
-
-        rightAnswer = cursor.getInt(11);
-        image = cursor.getBlob(12);
+        text = question.getQuestion();
+        textDescription = question.getDescription();
+        answers[0] = question.getAnswer_1();
+        answers[1] = question.getAnswer_2();
+        answers[2] = question.getAnswer_3();
+        answers[3] = question.getAnswer_4();
+        rightAnswer = question.getRight_answer();
+        image = question.getImage();
 
         return new Task(answers, rightAnswer, text, textDescription, image);
     }
@@ -117,5 +116,19 @@ public class TaskManager implements Language, TypeOfTest {
             remaining--;
         }
         return result;
+    }
+
+    private List<Question> getQuestionsByLanguage(List<Question> allQuestions) {
+        LanguageDao languageDao = db.languageDao();
+        List<Question> resultList = new ArrayList<>();
+
+        for(Question question: allQuestions) {
+            System.out.println(question.getQuestion_id());
+            if (languageDao.getLanguage(question.getLanguage_id()).equals(change.getLanguage())) {
+                resultList.add(question);
+            }
+        }
+
+        return resultList;
     }
 }
