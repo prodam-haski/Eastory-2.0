@@ -1,9 +1,7 @@
 package com.prodadimhaski.eastory2.Eastory2.OldVersion.TaskConstructor;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.DBManager.DatabaseHelper;
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.Language;
@@ -12,14 +10,11 @@ import com.prodadimhaski.eastory2.Room.Dao.LanguageDao;
 import com.prodadimhaski.eastory2.Room.Dao.TestDao;
 import com.prodadimhaski.eastory2.Room.Database;
 import com.prodadimhaski.eastory2.Room.entities.Question;
-import com.prodadimhaski.eastory2.Room.entities.TopicWithQuestions;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import static java.lang.String.valueOf;
 
 public class TaskManager implements Language, TypeOfTest {
 
@@ -42,8 +37,7 @@ public class TaskManager implements Language, TypeOfTest {
         db = Database.getInstance(context);
         testDao = db.testDao();
 
-        TopicWithQuestions topicWithQuestions = testDao.getTopicWithQuestionsById(setting.getType());
-        List<Question> questions = getQuestionsByLanguage(topicWithQuestions.getQuestion());
+        List<Question> questions = filterByLanguage(testDao.getTopicWithQuestionsById(setting.getType()));
 
         int[] position = sampleRandomNumbersWithoutRepetition(0, questions.size(), setting.getSizeOfTest());
 
@@ -69,8 +63,7 @@ public class TaskManager implements Language, TypeOfTest {
 
         int i = 0;
         for (int period : TYPEOFTTEST_INT) {
-            TopicWithQuestions topicWithQuestions = testDao.getTopicWithQuestionsById(period);
-            List<Question> questions = getQuestionsByLanguage(topicWithQuestions.getQuestion());
+            List<Question> questions = filterByLanguage(testDao.getTopicWithQuestionsById(period));
 
             int[] position = sampleRandomNumbersWithoutRepetition(0, questions.size(), 2);
 
@@ -85,11 +78,11 @@ public class TaskManager implements Language, TypeOfTest {
 
     private Task createTask(Question question) {
 
-        String text = new String();
+        String text;
         byte[] image;
         String[] answers = new String[4];
         int rightAnswer;
-        String textDescription = new String();
+        String textDescription;
 
         text = question.getQuestion();
         textDescription = question.getDescription();
@@ -124,7 +117,7 @@ public class TaskManager implements Language, TypeOfTest {
         return result;
     }
 
-    private List<Question> getQuestionsByLanguage(List<Question> allQuestions) {
+    private List<Question> filterByLanguage(List<Question> allQuestions) {
         LanguageDao languageDao = db.languageDao();
         List<Question> resultList = new ArrayList<>();
 

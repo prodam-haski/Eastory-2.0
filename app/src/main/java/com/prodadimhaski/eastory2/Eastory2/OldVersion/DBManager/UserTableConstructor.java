@@ -5,9 +5,11 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.prodadimhaski.eastory2.New.TestConstructor.DataAdapter.Test;
 import com.prodadimhaski.eastory2.New.TestConstructor.Interfaces.SelectedList;
+import com.prodadimhaski.eastory2.Room.Dao.TopicDao;
+import com.prodadimhaski.eastory2.Room.Database;
+import com.prodadimhaski.eastory2.Room.entities.Topic;
 
 import java.sql.SQLException;
-import java.util.List;
 
 public class UserTableConstructor implements SelectedList {
     private DatabaseHelper myDBHelper;
@@ -27,6 +29,11 @@ public class UserTableConstructor implements SelectedList {
             e.printStackTrace();
         }
 
+        Database db = Database.getInstance(context);
+        TopicDao topicDao = db.topicDao();
+
+        topicDao.insert(new Topic(topicDao.lastId() + 1, userList.getNameOfUserTable()));
+       /*
         myDb.execSQL("CREATE TABLE " + userList.getNameOfUserTable() +
                 "( _id INTEGER PRIMARY KEY, " +
                 "task_ru TEXT," +
@@ -43,20 +50,8 @@ public class UserTableConstructor implements SelectedList {
                 "image BLOB, " +
                 "description_ru TEXT, " +
                 "description_by TEXT)");
-    }
 
-    public void deleteUserTest(List<Test> list) {
-        myDBHelper = new DatabaseHelper(context, DatabaseHelper.DB_OLD);
-        myDBHelper.create_db();
-        try {
-            myDb = myDBHelper.open();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        for (Test test : list) {
-            myDb.execSQL("DROP TABLE " + test.getTestName());
-        }
+        */
         myDb.close();
     }
 
@@ -68,8 +63,14 @@ public class UserTableConstructor implements SelectedList {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+/*
         System.out.println("DROP TABLE " + test.getTestName());
         myDb.execSQL("DROP TABLE " + test.getTestName());
+*/
+
+        Database db = Database.getInstance(context);
+        TopicDao topicDao = db.topicDao();
+        topicDao.delete(new Topic(topicDao.getTopicId(test.getTestName()), test.getTestName()));
 
         myDb.close();
     }
