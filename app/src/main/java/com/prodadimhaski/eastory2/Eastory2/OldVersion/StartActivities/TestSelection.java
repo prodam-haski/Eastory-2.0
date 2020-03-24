@@ -53,14 +53,11 @@ public class TestSelection extends AppCompatActivity implements Language, TypeOf
     }
 
     private View.OnClickListener startTest(final int type) {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setting.setType(type);
-                setting.setPeriod();
-                Intent intent = new Intent(getApplicationContext(), TestWindow.class);
-                startActivity(intent);
-            }
+        return v -> {
+            setting.setType(type);
+            setting.setPeriod();
+            Intent intent = new Intent(getApplicationContext(), TestWindow.class);
+            startActivity(intent);
         };
     }
 

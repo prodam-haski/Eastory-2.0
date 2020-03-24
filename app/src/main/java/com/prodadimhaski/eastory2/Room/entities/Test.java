@@ -2,12 +2,14 @@ package com.prodadimhaski.eastory2.Room.entities;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "tests", primaryKeys = {"topic_id", "question_id"})
 public class Test {
+
     private int topic_id;
-    @ColumnInfo(index = true)
+
     private int question_id;
 
     public int getTopic_id() {

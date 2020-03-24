@@ -1,27 +1,28 @@
 package com.prodadimhaski.eastory2.Room;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.DBManager.DatabaseHelper;
 import com.prodadimhaski.eastory2.R;
 import com.prodadimhaski.eastory2.Room.Dao.TestDao;
+import com.prodadimhaski.eastory2.Room.entities.Language;
 import com.prodadimhaski.eastory2.Room.entities.Question;
-import com.prodadimhaski.eastory2.Room.entities.Test;
 import com.prodadimhaski.eastory2.Room.entities.TopicWithQuestions;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class RoomTest extends AppCompatActivity {
     EditText testNum;
     Button getQuestions;
+    TextView resultText;
     SQLiteDatabase myDb;
     Database db;
     TestDao testDao;
@@ -29,11 +30,11 @@ public class RoomTest extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.test);
 
         testNum = findViewById(R.id.testNum);
-        getQuestions = findViewById(R.id.getQuestions);
-
-        setContentView(R.layout.test);
+        getQuestions = findViewById(R.id.get_questions);
+        resultText = findViewById(R.id.result_text);
 
         DatabaseHelper databaseHelper = new DatabaseHelper(getApplicationContext(), DatabaseHelper.DB_NEW);
         databaseHelper.create_db();
@@ -43,24 +44,34 @@ public class RoomTest extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        //adb = new AssetDatabaseOpenHelper(this);
+        //sqLiteDatabase = adb.openDatabase();
+
         db = Database.getInstance(getApplicationContext());
         testDao = db.testDao();
 
-        if (getQuestions != null)
-            getQuestions.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    try {
-                        TopicWithQuestions topicWithQuestions = testDao.getTopicWithQuestionsById(Integer.parseInt(testNum.getText().toString()));
-                        List<Question> questionList = topicWithQuestions.getQuestion();
+        getQuestions.setOnClickListener(v -> {
+            try {
+                int id = Integer.parseInt(testNum.getText().toString());
+                System.out.println(id);
 
-                        for (Question question : questionList) {
-                            System.out.println(question.getQuestion());
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                TopicWithQuestions topicWithQuestions = testDao.getTopicWithQuestionsById(id);
+                List<Question> questionList = topicWithQuestions.getQuestion();
+/*
+                StringBuilder result = new StringBuilder();
+
+                for (Question question : questionList) {
+                    result.append(question.getQuestion()).append("\n");
                 }
-            });
+                resultText.setText(result);
+*/
+                for (Question question : questionList) {
+                    if (question.getLanguage_id() == 2)
+                        System.out.println(question.getQuestion());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

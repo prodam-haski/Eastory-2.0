@@ -34,33 +34,24 @@ public class NetworkSelection extends AppCompatActivity implements Language {
             testConstructor.setText(R.string.constructor_by);
         }
 
-        testConstructor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                    Intent intent = new Intent(NetworkSelection.this, ListOfTestsActivity.class);
-                    startActivity(intent);
+        testConstructor.setOnClickListener(v -> {
+            try{
+                Intent intent = new Intent(NetworkSelection.this, ListOfTestsActivity.class);
+                startActivity(intent);
 
-                }catch (Exception e){}
-            }
+            }catch (Exception e){}
         });
 
-        createServer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                    Intent intent = new Intent(NetworkSelection.this, RoomTest.class);
-                    startActivity(intent);
+        createServer.setOnClickListener(v -> {
+            try{
+                Intent intent = new Intent(NetworkSelection.this, RoomTest.class);
+                startActivity(intent);
 
-                }catch (Exception e){}
-            }
+            }catch (Exception e){}
         });
 
-        joinServer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        joinServer.setOnClickListener(v -> {
 
-            }
         });
 
     }
