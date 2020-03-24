@@ -28,7 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements TypeOfTest {
     private static final int SCHEMA = 2;
 
     public static final String DB_OLD = "ForEastory.db";
-    public static final String DB_NEW = "ForEastoryNewBD.db";
+    public static final String DB_NEW = "ForEastory3.db";
 
     private Context myContext;
 

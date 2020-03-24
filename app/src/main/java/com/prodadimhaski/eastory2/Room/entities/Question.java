@@ -1,32 +1,46 @@
 package com.prodadimhaski.eastory2.Room.entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.Room;
 
-@Entity (tableName = "questions")
+import java.sql.Blob;
+
+@Entity(tableName = "questions")
 public class Question {
 
     @PrimaryKey
     private int question_id;
 
+    @NonNull
     private String question;
 
+    @NonNull
     private String answer_1;
 
+    @NonNull
     private String answer_2;
 
+    @NonNull
     private String answer_3;
 
+    @NonNull
     private String answer_4;
 
+    @NonNull
     private int right_answer;
 
+    @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
+    private byte[] image;
+
+    @NonNull
+    private int language_id;
+
+    @NonNull
     private String description;
 
-    private int image_id;
-
-    private int language_id;
 
     public int getQuestion_id() {
         return question_id;
@@ -92,13 +106,9 @@ public class Question {
         this.description = description;
     }
 
-    public int getImage_id() {
-        return image_id;
-    }
+    public byte[] getImage() { return image; }
 
-    public void setImage_id(int image_id) {
-        this.image_id = image_id;
-    }
+    public void setImage(byte[] image) { this.image = image; }
 
     public int getLanguage_id() {
         return language_id;

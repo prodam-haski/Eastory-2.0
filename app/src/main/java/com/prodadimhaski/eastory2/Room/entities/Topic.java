@@ -1,6 +1,6 @@
 package com.prodadimhaski.eastory2.Room.entities;
 
-import androidx.room.ColumnInfo;
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -9,6 +9,7 @@ public class Topic {
     @PrimaryKey
     private int topic_id;
 
+    @NonNull
     private String topic;
 
     public int getTopic_id() {
