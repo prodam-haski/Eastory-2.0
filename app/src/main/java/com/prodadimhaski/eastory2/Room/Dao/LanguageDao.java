@@ -16,4 +16,7 @@ public interface LanguageDao {
 
     @Query("SELECT language_id FROM languages WHERE language = :language")
     int getLanguageId(String language);
+
+    @Query("SELECT COUNT(*) FROM languages")
+    int amountOfLanguages();
 }

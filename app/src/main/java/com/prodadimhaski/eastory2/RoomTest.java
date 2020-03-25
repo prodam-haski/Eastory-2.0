@@ -39,14 +39,7 @@ public class RoomTest extends AppCompatActivity {
                 System.out.println(id);
 
                 List<Question> questionList = testDao.getTopicWithQuestionsById(id);
-/*
-                StringBuilder result = new StringBuilder();
 
-                for (Question question : questionList) {
-                    result.append(question.getQuestion()).append("\n");
-                }
-                resultText.setText(result);
-*/
                 for (Question question : questionList) {
                     if (question.getLanguage_id() == 2)
                         System.out.println(question.getQuestion());

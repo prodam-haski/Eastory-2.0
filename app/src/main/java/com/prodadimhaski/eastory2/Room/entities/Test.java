@@ -8,6 +8,11 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "tests", primaryKeys = {"topic_id", "question_id"})
 public class Test {
 
+    public Test(int topic_id, int question_id) {
+        this.topic_id = topic_id;
+        this.question_id = question_id;
+    }
+
     private int topic_id;
 
     private int question_id;
