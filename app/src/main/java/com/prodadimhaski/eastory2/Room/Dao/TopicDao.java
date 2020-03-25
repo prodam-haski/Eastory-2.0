@@ -18,6 +18,9 @@ public interface TopicDao {
     @Query("SELECT topic FROM topics WHERE topic_id IN ('1', '2', '3', '4', '5', '6')")
     List<String> getDefaultTopics();
 
+    @Query("SELECT topic FROM topics WHERE topic_id > '6'")
+    List<String> getAllTopicsWithoutDefault();
+
     @Query("SELECT topic_id FROM topics ORDER BY topic_id DESC LIMIT 1")
     int lastId();
 

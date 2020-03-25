@@ -1,5 +1,6 @@
 package com.prodadimhaski.eastory2.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,14 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.prodadimhaski.eastory2.interfaces.Language;
 import com.prodadimhaski.eastory2.interfaces.TypeOfTest;
 import com.prodadimhaski.eastory2.rvadapters.QuestionAdapter;
-import com.prodadimhaski.eastory2.interfaces.SelectedList;
 import com.prodadimhaski.eastory2.R;
 import com.prodadimhaski.eastory2.Room.entities.Question;
 import com.prodadimhaski.eastory2.utils.TestConstructorUtils;
 
 import java.util.List;
 
-public class ConstructorActivity extends AppCompatActivity implements Language, TypeOfTest, SelectedList {
+public class ConstructorActivity extends AppCompatActivity implements Language, TypeOfTest {
     String[] periods;
     List<Question> questions;
 
@@ -50,7 +50,7 @@ public class ConstructorActivity extends AppCompatActivity implements Language, 
                 getResources().getString(R.string.newesttime_by)};
 
         periodsSpinner = findViewById(R.id.periods);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, periods);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, periods);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         periodsSpinner.setAdapter(adapter);
 
@@ -76,18 +76,12 @@ public class ConstructorActivity extends AppCompatActivity implements Language, 
 
         buttonAdd = findViewById(R.id.buttonAdd);
         buttonAdd.setOnClickListener(v -> {
-            List<Integer> selectedQuestions;
-            selectedQuestions = recyclerAdapter.getNumberChecked();
-            if(selectedQuestions.isEmpty()){
-                Toast.makeText(ConstructorActivity.this, "пустой список", Toast.LENGTH_SHORT).show();
-            }
-            else{
-                userList.setSelectedList(selectedQuestions);
-                userList.setSelectedTable(TYPEOFTTEST[periodsSpinner.getSelectedItemPosition()]);
-                TestConstructorUtils constructor = new TestConstructorUtils(getApplicationContext());
-                constructor.createUserTest();
-                finish();
-            }
+            TestConstructorUtils constructor = new TestConstructorUtils(getApplicationContext());
+
+            Intent intent = getIntent();
+            constructor.createUserTest(recyclerAdapter.getCheckedQuestions(),
+                    intent.getStringExtra(ListOfTestsActivity.TEST_NAME));
+            finish();
         });
     }
 

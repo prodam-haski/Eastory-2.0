@@ -17,18 +17,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.prodadimhaski.eastory2.utils.TestConstructorUtils;
 import com.prodadimhaski.eastory2.rvadapters.ListOfTestsAdapter;
-import com.prodadimhaski.eastory2.interfaces.SelectedList;
 import com.prodadimhaski.eastory2.R;
 
 import java.util.List;
 
-public class ListOfTestsActivity extends AppCompatActivity implements SelectedList {
+public class ListOfTestsActivity extends AppCompatActivity  {
 
     List<String> tableList;
     RecyclerView recyclerView;
     ListOfTestsAdapter adapter;
 
     Button create;
+
+    public static final String TEST_NAME = "testName";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,8 +117,8 @@ public class ListOfTestsActivity extends AppCompatActivity implements SelectedLi
             create.setOnClickListener(v12 -> {
                 nameDialog.dismiss();
                 if (!testName.getText().toString().trim().equals("" )) {
-                    userList.setNameOfUserTable(testName.getText().toString());
                     Intent intent = new Intent(ListOfTestsActivity.this, ConstructorActivity.class);
+                    intent.putExtra(TEST_NAME, testName.getText().toString());
                     startActivity(intent);
                 } else
                     Toast.makeText(ListOfTestsActivity.this, "фвла", Toast.LENGTH_SHORT).show();
