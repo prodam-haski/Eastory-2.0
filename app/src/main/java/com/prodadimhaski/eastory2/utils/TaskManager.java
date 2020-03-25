@@ -1,17 +1,14 @@
 package com.prodadimhaski.eastory2.utils;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 
-import com.prodadimhaski.eastory2.dbhelper.DatabaseHelper;
-import com.prodadimhaski.eastory2.interfaces.Language;
-import com.prodadimhaski.eastory2.interfaces.TypeOfTest;
 import com.prodadimhaski.eastory2.Room.Dao.LanguageDao;
 import com.prodadimhaski.eastory2.Room.Dao.TestDao;
 import com.prodadimhaski.eastory2.Room.Database;
 import com.prodadimhaski.eastory2.Room.entities.Question;
+import com.prodadimhaski.eastory2.interfaces.Language;
+import com.prodadimhaski.eastory2.interfaces.TypeOfTest;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -19,21 +16,11 @@ import java.util.Random;
 public class TaskManager implements Language, TypeOfTest {
 
     private Task[] listTask = new Task[setting.getSizeOfTest()];
-    private DatabaseHelper myDBHelper;
-    private SQLiteDatabase myDb;
     private Context context;
     private Database db;
     private TestDao testDao;
 
     public Task[] createList() {
-        myDBHelper = new DatabaseHelper(context, DatabaseHelper.DB_NEW);
-        myDBHelper.create_db();
-        try {
-            myDb = myDBHelper.open();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
         db = Database.getInstance(context);
         testDao = db.testDao();
 
@@ -44,20 +31,10 @@ public class TaskManager implements Language, TypeOfTest {
         for (int i = 0; i < setting.getSizeOfTest(); i++) {
             listTask[i] = createTask(questions.get(position[i]));
         }
-
-        myDb.close();
         return listTask;
     }
 
     public Task[] createMixedList() {
-        myDBHelper = new DatabaseHelper(context, DatabaseHelper.DB_NEW);
-        myDBHelper.create_db();
-        try {
-            myDb = myDBHelper.open();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
         db = Database.getInstance(context);
         testDao = db.testDao();
 
@@ -72,12 +49,10 @@ public class TaskManager implements Language, TypeOfTest {
                 i++;
             }
         }
-        myDb.close();
         return listTask;
     }
 
     private Task createTask(Question question) {
-
         String text;
         byte[] image;
         String[] answers = new String[4];

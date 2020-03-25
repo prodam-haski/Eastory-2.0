@@ -25,17 +25,16 @@ public abstract class Database extends RoomDatabase {
     public abstract LanguageDao languageDao();
     public abstract TopicDao topicDao();
 
-    public static String ASSET_DIR;
-
     public static synchronized Database getInstance(Context context)  {
         if (instance == null) {
             try {
-                ASSET_DIR = context.getFilesDir().getPath() + "/"+ DatabaseHelper.DB_NEW;
-                Log.d("Asset dir", ASSET_DIR);
+                DatabaseHelper databaseHelper = new DatabaseHelper(context);
+                databaseHelper.create_db();
+
                 instance = Room.databaseBuilder(context.getApplicationContext(),
                         Database.class,
                         "AppDB.db")
-                        .createFromFile(new File(ASSET_DIR))
+                        .createFromFile(new File(DatabaseHelper.DB_PATH))
                         .allowMainThreadQueries()
                         .build();
             }

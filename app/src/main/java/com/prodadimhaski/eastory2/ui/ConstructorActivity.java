@@ -12,14 +12,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.prodadimhaski.eastory2.utils.UserTableConstructor;
 import com.prodadimhaski.eastory2.interfaces.Language;
 import com.prodadimhaski.eastory2.interfaces.TypeOfTest;
 import com.prodadimhaski.eastory2.rvadapters.QuestionAdapter;
-import com.prodadimhaski.eastory2.utils.FullListConstructor;
 import com.prodadimhaski.eastory2.interfaces.SelectedList;
 import com.prodadimhaski.eastory2.R;
 import com.prodadimhaski.eastory2.Room.entities.Question;
+import com.prodadimhaski.eastory2.utils.TestConstructorUtils;
 
 import java.util.List;
 
@@ -63,8 +62,8 @@ public class ConstructorActivity extends AppCompatActivity implements Language, 
         periodsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                FullListConstructor fullListConstructor = new FullListConstructor(getApplicationContext());
-                questions = fullListConstructor.createFullList(TYPEOFTTEST_INT[periodsSpinner.getSelectedItemPosition()]);
+                TestConstructorUtils testConstructorUtils = new TestConstructorUtils(getApplicationContext());
+                questions = testConstructorUtils.createFullList(TYPEOFTTEST_INT[periodsSpinner.getSelectedItemPosition()]);
                 recyclerAdapter.setQuestions(questions);
                 recyclerAdapter.notifyDataSetChanged();
             }
@@ -85,7 +84,7 @@ public class ConstructorActivity extends AppCompatActivity implements Language, 
             else{
                 userList.setSelectedList(selectedQuestions);
                 userList.setSelectedTable(TYPEOFTTEST[periodsSpinner.getSelectedItemPosition()]);
-                UserTableConstructor constructor = new UserTableConstructor(getApplicationContext());
+                TestConstructorUtils constructor = new TestConstructorUtils(getApplicationContext());
                 constructor.createUserTest();
                 finish();
             }

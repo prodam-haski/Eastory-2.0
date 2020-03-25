@@ -15,8 +15,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.prodadimhaski.eastory2.utils.TableManager;
-import com.prodadimhaski.eastory2.utils.UserTableConstructor;
+import com.prodadimhaski.eastory2.utils.TestConstructorUtils;
 import com.prodadimhaski.eastory2.rvadapters.ListOfTestsAdapter;
 import com.prodadimhaski.eastory2.interfaces.SelectedList;
 import com.prodadimhaski.eastory2.R;
@@ -36,7 +35,7 @@ public class ListOfTestsActivity extends AppCompatActivity implements SelectedLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_of_tests);
 
-        tableList = (new TableManager(getApplicationContext()).getListOfTable());
+        tableList = (new TestConstructorUtils(getApplicationContext()).getListOfTable());
         System.out.println(tableList);
         recyclerView = findViewById(R.id.testsList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -55,11 +54,11 @@ public class ListOfTestsActivity extends AppCompatActivity implements SelectedLi
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 String swiped = tableList.get(viewHolder.getAdapterPosition());
-                UserTableConstructor constructor = new UserTableConstructor(getApplicationContext());
+                TestConstructorUtils constructor = new TestConstructorUtils(getApplicationContext());
                 constructor.deleteUserTest(swiped);
                 tableList.remove(swiped);
                 adapter.notifyDataSetChanged();
-
+/*
                 final AlertDialog nameDialog = new AlertDialog.Builder(ListOfTestsActivity.this).create();
                 LayoutInflater inflater = getLayoutInflater();
                 View nameView = inflater.inflate(R.layout.create_window, null);
@@ -82,6 +81,7 @@ public class ListOfTestsActivity extends AppCompatActivity implements SelectedLi
 
                 nameDialog.setView(nameView);
                 nameDialog.show();
+                */
             }
         };
 
@@ -96,7 +96,7 @@ public class ListOfTestsActivity extends AppCompatActivity implements SelectedLi
     @Override
     protected void onResume(){
         super.onResume();
-        tableList = (new TableManager(getApplicationContext()).getListOfTable());
+        tableList = (new TestConstructorUtils(getApplicationContext()).getListOfTable());
         adapter = new ListOfTestsAdapter(tableList);
         recyclerView.setAdapter(adapter);
     }
