@@ -12,6 +12,9 @@ import java.util.List;
 @Dao
 public interface TopicDao {
 
+    @Query("SELECT topic FROM topics")
+    List<String> getAllTopics();
+
     @Query("SELECT topic FROM topics WHERE topic_id IN ('1', '2', '3', '4', '5', '6')")
     List<String> getDefaultTopics();
 
