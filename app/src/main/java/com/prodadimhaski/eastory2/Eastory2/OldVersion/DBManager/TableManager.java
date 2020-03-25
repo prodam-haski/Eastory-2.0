@@ -5,6 +5,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.prodadimhaski.eastory2.New.TestConstructor.DataAdapter.Test;
+import com.prodadimhaski.eastory2.Room.Dao.TestDao;
+import com.prodadimhaski.eastory2.Room.Dao.TopicDao;
+import com.prodadimhaski.eastory2.Room.Database;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -30,14 +33,15 @@ public class TableManager {
             e.printStackTrace();
         }
 
-        Cursor cursor = myDb.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name!='sqlite_sequence'AND name!='android_metadata'",null);
-        cursor.moveToLast();
-        int tableSize = cursor.getPosition()+1;
-        for (int i = 0;i<tableSize;i++){
-            cursor.moveToPosition(i);
-            listOfTable.add(new Test(cursor.getString(0)));
+        Database db = Database.getInstance(context);
+        TopicDao topicDao = db.topicDao();
+
+        List<String> topics = topicDao.getDefaultTopics();
+
+        for (String string: topics){
+            listOfTable.add(new Test(string));
         }
-        cursor.close();
+
         return listOfTable;
     }
 }

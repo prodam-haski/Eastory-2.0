@@ -2,7 +2,6 @@ package com.prodadimhaski.eastory2.Room;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -12,9 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.DBManager.DatabaseHelper;
 import com.prodadimhaski.eastory2.R;
 import com.prodadimhaski.eastory2.Room.Dao.TestDao;
-import com.prodadimhaski.eastory2.Room.entities.Language;
 import com.prodadimhaski.eastory2.Room.entities.Question;
-import com.prodadimhaski.eastory2.Room.entities.TopicWithQuestions;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -55,8 +52,7 @@ public class RoomTest extends AppCompatActivity {
                 int id = Integer.parseInt(testNum.getText().toString());
                 System.out.println(id);
 
-                TopicWithQuestions topicWithQuestions = testDao.getTopicWithQuestionsById(id);
-                List<Question> questionList = topicWithQuestions.getQuestion();
+                List<Question> questionList = testDao.getTopicWithQuestionsById(id);
 /*
                 StringBuilder result = new StringBuilder();
 

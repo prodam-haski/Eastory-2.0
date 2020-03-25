@@ -82,16 +82,17 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
         initButtons();
 
         TaskManager manager = new TaskManager(getApplicationContext());
-        if(setting.getType()==0)tasks = manager.createList();
-        else tasks= manager.createList();
+        if (setting.getType() == 0) tasks = manager.createMixedList();
+        else tasks = manager.createList();
 
         paint();
     }
 
     @SuppressLint("ResourceType")
     private void paint() {
-        if (tasks[taskNumber].getImage()!=null) {
-            if (change.getLanguage().equals("ru"))Toast.makeText(this, R.string.hasImage_ru, Toast.LENGTH_SHORT).show();
+        if (tasks[taskNumber].getImage() != null) {
+            if (change.getLanguage().equals("ru"))
+                Toast.makeText(this, R.string.hasImage_ru, Toast.LENGTH_SHORT).show();
             else Toast.makeText(this, R.string.hasImage_by, Toast.LENGTH_SHORT).show();
         }
 
@@ -117,25 +118,26 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
         buttonPrev.setOnClickListener(v -> toPrev());
 
         answer.setOnClickListener(v -> {
-            if(wasAnswered()){
+            if (wasAnswered()) {
                 tapCounter++;
                 answer.setClickable(false);
                 progressBar.incrementProgressBy(1);
                 control.setUserIsRight();
-            }
-            else{
-                if(change.getLanguage().equals("ru"))
+            } else {
+                if (change.getLanguage().equals("ru"))
                     Toast.makeText(TestWindow.this, R.string.hasAnswer_ru, Toast.LENGTH_SHORT).show();
-                else Toast.makeText(TestWindow.this, R.string.hasAnswer_by, Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(TestWindow.this, R.string.hasAnswer_by, Toast.LENGTH_SHORT).show();
             }
         });
 
         image.setOnClickListener(v -> {
-            if(tasks[taskNumber].getImage()==null){
-                if (change.getLanguage().equals("ru")) Toast.makeText(TestWindow.this, R.string.noImage_ru, Toast.LENGTH_SHORT).show();
-                else Toast.makeText(TestWindow.this, R.string.noImage_by, Toast.LENGTH_SHORT).show();
-            }
-            else{
+            if (tasks[taskNumber].getImage() == null) {
+                if (change.getLanguage().equals("ru"))
+                    Toast.makeText(TestWindow.this, R.string.noImage_ru, Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(TestWindow.this, R.string.noImage_by, Toast.LENGTH_SHORT).show();
+            } else {
                 Dialog imageWindow = new Dialog(TestWindow.this);
                 imageWindow.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 imageWindow.getWindow().setBackgroundDrawable(
@@ -148,14 +150,14 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
 
 
                 ImageView imageTask = new ImageView(TestWindow.this);
-                Bitmap imageResult = BitmapFactory.decodeByteArray(tasks[taskNumber].getImage(),0,tasks[taskNumber].getImage().length);
+                Bitmap imageResult = BitmapFactory.decodeByteArray(tasks[taskNumber].getImage(), 0, tasks[taskNumber].getImage().length);
                 imageTask.setImageBitmap(imageResult);
                 imageWindow.addContentView(imageTask, new RelativeLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT));
                 imageWindow.show();
-                int width = (int)(getResources().getDisplayMetrics().widthPixels*0.90);
-                int height = (int)(getResources().getDisplayMetrics().heightPixels*0.90);
+                int width = (int) (getResources().getDisplayMetrics().widthPixels * 0.90);
+                int height = (int) (getResources().getDisplayMetrics().heightPixels * 0.90);
 
                 imageWindow.getWindow().setLayout(width, height);
             }
@@ -170,157 +172,158 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Languag
                 TextView descriptionText = descriptionDialog.findViewById(R.id.textDescription);
                 descriptionText.setText(tasks[taskNumber].getDescription());
                 descriptionDialog.show();
-            }
-            else{
-                    if (change.getLanguage().equals("ru"))
-                        Toast.makeText(TestWindow.this, R.string.noDescription_ru, Toast.LENGTH_SHORT).show();
-                    else
-                        Toast.makeText(TestWindow.this, R.string.noDescription_by, Toast.LENGTH_SHORT).show();
-                }
-
-            });
-        }
-
-        private void toNext () {
-            if (tapCounter == setting.getSizeOfTest()) finishTest();
-            else {
-                if (taskNumber == setting.getSizeOfTest()-1) taskNumber = 0;
-                else taskNumber++;
-                if (control.getIsAnswered(taskNumber)) {
-                    toNext();
-                } else paint();
-            }
-        }
-        private void toPrev () {
-            if (tapCounter == setting.getSizeOfTest()) finishTest();
-            else {
-                if (taskNumber == 0) taskNumber = setting.getSizeOfTest()-1;
-                else taskNumber--;
-                if (control.getIsAnswered(taskNumber)) {
-                    toPrev();
-                } else paint();
-            }
-        }
-
-        @Override
-        public void onBackPressed () {
-            finish();
-        }
-
-        private int installBackground () {
-            switch (setting.getType()) {
-                case 0:
-                    return R.drawable.commonback;
-                case 1:
-                    return R.drawable.polotsk1;
-                case 2:
-                    return R.drawable.polotsk2;
-                case 3:
-                    return R.drawable.new1;
-                case 4:
-                    return R.drawable.newback;
-                case 5:
-                    return R.drawable.newestback;
-                case 6:
-                    return R.drawable.library;
-            }
-            return 0;
-        }
-
-        @SuppressLint("ResourceAsColor")
-        private boolean wasAnswered () {
-
-            int userAnswer = 0;
-            switch (userAnswers.getCheckedRadioButtonId()) {
-                case R.id.radioButton1:
-                    userAnswer = 1;
-                    break;
-                case R.id.radioButton2:
-                    userAnswer = 2;
-                    break;
-                case R.id.radioButton3:
-                    userAnswer = 3;
-                    break;
-                case R.id.radioButton4:
-                    userAnswer = 4;
-                    break;
-                default: return false;
-            }
-            userAnswers.setClickable(false);
-            control.checkAnswer(userAnswer, taskNumber);
-            if (control.getUserIsRight()) {
-                switch (userAnswers.getCheckedRadioButtonId()) {
-                    case R.id.radioButton1:
-                        userAnswer1.setBackgroundResource(R.drawable.style_btn_right);
-                        break;
-                    case R.id.radioButton2:
-                        userAnswer2.setBackgroundResource(R.drawable.style_btn_right);
-                        break;
-                    case R.id.radioButton3:
-                        userAnswer3.setBackgroundResource(R.drawable.style_btn_right);
-                        break;
-                    case R.id.radioButton4:
-                        userAnswer4.setBackgroundResource(R.drawable.style_btn_right);
-                        break;
-                }
             } else {
-                switch (userAnswers.getCheckedRadioButtonId()) {
-                    case R.id.radioButton1:
-                        userAnswer1.setBackgroundResource(R.drawable.style_btn_false);
-                        break;
-                    case R.id.radioButton2:
-                        userAnswer2.setBackgroundResource(R.drawable.style_btn_false);
-                        break;
-                    case R.id.radioButton3:
-                        userAnswer3.setBackgroundResource(R.drawable.style_btn_false);
-                        break;
-                    case R.id.radioButton4:
-                        userAnswer4.setBackgroundResource(R.drawable.style_btn_false);
-                        break;
-                }
-                switch (control.getRightAnswer()) {
-                    case 1:
-                        userAnswer1.setBackgroundResource(R.drawable.style_btn_right);
-                        break;
-                    case 2:
-                        userAnswer2.setBackgroundResource(R.drawable.style_btn_right);
-                        break;
-                    case 3:
-                        userAnswer3.setBackgroundResource(R.drawable.style_btn_right);
-                        break;
-                    case 4:
-                        userAnswer4.setBackgroundResource(R.drawable.style_btn_right);
-                        break;
-                }
+                if (change.getLanguage().equals("ru"))
+                    Toast.makeText(TestWindow.this, R.string.noDescription_ru, Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(TestWindow.this, R.string.noDescription_by, Toast.LENGTH_SHORT).show();
             }
-            userAnswers.clearCheck();
-            return true;
-        }
 
-        private void finishTest () {
-            Dialog descriptionDialog = new Dialog(TestWindow.this);
-            descriptionDialog.getWindow();
-            descriptionDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            descriptionDialog.setContentView(R.layout.result_window);
+        });
+    }
 
-            TextView descriptionText = descriptionDialog.findViewById(R.id.textResult);
-            if (change.getLanguage().equals("ru")) {
-                descriptionText.setText(R.string.result_ru);
-            } else descriptionText.setText(R.string.result_by);
-            descriptionText.append(" " + control.getScore() + "/"+setting.getSizeOfTest());
-
-
-            Button buttonFinish = descriptionDialog.findViewById(R.id.buttonFinish);
-            if (change.getLanguage().equals("ru")) {
-                buttonFinish.setText(R.string.finish_ru);
-            } else buttonFinish.setText(R.string.finish_by);
-            buttonFinish.setVisibility(View.VISIBLE);
-            buttonFinish.setOnClickListener(v -> finish());
-
-            descriptionDialog.show();
-
+    private void toNext() {
+        if (tapCounter == setting.getSizeOfTest()) finishTest();
+        else {
+            if (taskNumber == setting.getSizeOfTest() - 1) taskNumber = 0;
+            else taskNumber++;
+            if (control.getIsAnswered(taskNumber)) {
+                toNext();
+            } else paint();
         }
     }
+
+    private void toPrev() {
+        if (tapCounter == setting.getSizeOfTest()) finishTest();
+        else {
+            if (taskNumber == 0) taskNumber = setting.getSizeOfTest() - 1;
+            else taskNumber--;
+            if (control.getIsAnswered(taskNumber)) {
+                toPrev();
+            } else paint();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    private int installBackground() {
+        switch (setting.getType()) {
+            case 0:
+                return R.drawable.commonback;
+            case 1:
+                return R.drawable.polotsk1;
+            case 2:
+                return R.drawable.polotsk2;
+            case 3:
+                return R.drawable.new1;
+            case 4:
+                return R.drawable.newback;
+            case 5:
+                return R.drawable.newestback;
+            case 6:
+                return R.drawable.library;
+        }
+        return 0;
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private boolean wasAnswered() {
+
+        int userAnswer = 0;
+        switch (userAnswers.getCheckedRadioButtonId()) {
+            case R.id.radioButton1:
+                userAnswer = 1;
+                break;
+            case R.id.radioButton2:
+                userAnswer = 2;
+                break;
+            case R.id.radioButton3:
+                userAnswer = 3;
+                break;
+            case R.id.radioButton4:
+                userAnswer = 4;
+                break;
+            default:
+                return false;
+        }
+        userAnswers.setClickable(false);
+        control.checkAnswer(userAnswer, taskNumber);
+        if (control.getUserIsRight()) {
+            switch (userAnswers.getCheckedRadioButtonId()) {
+                case R.id.radioButton1:
+                    userAnswer1.setBackgroundResource(R.drawable.style_btn_right);
+                    break;
+                case R.id.radioButton2:
+                    userAnswer2.setBackgroundResource(R.drawable.style_btn_right);
+                    break;
+                case R.id.radioButton3:
+                    userAnswer3.setBackgroundResource(R.drawable.style_btn_right);
+                    break;
+                case R.id.radioButton4:
+                    userAnswer4.setBackgroundResource(R.drawable.style_btn_right);
+                    break;
+            }
+        } else {
+            switch (userAnswers.getCheckedRadioButtonId()) {
+                case R.id.radioButton1:
+                    userAnswer1.setBackgroundResource(R.drawable.style_btn_false);
+                    break;
+                case R.id.radioButton2:
+                    userAnswer2.setBackgroundResource(R.drawable.style_btn_false);
+                    break;
+                case R.id.radioButton3:
+                    userAnswer3.setBackgroundResource(R.drawable.style_btn_false);
+                    break;
+                case R.id.radioButton4:
+                    userAnswer4.setBackgroundResource(R.drawable.style_btn_false);
+                    break;
+            }
+            switch (control.getRightAnswer()) {
+                case 1:
+                    userAnswer1.setBackgroundResource(R.drawable.style_btn_right);
+                    break;
+                case 2:
+                    userAnswer2.setBackgroundResource(R.drawable.style_btn_right);
+                    break;
+                case 3:
+                    userAnswer3.setBackgroundResource(R.drawable.style_btn_right);
+                    break;
+                case 4:
+                    userAnswer4.setBackgroundResource(R.drawable.style_btn_right);
+                    break;
+            }
+        }
+        userAnswers.clearCheck();
+        return true;
+    }
+
+    private void finishTest() {
+        Dialog descriptionDialog = new Dialog(TestWindow.this);
+        descriptionDialog.getWindow();
+        descriptionDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        descriptionDialog.setContentView(R.layout.result_window);
+
+        TextView descriptionText = descriptionDialog.findViewById(R.id.textResult);
+        if (change.getLanguage().equals("ru")) {
+            descriptionText.setText(R.string.result_ru);
+        } else descriptionText.setText(R.string.result_by);
+        descriptionText.append(" " + control.getScore() + "/" + setting.getSizeOfTest());
+
+
+        Button buttonFinish = descriptionDialog.findViewById(R.id.buttonFinish);
+        if (change.getLanguage().equals("ru")) {
+            buttonFinish.setText(R.string.finish_ru);
+        } else buttonFinish.setText(R.string.finish_by);
+        buttonFinish.setVisibility(View.VISIBLE);
+        buttonFinish.setOnClickListener(v -> finish());
+
+        descriptionDialog.show();
+
+    }
+}
 
 
 

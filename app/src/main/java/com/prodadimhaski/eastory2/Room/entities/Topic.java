@@ -12,6 +12,11 @@ public class Topic {
     @NonNull
     private String topic;
 
+    public Topic(int topic_id, @NonNull String topic) {
+        this.topic_id = topic_id;
+        this.topic = topic;
+    }
+
     public int getTopic_id() {
         return topic_id;
     }

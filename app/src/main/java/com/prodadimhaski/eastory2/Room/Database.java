@@ -9,6 +9,7 @@ import androidx.room.RoomDatabase;
 import com.prodadimhaski.eastory2.Eastory2.OldVersion.DBManager.DatabaseHelper;
 import com.prodadimhaski.eastory2.Room.Dao.LanguageDao;
 import com.prodadimhaski.eastory2.Room.Dao.TestDao;
+import com.prodadimhaski.eastory2.Room.Dao.TopicDao;
 import com.prodadimhaski.eastory2.Room.entities.Language;
 import com.prodadimhaski.eastory2.Room.entities.Question;
 import com.prodadimhaski.eastory2.Room.entities.Test;
@@ -22,6 +23,7 @@ public abstract class Database extends RoomDatabase {
 
     public abstract TestDao testDao();
     public abstract LanguageDao languageDao();
+    public abstract TopicDao topicDao();
 
     public static String ASSET_DIR;
 
