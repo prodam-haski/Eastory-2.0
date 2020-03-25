@@ -1,11 +1,11 @@
-package com.prodadimhaski.eastory2.Eastory2.OldVersion.TaskConstructor;
+package com.prodadimhaski.eastory2.utils;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.DBManager.DatabaseHelper;
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.Language;
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.TypeOfTest;
+import com.prodadimhaski.eastory2.dbhelper.DatabaseHelper;
+import com.prodadimhaski.eastory2.interfaces.Language;
+import com.prodadimhaski.eastory2.interfaces.TypeOfTest;
 import com.prodadimhaski.eastory2.Room.Dao.LanguageDao;
 import com.prodadimhaski.eastory2.Room.Dao.TestDao;
 import com.prodadimhaski.eastory2.Room.Database;
@@ -50,7 +50,7 @@ public class TaskManager implements Language, TypeOfTest {
     }
 
     public Task[] createMixedList() {
-        myDBHelper = new DatabaseHelper(context, DatabaseHelper.DB_OLD);
+        myDBHelper = new DatabaseHelper(context, DatabaseHelper.DB_NEW);
         myDBHelper.create_db();
         try {
             myDb = myDBHelper.open();

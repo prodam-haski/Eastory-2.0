@@ -1,13 +1,11 @@
-package com.prodadimhaski.eastory2.Eastory2.OldVersion.DBManager;
+package com.prodadimhaski.eastory2.utils;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.prodadimhaski.eastory2.New.TestConstructor.DataAdapter.Test;
-import com.prodadimhaski.eastory2.Room.Dao.TestDao;
 import com.prodadimhaski.eastory2.Room.Dao.TopicDao;
 import com.prodadimhaski.eastory2.Room.Database;
+import com.prodadimhaski.eastory2.dbhelper.DatabaseHelper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,14 +16,14 @@ public class TableManager {
     private SQLiteDatabase myDb;
     private Context context;
 
-    private List<Test> listOfTable = new ArrayList<Test>();
+    private List<String> listOfTable = new ArrayList<>();
 
     public TableManager(Context context) {
         this.context = context;
     }
 
-    public List<Test> getListOfTable() {
-        myDBHelper = new DatabaseHelper(context, DatabaseHelper.DB_OLD);
+    public List<String> getListOfTable() {
+        myDBHelper = new DatabaseHelper(context, DatabaseHelper.DB_NEW);
         myDBHelper.create_db();
         try {
             myDb = myDBHelper.open();
@@ -36,11 +34,7 @@ public class TableManager {
         Database db = Database.getInstance(context);
         TopicDao topicDao = db.topicDao();
 
-        List<String> topics = topicDao.getDefaultTopics();
-
-        for (String string: topics){
-            listOfTable.add(new Test(string));
-        }
+        listOfTable = topicDao.getDefaultTopics();
 
         return listOfTable;
     }

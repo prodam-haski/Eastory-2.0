@@ -6,7 +6,7 @@ import android.util.Log;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.DBManager.DatabaseHelper;
+import com.prodadimhaski.eastory2.dbhelper.DatabaseHelper;
 import com.prodadimhaski.eastory2.Room.Dao.LanguageDao;
 import com.prodadimhaski.eastory2.Room.Dao.TestDao;
 import com.prodadimhaski.eastory2.Room.Dao.TopicDao;

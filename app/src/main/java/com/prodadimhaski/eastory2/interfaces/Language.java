@@ -1,4 +1,4 @@
-package com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces;
+package com.prodadimhaski.eastory2.interfaces;
 
 public interface Language {
     Changing change = new Changing();

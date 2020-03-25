@@ -1,11 +1,11 @@
-package com.prodadimhaski.eastory2.Eastory2.OldVersion.DBManager;
+package com.prodadimhaski.eastory2.dbhelper;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.TypeOfTest;
+import com.prodadimhaski.eastory2.interfaces.TypeOfTest;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
-import java.util.Objects;
 
 public class DatabaseHelper extends SQLiteOpenHelper implements TypeOfTest {
     public static final String TABLEANTIQUITY = "TaskAntiquity";

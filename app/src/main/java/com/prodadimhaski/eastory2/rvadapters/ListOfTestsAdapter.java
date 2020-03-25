@@ -1,8 +1,5 @@
-package com.prodadimhaski.eastory2.New.TestConstructor.DataAdapter;
+package com.prodadimhaski.eastory2.rvadapters;
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,18 +7,15 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.DBManager.DatabaseHelper;
-import com.prodadimhaski.eastory2.New.TestConstructor.FullListConstructor.Question;
 import com.prodadimhaski.eastory2.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListOfTestsAdapter extends RecyclerView.Adapter<ListOfTestsAdapter.ViewHolder> {
 
-    private List<Test> listOfTests;
+    private List<String> listOfTests;
 
-    public ListOfTestsAdapter(Context context, List<Test> list) {
+    public ListOfTestsAdapter(List<String> list) {
         this.listOfTests = list;
     }
 
@@ -33,8 +27,8 @@ public class ListOfTestsAdapter extends RecyclerView.Adapter<ListOfTestsAdapter.
 
     @Override
     public void onBindViewHolder(final ListOfTestsAdapter.ViewHolder holder, final int position) {
-        final Test test = listOfTests.get(position);
-        holder.testName.setText(test.getTestName());
+        final String test = listOfTests.get(position);
+        holder.testName.setText(test);
     }
 
     @Override

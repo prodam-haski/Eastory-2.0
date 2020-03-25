@@ -1,4 +1,4 @@
-package com.prodadimhaski.eastory2.New.TestConstructor.Activity;
+package com.prodadimhaski.eastory2.ui;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -15,24 +15,21 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.DBManager.TableManager;
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.DBManager.UserTableConstructor;
-import com.prodadimhaski.eastory2.New.TestConstructor.DataAdapter.ListOfTestsAdapter;
-import com.prodadimhaski.eastory2.New.TestConstructor.DataAdapter.Test;
-import com.prodadimhaski.eastory2.New.TestConstructor.Interfaces.SelectedList;
+import com.prodadimhaski.eastory2.utils.TableManager;
+import com.prodadimhaski.eastory2.utils.UserTableConstructor;
+import com.prodadimhaski.eastory2.rvadapters.ListOfTestsAdapter;
+import com.prodadimhaski.eastory2.interfaces.SelectedList;
 import com.prodadimhaski.eastory2.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListOfTestsActivity extends AppCompatActivity implements SelectedList {
 
-    List<Test> tableList = new ArrayList<>();
+    List<String> tableList;
     RecyclerView recyclerView;
     ListOfTestsAdapter adapter;
 
     Button create;
-    Button delete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +41,7 @@ public class ListOfTestsActivity extends AppCompatActivity implements SelectedLi
         recyclerView = findViewById(R.id.testsList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        adapter = new ListOfTestsAdapter(getApplicationContext(), tableList);
+        adapter = new ListOfTestsAdapter(tableList);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
@@ -57,7 +54,7 @@ public class ListOfTestsActivity extends AppCompatActivity implements SelectedLi
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                Test swiped = tableList.get(viewHolder.getAdapterPosition());
+                String swiped = tableList.get(viewHolder.getAdapterPosition());
                 UserTableConstructor constructor = new UserTableConstructor(getApplicationContext());
                 constructor.deleteUserTest(swiped);
                 tableList.remove(swiped);
@@ -100,7 +97,7 @@ public class ListOfTestsActivity extends AppCompatActivity implements SelectedLi
     protected void onResume(){
         super.onResume();
         tableList = (new TableManager(getApplicationContext()).getListOfTable());
-        adapter = new ListOfTestsAdapter(getApplicationContext(), tableList);
+        adapter = new ListOfTestsAdapter(tableList);
         recyclerView.setAdapter(adapter);
     }
 
@@ -116,17 +113,14 @@ public class ListOfTestsActivity extends AppCompatActivity implements SelectedLi
             final Button create = nameView.findViewById(R.id.buttonCreateTest);
             final Button cancel = nameView.findViewById(R.id.buttonCancel);
 
-            create.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    nameDialog.dismiss();
-                    if (!testName.getText().toString().trim().equals("" )) {
-                        userList.setNameOfUserTable(testName.getText().toString());
-                        Intent intent = new Intent(ListOfTestsActivity.this, ConstructorActivity.class);
-                        startActivity(intent);
-                    } else
-                        Toast.makeText(ListOfTestsActivity.this, "фвла", Toast.LENGTH_SHORT).show();
-                }
+            create.setOnClickListener(v12 -> {
+                nameDialog.dismiss();
+                if (!testName.getText().toString().trim().equals("" )) {
+                    userList.setNameOfUserTable(testName.getText().toString());
+                    Intent intent = new Intent(ListOfTestsActivity.this, ConstructorActivity.class);
+                    startActivity(intent);
+                } else
+                    Toast.makeText(ListOfTestsActivity.this, "фвла", Toast.LENGTH_SHORT).show();
             });
 
             cancel.setOnClickListener(v1 -> nameDialog.cancel());

@@ -1,18 +1,14 @@
-package com.prodadimhaski.eastory2.New.NetworkActivities;
+package com.prodadimhaski.eastory2.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.Language;
-import com.prodadimhaski.eastory2.New.TestConstructor.Activity.ConstructorActivity;
-import com.prodadimhaski.eastory2.New.TestConstructor.Activity.ListOfTestsActivity;
-import com.prodadimhaski.eastory2.New.TestConstructor.DataAdapter.ListOfTestsAdapter;
+import com.prodadimhaski.eastory2.interfaces.Language;
 import com.prodadimhaski.eastory2.R;
-import com.prodadimhaski.eastory2.Room.RoomTest;
+import com.prodadimhaski.eastory2.RoomTest;
 
 public class NetworkSelection extends AppCompatActivity implements Language {
     Button createServer;

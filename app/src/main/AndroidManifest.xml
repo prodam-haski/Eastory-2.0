@@ -11,13 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Room.RoomTest"></activity>
-        <activity android:name=".New.TestConstructor.Activity.ListOfTestsActivity" />
-        <activity android:name=".New.TestConstructor.Activity.ConstructorActivity" />
-        <activity android:name=".New.NetworkActivities.NetworkSelection" />
-        <activity android:name=".Eastory2.OldVersion.TestActivities.TestWindow" />
-        <activity android:name=".Eastory2.OldVersion.StartActivities.TestSelection" />
-        <activity android:name=".Eastory2.OldVersion.StartActivities.MainActivity">
+        <activity android:name=".RoomTest"></activity>
+        <activity android:name=".ui.ListOfTestsActivity" />
+        <activity android:name=".ui.ConstructorActivity" />
+        <activity android:name=".ui.NetworkSelection" />
+        <activity android:name=".ui.TestWindow" />
+        <activity android:name=".ui.TestSelection" />
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

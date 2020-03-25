@@ -1,17 +1,15 @@
-package com.prodadimhaski.eastory2.Eastory2.OldVersion.StartActivities;
+package com.prodadimhaski.eastory2.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.Language;
-import com.prodadimhaski.eastory2.New.NetworkActivities.NetworkSelection;
+import com.prodadimhaski.eastory2.interfaces.Language;
 import com.prodadimhaski.eastory2.R;
 
 public class MainActivity extends AppCompatActivity implements Language {
@@ -75,7 +73,6 @@ public class MainActivity extends AppCompatActivity implements Language {
         });
     }
 
-    //System button back double pressed
     private long backPressedTime;
     private Toast backToast;
 

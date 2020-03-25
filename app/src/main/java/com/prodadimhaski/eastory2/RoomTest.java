@@ -1,4 +1,4 @@
-package com.prodadimhaski.eastory2.Room;
+package com.prodadimhaski.eastory2;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -8,7 +8,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.DBManager.DatabaseHelper;
+import com.prodadimhaski.eastory2.Room.Database;
+import com.prodadimhaski.eastory2.dbhelper.DatabaseHelper;
 import com.prodadimhaski.eastory2.R;
 import com.prodadimhaski.eastory2.Room.Dao.TestDao;
 import com.prodadimhaski.eastory2.Room.entities.Question;

@@ -1,6 +1,4 @@
-package com.prodadimhaski.eastory2.Eastory2.OldVersion.StartActivities;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.prodadimhaski.eastory2.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,11 +6,11 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageButton;
 
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.Language;
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.TypeOfTest;
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.TestActivities.TestWindow;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.prodadimhaski.eastory2.interfaces.Language;
+import com.prodadimhaski.eastory2.interfaces.TypeOfTest;
 import com.prodadimhaski.eastory2.R;
 
 public class TestSelection extends AppCompatActivity implements Language, TypeOfTest {
@@ -22,13 +20,13 @@ public class TestSelection extends AppCompatActivity implements Language, TypeOf
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_selection);
 
-        final Button buttonCommon = (Button)findViewById(R.id.buttonCommon);
-        final Button buttonAnciety = (Button)findViewById(R.id.buttonAnciety);
-        final Button buttonMedival = (Button)findViewById(R.id.buttonMedival);
-        final Button buttonNew1 = (Button)findViewById(R.id.buttonNew1);
-        final Button buttonNew2 = (Button)findViewById(R.id.buttonNew2);
-        final Button buttonSoviets = (Button)findViewById(R.id.buttonSoviets);
-        final Button buttonNewest = (Button)findViewById(R.id.buttonNewest);
+        final Button buttonCommon = findViewById(R.id.buttonCommon);
+        final Button buttonAnciety = findViewById(R.id.buttonAnciety);
+        final Button buttonMedival = findViewById(R.id.buttonMedival);
+        final Button buttonNew1 = findViewById(R.id.buttonNew1);
+        final Button buttonNew2 = findViewById(R.id.buttonNew2);
+        final Button buttonSoviets = findViewById(R.id.buttonSoviets);
+        final Button buttonNewest = findViewById(R.id.buttonNewest);
 
 
         if(change.getLanguage().equals("by")){
@@ -60,8 +58,6 @@ public class TestSelection extends AppCompatActivity implements Language, TypeOf
             startActivity(intent);
         };
     }
-
-    //System button back
 
     @Override
     public void onBackPressed(){

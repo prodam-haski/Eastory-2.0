@@ -1,4 +1,4 @@
-package com.prodadimhaski.eastory2.Eastory2.OldVersion.TestActivities;
+package com.prodadimhaski.eastory2.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,10 +21,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.Language;
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.TypeOfTest;
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.TaskConstructor.Task;
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.TaskConstructor.TaskManager;
+import com.prodadimhaski.eastory2.interfaces.Language;
+import com.prodadimhaski.eastory2.interfaces.TypeOfTest;
+import com.prodadimhaski.eastory2.utils.Checking;
+import com.prodadimhaski.eastory2.utils.Task;
+import com.prodadimhaski.eastory2.utils.TaskManager;
 import com.prodadimhaski.eastory2.R;
 
 public class TestWindow extends AppCompatActivity implements TypeOfTest, Language {

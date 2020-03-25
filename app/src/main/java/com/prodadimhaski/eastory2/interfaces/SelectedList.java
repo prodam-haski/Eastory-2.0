@@ -1,4 +1,4 @@
-package com.prodadimhaski.eastory2.New.TestConstructor.Interfaces;
+package com.prodadimhaski.eastory2.interfaces;
 
 import java.util.ArrayList;
 import java.util.List;

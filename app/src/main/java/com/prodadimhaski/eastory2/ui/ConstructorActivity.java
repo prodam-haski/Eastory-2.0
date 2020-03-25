@@ -1,13 +1,5 @@
-package com.prodadimhaski.eastory2.New.TestConstructor.Activity;
+package com.prodadimhaski.eastory2.ui;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.ClipData;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,16 +8,19 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.DBManager.UserTableConstructor;
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.Language;
-import com.prodadimhaski.eastory2.Eastory2.OldVersion.Interfaces.TypeOfTest;
-import com.prodadimhaski.eastory2.New.TestConstructor.DataAdapter.QuestionAdapter;
-import com.prodadimhaski.eastory2.New.TestConstructor.FullListConstructor.FullListConstructor;
-import com.prodadimhaski.eastory2.New.TestConstructor.FullListConstructor.Question;
-import com.prodadimhaski.eastory2.New.TestConstructor.Interfaces.SelectedList;
-import com.prodadimhaski.eastory2.R;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.prodadimhaski.eastory2.utils.UserTableConstructor;
+import com.prodadimhaski.eastory2.interfaces.Language;
+import com.prodadimhaski.eastory2.interfaces.TypeOfTest;
+import com.prodadimhaski.eastory2.rvadapters.QuestionAdapter;
+import com.prodadimhaski.eastory2.utils.FullListConstructor;
+import com.prodadimhaski.eastory2.interfaces.SelectedList;
+import com.prodadimhaski.eastory2.R;
+import com.prodadimhaski.eastory2.Room.entities.Question;
+
 import java.util.List;
 
 public class ConstructorActivity extends AppCompatActivity implements Language, TypeOfTest, SelectedList {
@@ -69,7 +64,7 @@ public class ConstructorActivity extends AppCompatActivity implements Language, 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 FullListConstructor fullListConstructor = new FullListConstructor(getApplicationContext());
-                questions = fullListConstructor.createFullList(TYPEOFTTEST[periodsSpinner.getSelectedItemPosition()]);
+                questions = fullListConstructor.createFullList(TYPEOFTTEST_INT[periodsSpinner.getSelectedItemPosition()]);
                 recyclerAdapter.setQuestions(questions);
                 recyclerAdapter.notifyDataSetChanged();
             }

@@ -1,4 +1,4 @@
-package com.prodadimhaski.eastory2.New.TestConstructor.DataAdapter;
+package com.prodadimhaski.eastory2.rvadapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.prodadimhaski.eastory2.New.TestConstructor.FullListConstructor.Question;
 import com.prodadimhaski.eastory2.R;
+import com.prodadimhaski.eastory2.Room.entities.Question;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +27,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         this.inflater = LayoutInflater.from(context);
 
     }
+
     @Override
     public QuestionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.activity_list_item, parent, false);
@@ -40,9 +41,13 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         holder.checkBox.setChecked(checked[position]);
         holder.checkBox.setOnClickListener(v -> {
             checked[position] = !checked[position];
-            if(checked[position])numberChecked.add(position);
-            else for (Integer s :numberChecked
-                      ) {if(s==position) {numberChecked.remove(s);break;}
+            if (checked[position]) numberChecked.add(position);
+            else for (Integer s : numberChecked
+            ) {
+                if (s == position) {
+                    numberChecked.remove(s);
+                    break;
+                }
             }
         });
 
@@ -56,7 +61,8 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         final TextView nameView;
         final CheckBox checkBox;
-        ViewHolder(View view){
+
+        ViewHolder(View view) {
             super(view);
             nameView = view.findViewById(R.id.questionText);
             checkBox = view.findViewById(R.id.checkBox);

@@ -1,4 +1,4 @@
-package com.prodadimhaski.eastory2.Eastory2.OldVersion.TaskConstructor;
+package com.prodadimhaski.eastory2.utils;
 
 public class Task {
 
