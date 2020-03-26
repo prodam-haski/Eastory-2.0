@@ -1,12 +1,10 @@
 package com.prodadimhaski.eastory2.Room;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.prodadimhaski.eastory2.dbhelper.DatabaseHelper;
 import com.prodadimhaski.eastory2.Room.Dao.LanguageDao;
 import com.prodadimhaski.eastory2.Room.Dao.TestDao;
 import com.prodadimhaski.eastory2.Room.Dao.TopicDao;
@@ -14,6 +12,7 @@ import com.prodadimhaski.eastory2.Room.entities.Language;
 import com.prodadimhaski.eastory2.Room.entities.Question;
 import com.prodadimhaski.eastory2.Room.entities.Test;
 import com.prodadimhaski.eastory2.Room.entities.Topic;
+import com.prodadimhaski.eastory2.dbhelper.DatabaseHelper;
 
 import java.io.File;
 

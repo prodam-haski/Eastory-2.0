@@ -40,7 +40,7 @@ public class NetworkSelection extends AppCompatActivity implements Language {
 
         createServer.setOnClickListener(v -> {
             try{
-                Intent intent = new Intent(NetworkSelection.this, RoomTest.class);
+                Intent intent = new Intent(NetworkSelection.this, UsersTests.class);
                 startActivity(intent);
 
             }catch (Exception e){}

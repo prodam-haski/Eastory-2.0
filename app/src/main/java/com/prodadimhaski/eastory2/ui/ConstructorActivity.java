@@ -56,7 +56,7 @@ public class ConstructorActivity extends AppCompatActivity implements Language, 
 
         questionView = findViewById(R.id.questionList);
         questionView.setLayoutManager(new LinearLayoutManager(this));
-        final QuestionAdapter recyclerAdapter = new QuestionAdapter(this, questions);
+        QuestionAdapter recyclerAdapter = new QuestionAdapter(this, questions);
         questionView.setAdapter(recyclerAdapter);
 
         periodsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -83,6 +83,12 @@ public class ConstructorActivity extends AppCompatActivity implements Language, 
                     intent.getStringExtra(ListOfTestsActivity.TEST_NAME));
             finish();
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
     }
 
     @Override

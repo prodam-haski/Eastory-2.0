@@ -14,18 +14,16 @@ import com.prodadimhaski.eastory2.Room.entities.Topic;
 import com.prodadimhaski.eastory2.interfaces.Language;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
 public class TestConstructorUtils implements Language {
-    private Database db;
     private TopicDao topicDao;
     private TestDao testDao;
     private LanguageDao languageDao;
 
     public TestConstructorUtils(Context context) {
-        db = Database.getInstance(context);
+        Database db = Database.getInstance(context);
         topicDao = db.topicDao();
         testDao = db.testDao();
         languageDao = db.languageDao();
@@ -37,26 +35,23 @@ public class TestConstructorUtils implements Language {
 
     public void createUserTest(List<Integer> questions, String testName) {
         int topicId = topicDao.lastId() + 1;
-        Topic newTopic = new Topic(topicId, testName);
-        topicDao.insert(newTopic);
-
-        List<Test> newTest = new LinkedList<>();
+        topicDao.insert(new Topic(topicId, testName));
 
         for (int i = 0; i < questions.size(); i++) {
-            newTest.add(new Test(topicId, questions.get(i)));
-        }
-
-        testDao.insertAll(newTest);
-
-        List<Question> questionList = testDao.getTopicWithQuestionsById(topicId);
-
-        for (Question question : questionList) {
-            System.out.println(question.getQuestion());
+            testDao.insert(new Test(topicId, questions.get(i)));
+            System.out.println(questions.get(i));
         }
     }
 
     public void deleteUserTest(String test) {
-        topicDao.delete(new Topic(topicDao.getTopicId(test), test));
+        int topicId = topicDao.getTopicId(test);
+        topicDao.delete(new Topic(topicId, test));
+
+        List<Test> removableTest = testDao.getTopicWithQuestionsId(topicId);
+        for (int i = 0; i < removableTest.size(); i++) {
+            testDao.deleteByTopic(new Test(topicId, removableTest.get(i).getQuestion_id()));
+            System.out.println(removableTest.get(i));
+        }
     }
 
     public List<Question> createFullList(int period) {
@@ -68,7 +63,6 @@ public class TestConstructorUtils implements Language {
         List<Question> resultList = new ArrayList<>();
 
         for (Question question : allQuestions) {
-            System.out.println(question.getQuestion_id());
             if (languageDao.getLanguage(question.getLanguage_id()).equals(change.getLanguage())) {
                 resultList.add(question);
             }
