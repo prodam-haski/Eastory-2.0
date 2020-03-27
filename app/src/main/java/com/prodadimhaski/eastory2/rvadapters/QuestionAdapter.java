@@ -1,7 +1,6 @@
 package com.prodadimhaski.eastory2.rvadapters;
 
 import android.content.Context;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +10,9 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.prodadimhaski.eastory2.R;
-import com.prodadimhaski.eastory2.Room.Dao.LanguageDao;
-import com.prodadimhaski.eastory2.Room.Dao.TestDao;
-import com.prodadimhaski.eastory2.Room.Database;
-import com.prodadimhaski.eastory2.Room.entities.Language;
 import com.prodadimhaski.eastory2.Room.entities.Question;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,15 +22,15 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     private List<Question> questions;
     private List<Integer> checkedQuestions;
 
-    public QuestionAdapter(Context context, List<Question> foodItems) {
-        this.questions = foodItems;
+    public QuestionAdapter(Context context, List<Question> questions) {
+        this.questions = questions;
         this.inflater = LayoutInflater.from(context);
-        checkedQuestions = new LinkedList<>();
+        checkedQuestions = new ArrayList<>();
     }
 
     @Override
     public QuestionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.activity_list_item, parent, false);
+        View view = inflater.inflate(R.layout.list_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -55,10 +49,12 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
 
         holder.checkBox.setOnClickListener(v -> {
             if (checkedQuestions.contains(question.getQuestion_id())) {
-                checkedQuestions.remove(question.getQuestion_id());
+                checkedQuestions.remove(checkedQuestions.indexOf(question.getQuestion_id()));
+
             }
             else {
                 checkedQuestions.add(question.getQuestion_id());
+                System.out.println(question.getQuestion_id());
             }
         });
 
@@ -88,4 +84,14 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
     public List<Integer> getCheckedQuestions() {
         return checkedQuestions;
     }
+/*
+    private int indexOf(List<Question> questions, Question question) {
+        for (int i = 0; i < questions.size(); i++) {
+            if (quest.equals(question)) {
+                questions.remove(quest);
+            }
+        }
+    }
+
+ */
 }
