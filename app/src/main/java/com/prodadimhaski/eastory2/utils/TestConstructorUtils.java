@@ -14,7 +14,6 @@ import com.prodadimhaski.eastory2.Room.entities.Topic;
 import com.prodadimhaski.eastory2.interfaces.Language;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class TestConstructorUtils implements Language {
@@ -47,7 +46,7 @@ public class TestConstructorUtils implements Language {
         int topicId = topicDao.getTopicId(test);
         topicDao.delete(new Topic(topicId, test));
 
-        List<Test> removableTest = testDao.getTopicWithQuestionsId(topicId);
+        List<Test> removableTest = testDao.getQuestionsId(topicId);
         for (int i = 0; i < removableTest.size(); i++) {
             testDao.deleteByTopic(new Test(topicId, removableTest.get(i).getQuestion_id()));
             System.out.println(removableTest.get(i));
@@ -56,6 +55,15 @@ public class TestConstructorUtils implements Language {
 
     public List<Question> createFullList(int period) {
         return filterByLanguage(testDao.getTopicWithQuestionsById(period));
+    }
+
+    public List<Question> creteListIgnoringLanguage(int period) {
+        return testDao.getTopicWithQuestionsById(period);
+    }
+
+    public boolean isTopicExist(String name) {
+        Topic topic = topicDao.ifExists(name);
+        return topic != null;
     }
 
     @NonNull

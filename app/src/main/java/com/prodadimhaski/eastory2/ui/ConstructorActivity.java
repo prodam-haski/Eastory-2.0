@@ -76,12 +76,16 @@ public class ConstructorActivity extends AppCompatActivity implements Language, 
 
         buttonAdd = findViewById(R.id.buttonAdd);
         buttonAdd.setOnClickListener(v -> {
-            TestConstructorUtils constructor = new TestConstructorUtils(getApplicationContext());
+            if (recyclerAdapter.getCheckedQuestions().isEmpty()){
+                Toast.makeText(this, "Пустой же!", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                TestConstructorUtils constructor = new TestConstructorUtils(getApplicationContext());
+                constructor.createUserTest(recyclerAdapter.getCheckedQuestions(),
+                        getIntent().getStringExtra(ListOfTestsActivity.TEST_NAME));
+                finish();
 
-            Intent intent = getIntent();
-            constructor.createUserTest(recyclerAdapter.getCheckedQuestions(),
-                    intent.getStringExtra(ListOfTestsActivity.TEST_NAME));
-            finish();
+            }
         });
     }
 

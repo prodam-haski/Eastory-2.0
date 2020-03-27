@@ -5,6 +5,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import com.prodadimhaski.eastory2.Room.entities.Test;
 import com.prodadimhaski.eastory2.Room.entities.Topic;
 
 import java.util.List;
@@ -26,6 +27,9 @@ public interface TopicDao {
 
     @Query("SELECT topic_id FROM topics WHERE topic = :name")
     int getTopicId(String name);
+
+    @Query("SELECT * FROM topics WHERE topic = :name")
+    Topic ifExists(String name);
 
     @Insert
     void insert(Topic topic);

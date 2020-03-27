@@ -12,12 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.prodadimhaski.eastory2.R;
 import com.prodadimhaski.eastory2.Room.entities.Question;
+import com.prodadimhaski.eastory2.rvadapters.ListOfTestsAdapter;
 import com.prodadimhaski.eastory2.rvadapters.UserTestAdapter;
 import com.prodadimhaski.eastory2.utils.TestConstructorUtils;
 
 import java.util.List;
 
-public class UsersTests extends AppCompatActivity {
+import static java.lang.String.valueOf;
+
+public class UserTests extends AppCompatActivity {
     List<String> periods;
     List<Question> questions;
 
@@ -35,6 +38,8 @@ public class UsersTests extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, periods);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         periodsSpinner.setAdapter(adapter);
+        periodsSpinner.setSelection(getIntent().
+                getIntExtra(ListOfTestsAdapter.ITEM_POSITION, 0));
 
         questionView = findViewById(R.id.questions);
         questionView.setLayoutManager(new LinearLayoutManager(this));
@@ -46,7 +51,7 @@ public class UsersTests extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 TestConstructorUtils testConstructorUtils = new TestConstructorUtils(getApplicationContext());
-                questions = testConstructorUtils.createFullList(periodsSpinner.getSelectedItemPosition() + 7);
+                questions = testConstructorUtils.creteListIgnoringLanguage(periodsSpinner.getSelectedItemPosition() + 7);
                 recyclerAdapter.setQuestions(questions);
                 recyclerAdapter.notifyDataSetChanged();
             }

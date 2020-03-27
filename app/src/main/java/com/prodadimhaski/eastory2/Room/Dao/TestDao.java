@@ -21,7 +21,7 @@ public interface TestDao {
 
     @Query("SELECT * FROM tests " +
             "WHERE topic_id = :id")
-    List <Test> getTopicWithQuestionsId(int id);
+    List <Test> getQuestionsId(int id);
 
     @Query("SELECT COUNT(*) FROM tests WHERE topic_id = :id")
     int amountOfQuestionsInTopic(int id);

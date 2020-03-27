@@ -12,7 +12,9 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="8dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -17,7 +17,7 @@
         <activity android:name=".ui.NetworkSelection" />
         <activity android:name=".ui.TestWindow" />
         <activity android:name=".ui.TestSelection" />
-        <activity android:name=".ui.UsersTests" />
+        <activity android:name=".ui.UserTests" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
