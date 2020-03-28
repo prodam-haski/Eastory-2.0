@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Eastory</string>
+
+    <string name="start">Начать</string>
+    <string name="change">Сменить язык</string>
+    <string name="answer">Ответить</string>
+    <string name="network">Тестирование по сети</string>
+    <string name="exit">Нажмите еще раз, чтобы выйти</string>
+
+    <string name="description">Объяснение правильного ответа</string>
+    <string name="finish">Закончить тест</string>
+    <string name="result">Ваш результат </string>
+    <string name="noDescription">Объясненение будет доступно после ответа </string>
+
+    <string name="noImage"> Вопрос без изображения  </string>
+    <string name="hasImage"> Вопрос с изображением. Нажмите на кнопку в верхнем левом углу экрана  </string>
+    <string name="hasAnswer"> Выберите вариант ответа  </string>
+
+    <string name="join"> Подключиться к тестированию  </string>
+    <string name="create"> Создать сервер  </string>
+    <string name="constructor"> Конструктор тестов  </string>
+
+    <string name="buttonCreate"> Создать тест</string>
+    <string name="buttonChange"> Изменить тест</string>
+
+    <string name="antiquity">История Беларуси с древнейших времен до середины ХІІІ в.</string>
+    <string name="medival">История Беларуси в середине ХІІІ — первой половине XVI в.</string>
+    <string name="new1">Белорусские земли во второй половине ХVІ – ХVІІІ в.</string>
+    <string name="new2">История Беларуси в ХІХ — начале ХХ в.</string>
+    <string name="soviets">Беларусь в Советский период.</string>
+    <string name="newesttime">Республика Беларусь в 1991–2013 гг.</string>
+    <string name="common">Комплексный тест.</string>
+
+    <string name="enterName">Введите название теста</string>
+    <string name="alreadyExist">Тест с таким названием уже существует</string>
+    <string name="createTest">Создать</string>
+    <string name="cancel">Отмена</string>
+
+</resources>

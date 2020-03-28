@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="red">#65E7072E</color>
+    <color name="white">#CCFCF7F8</color>
+    <color name="white2">#4DFCF7F8</color>
+    <color name="stred">#E6F70020</color>
+    <color name="litebrown">#80530E0E</color>
+    <color name="answerColor">#B71C1C</color>
+    <color name="rightAnwer">#1DD818</color>
+    <color name="taskNew">#DFE610</color>
+    <color name="borderblack">#221E22</color>
+
+
+</resources>

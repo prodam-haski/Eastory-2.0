@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Eastory</string>
+
+
+    <string name="start">Пачаць</string>
+    <string name="change">Змяніць мову</string>
+    <string name="answer">Адказаць</string>
+    <string name="network">Тэставанне па сетцы</string>
+    <string name="exit">Націсніце яшчэ раз, каб выйсці</string>
+
+    <string name="description">Тлумачэнне правільнага адказу</string>
+    <string name="finish">Скончыць тэст</string>
+    <string name="result">Ваш вынік </string>
+
+    <string name="noDescription">Тлумачэнне будзе даступна пасля адказу </string>
+    <string name="noImage">Пытанне без выявы </string>
+    <string name="hasImage">Пытанне з выявай. Націсніце на кнопку ў верхнім левым куце экрана </string>
+    <string name="hasAnswer">Выберыце варыянт адказу </string>
+
+    <string name="join">Далучыцца да тэставання </string>
+    <string name="create">Стварыць сервер </string>
+    <string name="constructor">Канструктар тэстаў </string>
+
+    <string name="buttonCreate"> Стварыць тэст</string>
+    <string name="buttonChange"> Змяніць тэст</string>
+
+
+    <string name="antiquity">Гісторыя Беларусі са старажытных часоў да сярэдзіны ХІІІ ст.</string>
+    <string name="medival">Гісторыя Беларусі ў сярэдзіне ХІІІ — першай палове XVI ст.</string>
+    <string name="new1">Беларускія землі ў другой палове ХVІ-ХVІІІ ст.</string>
+    <string name="new2">Гісторыя Беларусі ў ХІХ — пачатку ХХ ст.</string>
+    <string name="soviets">Беларусь у Савецкі перыяд.</string>
+    <string name="newesttime">Рэспубліка Беларусь у 1991–2013 гг.</string>
+    <string name="common">Комплексны тэст</string>
+
+    <string name="enterName">Увядзіце назву тэсту</string>
+    <string name="alreadyExist">Тэст з такой назвай ужо існуе</string>
+    <string name="createTest">Стварыць</string>
+    <string name="cancel">Адмена</string>
+
+</resources>
