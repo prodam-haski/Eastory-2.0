@@ -35,5 +35,7 @@
     <string name="alreadyExist">Тест с таким названием уже существует</string>
     <string name="createTest">Создать</string>
     <string name="cancel">Отмена</string>
+    <string name="delete">Удалить</string>
+    <string name="confirmationDelete"> Хотите удалить тест?</string>
 
 </resources>

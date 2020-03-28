@@ -51,7 +51,9 @@ public class MainActivity extends AppCompatActivity implements Language {
             try {
 
                 localeHelper.setLocale(MainActivity.this, change.changeLanguage());
-                recreate();
+                startButton.setText(R.string.start);
+                networkButton.setText(R.string.network);
+                changeButton.setText(R.string.change);
                 change.swipeLanguage();
             } catch (Exception e) {}
         });
@@ -73,8 +75,7 @@ public class MainActivity extends AppCompatActivity implements Language {
             super.onBackPressed();
             return;
         } else {
-            backToast = Toast.makeText(getBaseContext(), R.string.exit, Toast.LENGTH_SHORT);
-            backToast.show();
+            Toast.makeText(this, R.string.exit, Toast.LENGTH_SHORT).show();
         }
         backPressedTime = System.currentTimeMillis();
 

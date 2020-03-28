@@ -63,7 +63,7 @@ public class ListOfTestsActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                /*AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
                 builder.setMessage("Удалить тест?")
                         .setPositiveButton("Да.", (dialog, which) -> {
                             String swiped = tableList.get(viewHolder.getAdapterPosition());
@@ -72,7 +72,29 @@ public class ListOfTestsActivity extends AppCompatActivity {
                             tableList.remove(swiped);
                             adapter.notifyDataSetChanged();
                         }).setNegativeButton("Нет", null)
-                        .create();
+                        .create();*/
+                final AlertDialog confirmationDialog = new AlertDialog.Builder(ListOfTestsActivity.this).create();
+                LayoutInflater inflater = getLayoutInflater();
+                View nameView = inflater.inflate(R.layout.delete_window, null);
+
+                final Button deleteTest= nameView.findViewById(R.id.buttonDeleteTest);
+                final Button cancelDelete = nameView.findViewById(R.id.buttonCancelDelete);
+
+                deleteTest.setOnClickListener(v -> {
+                    confirmationDialog.dismiss();
+                    String swiped = tableList.get(viewHolder.getAdapterPosition());
+                    TestConstructorUtils constructor = new TestConstructorUtils(getApplicationContext());
+                    constructor.deleteUserTest(swiped);
+                    tableList.remove(swiped);
+                    adapter.notifyDataSetChanged();
+                });
+                cancelDelete.setOnClickListener(v1 -> {
+                    adapter.notifyDataSetChanged();
+                    confirmationDialog.cancel();
+                });
+
+                confirmationDialog.setView(nameView);
+                confirmationDialog.show();
             }
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);

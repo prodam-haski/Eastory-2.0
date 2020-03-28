@@ -5,8 +5,8 @@
     <string name="start">Пачаць</string>
     <string name="change">Змяніць мову</string>
     <string name="answer">Адказаць</string>
-    <string name="network">Тэставанне па сетцы</string>
-    <string name="exit">Націсніце яшчэ раз, каб выйсці</string>
+    <string name="network"> Тэставанне па сетцы</string>
+    <string name="exit"> Націсніце яшчэ раз, каб выйсці</string>
 
     <string name="description">Тлумачэнне правільнага адказу</string>
     <string name="finish">Скончыць тэст</string>
@@ -37,5 +37,7 @@
     <string name="alreadyExist">Тэст з такой назвай ужо існуе</string>
     <string name="createTest">Стварыць</string>
     <string name="cancel">Адмена</string>
+    <string name="delete">Выдаліць</string>
+    <string name="confirmationDelete">Хочаце выдаліць тэст?</string>
 
 </resources>
