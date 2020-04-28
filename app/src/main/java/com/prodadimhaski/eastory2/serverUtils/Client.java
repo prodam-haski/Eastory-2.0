@@ -16,30 +16,8 @@ public class Client {
     private String serverName;
     private String userName;
 
-    private Thread connectingRun = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            while (connected){
-                Socket socket = null;
-                try {
-                    socket = new Socket(InetAddress.getByName(ADDRESS),PORT);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                InputStream inputStream = null;
-                try {
-                    inputStream = socket.getInputStream();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    inputStream.read();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    });
+    private Socket socket;
+    private Thread connectingRun;
 
     public Client(String serverName, String userName) throws IOException, SocketException {
         this.serverName = serverName;
@@ -50,6 +28,19 @@ public class Client {
         if (!connected) {
             System.out.println("Connection failed..");
         }
+
+        socket = new Socket(InetAddress.getByName(ADDRESS),PORT);
+        InputStream inputStream = socket.getInputStream();
+        connectingRun = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    inputStream.read();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     public void setServerName(String serverName) {
@@ -94,6 +85,5 @@ public class Client {
         String request = "/re/"+serverName+"%"+userName+result+"%";
         net.send(request.getBytes());
     }
-
 
 }
