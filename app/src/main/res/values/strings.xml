@@ -19,6 +19,10 @@
     <string name="join"> Подключиться к тестированию  </string>
     <string name="create"> Создать сервер  </string>
     <string name="constructor"> Конструктор тестов  </string>
+    <string name="enterServerName">Введите имя сервера</string>
+    <string name="enterStudentName">Введите имя и фамилию</string>
+
+    <string name="next">Далее</string>
 
     <string name="buttonCreate"> Создать тест</string>
     <string name="buttonChange"> Изменить тест</string>
@@ -37,5 +41,6 @@
     <string name="cancel">Отмена</string>
     <string name="delete">Удалить</string>
     <string name="confirmationDelete"> Хотите удалить тест?</string>
+
 
 </resources>

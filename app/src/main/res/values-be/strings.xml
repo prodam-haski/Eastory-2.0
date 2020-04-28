@@ -20,10 +20,13 @@
     <string name="join">Далучыцца да тэставання </string>
     <string name="create">Стварыць сервер </string>
     <string name="constructor">Канструктар тэстаў </string>
+    <string name="enterServerName">Увядзіце імя сервера</string>
+    <string name="enterStudentName">Увядзіце імя i прозвiшча</string>
+
+    <string name="next">Далей</string>
 
     <string name="buttonCreate"> Стварыць тэст</string>
     <string name="buttonChange"> Змяніць тэст</string>
-
 
     <string name="antiquity">Гісторыя Беларусі са старажытных часоў да сярэдзіны ХІІІ ст.</string>
     <string name="medival">Гісторыя Беларусі ў сярэдзіне ХІІІ — першай палове XVI ст.</string>
