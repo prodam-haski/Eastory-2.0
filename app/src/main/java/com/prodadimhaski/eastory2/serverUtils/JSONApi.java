@@ -6,7 +6,9 @@ import com.prodadimhaski.eastory2.serverUtils.POJO.TopicOTD;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -20,7 +22,7 @@ public interface JSONApi {
     @GET("/topic")
     public Call<List<TopicOTD>> getAllTopic();
 
-    @POST("/test/check_result")
-    public Call<ResultDTO> sendResult(@Body ResultDTO data);
+    @POST("/test/check_results")
+    public Call<ResponseBody> sendResult(@Body ResultDTO data);
 
 }

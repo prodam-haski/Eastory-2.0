@@ -6,6 +6,7 @@ public class Checking implements TypeOfTest {
 
     private int rightAnswer;
     private int score = 0;
+    private boolean alwaysZero= false;
     private boolean userIsRight=false;
     private boolean[] isAnswered = new boolean[setting.getSizeOfTest()];
 
@@ -26,9 +27,14 @@ public class Checking implements TypeOfTest {
         this.score = score;
     }
 
+    public void setAlwaysZero() {
+        alwaysZero = true;
+        score = 0;
+    }
+
     public void checkAnswer(int answer, int number) {
         isAnswered[number]=true;
-        if (rightAnswer == answer) {
+        if (rightAnswer == answer&&!alwaysZero) {
             score++;
             userIsRight=true;
         }

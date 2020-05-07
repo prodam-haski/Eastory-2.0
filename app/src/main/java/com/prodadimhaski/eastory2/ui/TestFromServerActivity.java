@@ -1,6 +1,8 @@
 package com.prodadimhaski.eastory2.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -25,14 +27,23 @@ import android.widget.Toast;
 import com.prodadimhaski.eastory2.R;
 import com.prodadimhaski.eastory2.interfaces.Name;
 import com.prodadimhaski.eastory2.interfaces.TypeOfTest;
+import com.prodadimhaski.eastory2.rvadapters.TopicAdapter;
 import com.prodadimhaski.eastory2.serverUtils.NetworkService;
 import com.prodadimhaski.eastory2.serverUtils.POJO.ResultDTO;
 import com.prodadimhaski.eastory2.serverUtils.POJO.TestOTD;
+import com.prodadimhaski.eastory2.serverUtils.POJO.TopicOTD;
 import com.prodadimhaski.eastory2.utils.Checking;
 import com.prodadimhaski.eastory2.utils.Task;
 import com.prodadimhaski.eastory2.utils.TaskManager;
 
+import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.prodadimhaski.eastory2.rvadapters.ListOfTestsAdapter.ITEM_POSITION;
 
@@ -64,7 +75,7 @@ public class TestFromServerActivity extends AppCompatActivity implements TypeOfT
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        id = getIntent().getIntExtra(ITEM_POSITION,0);
+        id = getIntent().getIntExtra(ITEM_POSITION, 0);
         setContentView(R.layout.activity_test_window);
 
         userAnswers = findViewById(R.id.radioButtons);
@@ -214,34 +225,31 @@ public class TestFromServerActivity extends AppCompatActivity implements TypeOfT
         answer.setClickable(true);
     }
 
+    @Override
     public void onStop() {
-        control.setScore(0);
-        finishTest();
+        control.setAlwaysZero();
         super.onStop();
     }
 
-    private void finishTest(){
+    private void finishTest() {
 
-        ResultDTO resultDTO = new ResultDTO(nameOfStudent.getName(),id,control.getScore());
-        NetworkService.getInstance().getJSONApi().sendResult(resultDTO);
+        ResultDTO resultDTO = new ResultDTO(nameOfStudent.getName(), id, control.getScore());
+        NetworkService.getInstance().getJSONApi().sendResult(resultDTO).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
 
-        Dialog descriptionDialog = new Dialog(TestFromServerActivity.this);
-        descriptionDialog.getWindow();
-        descriptionDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        descriptionDialog.setContentView(R.layout.result_window);
+            }
 
-        TextView descriptionText = descriptionDialog.findViewById(R.id.textResult);
-        descriptionText.setText(R.string.result);
-        descriptionText.append(" " + control.getScore() + "/" + setting.getSizeOfTest());
+            @Override
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                Toast.makeText(getApplicationContext(), "xuina", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-
-        Button buttonFinish = descriptionDialog.findViewById(R.id.buttonFinish);
-        buttonFinish.setText(R.string.finish);
-        buttonFinish.setVisibility(View.VISIBLE);
-        buttonFinish.setOnClickListener(v -> finish());
-
-        descriptionDialog.show();
-
-
+      /*  Intent intent = new Intent(TestFromServerActivity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+*/
+        finish();
     }
 }
