@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.prodadimhaski.eastory2">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -12,13 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RoomTest" />
+        <activity android:name=".ui.TestFromServerActivity"></activity>
+        <activity android:name=".temp.RoomTest" />
         <activity android:name=".ui.ListOfTestsActivity" />
         <activity android:name=".ui.ConstructorActivity" />
         <activity android:name=".ui.NetworkSelection" />
         <activity android:name=".ui.TestWindow" />
         <activity android:name=".ui.TestSelection" />
         <activity android:name=".ui.UserTests" />
+        <activity android:name=".ui.TestsFromServer" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

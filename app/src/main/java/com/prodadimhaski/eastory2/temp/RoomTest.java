@@ -1,4 +1,4 @@
-package com.prodadimhaski.eastory2;
+package com.prodadimhaski.eastory2.temp;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.prodadimhaski.eastory2.R;
 import com.prodadimhaski.eastory2.Room.Dao.TestDao;
 import com.prodadimhaski.eastory2.Room.Database;
 import com.prodadimhaski.eastory2.Room.entities.Question;

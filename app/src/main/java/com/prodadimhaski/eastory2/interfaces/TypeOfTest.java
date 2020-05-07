@@ -25,6 +25,10 @@ public interface TypeOfTest {
             return period;
         }
 
+        public void setSizeOfTest(int sizeOfTest) {
+            this.sizeOfTest = sizeOfTest;
+        }
+
         public int getSizeOfTest() {
             return sizeOfTest;
         }

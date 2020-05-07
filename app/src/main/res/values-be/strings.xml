@@ -42,5 +42,6 @@
     <string name="cancel">Адмена</string>
     <string name="delete">Выдаліць</string>
     <string name="confirmationDelete">Хочаце выдаліць тэст?</string>
+    <string name="rollUp">Пры згортванні прыкладання будзе выстаўлена адзнака 0</string>
 
 </resources>

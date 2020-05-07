@@ -15,11 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.prodadimhaski.eastory2.R;
-import com.prodadimhaski.eastory2.serverUtils.Client;
+import com.prodadimhaski.eastory2.interfaces.Name;
 
 import java.io.IOException;
 
-public class NetworkSelection extends AppCompatActivity  {
+public class NetworkSelection extends AppCompatActivity implements Name {
     Button createServer;
     Button joinServer;
     Button testConstructor;
@@ -60,11 +60,7 @@ public class NetworkSelection extends AppCompatActivity  {
             create.setOnClickListener(v12 -> {
                 if (!testName.getText().toString().trim().equals("")) {
                     nameDialog.dismiss();
-                    try {
-                        Client client = new Client (testName.getText().toString(),"creator");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+
 
                 } else
                     Toast.makeText(NetworkSelection.this,
@@ -82,21 +78,18 @@ public class NetworkSelection extends AppCompatActivity  {
 
             final TextView textView = nameView.findViewById(R.id.textView);
             textView.setText(R.string.enterStudentName);
-            final EditText testName = nameView.findViewById(R.id.editText);
+            final EditText studentName = nameView.findViewById(R.id.editText);
             final Button create = nameView.findViewById(R.id.buttonCreateTest);
             create.setText(R.string.next);
             final Button cancel = nameView.findViewById(R.id.buttonCancel);
 
             cancel.setOnClickListener(v1 -> nameDialog.cancel());
             create.setOnClickListener(v12 -> {
-                if (!testName.getText().toString().trim().equals("")) {
+                if (!studentName.getText().toString().trim().equals("")) {
                     nameDialog.dismiss();
-                    try {
-                        Client client = new Client ("???",testName.getText().toString());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
+                    nameOfStudent.setName(studentName.getText().toString().trim());
+                    Intent intent = new Intent(NetworkSelection.this, TestsFromServer.class);
+                    startActivity(intent);
                 } else
                     Toast.makeText(NetworkSelection.this,
                             R.string.enterStudentName, Toast.LENGTH_SHORT).show();
@@ -104,6 +97,7 @@ public class NetworkSelection extends AppCompatActivity  {
 
             nameDialog.setView(nameView);
             nameDialog.show();
+
         });
     }
 

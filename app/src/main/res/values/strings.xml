@@ -42,5 +42,7 @@
     <string name="delete">Удалить</string>
     <string name="confirmationDelete"> Хотите удалить тест?</string>
 
+    <string name="rollUp">При сворачивании приложения будет выставлена оценка 0</string>
+
 
 </resources>

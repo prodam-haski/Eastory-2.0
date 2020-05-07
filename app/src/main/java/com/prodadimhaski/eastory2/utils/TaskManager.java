@@ -34,6 +34,18 @@ public class TaskManager implements Language, TypeOfTest {
         return listTask;
     }
 
+    public Task[] createListFromServer(int id){
+        db = Database.getInstance(context);
+        testDao = db.testDao();
+        List<Question> questions = filterByLanguage(testDao.getTopicWithQuestionsById(id));
+        setting.setSizeOfTest(questions.size());
+        listTask = new Task[questions.size()];
+        for (int i = 0; i < questions.size(); i++) {
+            listTask[i] = createTask(questions.get(i));
+        }
+        return listTask;
+    }
+
     public Task[] createMixedList() {
         db = Database.getInstance(context);
         testDao = db.testDao();

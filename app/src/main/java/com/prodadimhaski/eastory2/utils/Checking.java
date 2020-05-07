@@ -22,6 +22,10 @@ public class Checking implements TypeOfTest {
         }
     }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     public void checkAnswer(int answer, int number) {
         isAnswered[number]=true;
         if (rightAnswer == answer) {
