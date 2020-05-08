@@ -18,7 +18,7 @@
     <string name="hasAnswer">Выберыце варыянт адказу </string>
 
     <string name="join">Далучыцца да тэставання </string>
-    <string name="create">Стварыць сервер </string>
+    <string name="create">Пабачыць вынікі </string>
     <string name="constructor">Канструктар тэстаў </string>
     <string name="enterServerName">Увядзіце імя сервера</string>
     <string name="enterStudentName">Увядзіце імя i прозвiшча</string>

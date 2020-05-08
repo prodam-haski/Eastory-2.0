@@ -1,4 +1,4 @@
-package com.prodadimhaski.eastory2.ui;
+package com.prodadimhaski.eastory2.ui.testActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 

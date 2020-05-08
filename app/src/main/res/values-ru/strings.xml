@@ -17,7 +17,7 @@
     <string name="hasAnswer"> Выберите вариант ответа  </string>
 
     <string name="join"> Подключиться к тестированию  </string>
-    <string name="create"> Создать сервер  </string>
+    <string name="create"> Увидеть результаты  </string>
     <string name="constructor"> Конструктор тестов  </string>
     <string name="enterServerName">Введите имя сервера</string>
     <string name="enterStudentName">Введите имя и фамилию</string>

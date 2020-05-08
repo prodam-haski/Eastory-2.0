@@ -1,4 +1,4 @@
-package com.prodadimhaski.eastory2.ui;
+package com.prodadimhaski.eastory2.ui.constructorActivities;
 
 import android.os.Bundle;
 import android.view.View;

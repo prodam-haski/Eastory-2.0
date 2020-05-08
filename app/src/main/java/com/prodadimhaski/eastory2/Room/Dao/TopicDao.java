@@ -31,6 +31,9 @@ public interface TopicDao {
     @Query("SELECT * FROM topics WHERE topic = :name")
     Topic ifExists(String name);
 
+    @Query("SELECT topic FROM topics WHERE topic_id = :id")
+    String getTopicNameById(int id);
+
     @Insert
     void insert(Topic topic);
 

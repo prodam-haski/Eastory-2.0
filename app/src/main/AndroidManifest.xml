@@ -12,16 +12,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.TestFromServerActivity"></activity>
+        <activity android:name=".ui.networkActivities.ResultActivity"></activity>
+        <activity android:name=".ui.testActivities.TestFromServerActivity" />
         <activity android:name=".temp.RoomTest" />
-        <activity android:name=".ui.ListOfTestsActivity" />
-        <activity android:name=".ui.ConstructorActivity" />
-        <activity android:name=".ui.NetworkSelection" />
-        <activity android:name=".ui.TestWindow" />
-        <activity android:name=".ui.TestSelection" />
-        <activity android:name=".ui.UserTests" />
-        <activity android:name=".ui.TestsFromServer" />
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.constructorActivities.ListOfTestsActivity" />
+        <activity android:name=".ui.constructorActivities.ConstructorActivity" />
+        <activity android:name=".ui.networkActivities.NetworkSelection" />
+        <activity android:name=".ui.testActivities.TestWindow" />
+        <activity android:name=".ui.startActivities.TestSelection" />
+        <activity android:name=".ui.constructorActivities.UserTests" />
+        <activity android:name=".ui.networkActivities.TestsFromServer" />
+        <activity android:name=".ui.startActivities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,4 +1,4 @@
-package com.prodadimhaski.eastory2.ui;
+package com.prodadimhaski.eastory2.ui.startActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.prodadimhaski.eastory2.R;
 import com.prodadimhaski.eastory2.interfaces.Language;
 import com.prodadimhaski.eastory2.localizer.LocaleHelper;
+import com.prodadimhaski.eastory2.ui.networkActivities.NetworkSelection;
 
 public class MainActivity extends AppCompatActivity implements Language {
 

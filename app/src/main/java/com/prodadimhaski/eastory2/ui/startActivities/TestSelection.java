@@ -1,4 +1,4 @@
-package com.prodadimhaski.eastory2.ui;
+package com.prodadimhaski.eastory2.ui.startActivities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.prodadimhaski.eastory2.interfaces.TypeOfTest;
 import com.prodadimhaski.eastory2.R;
+import com.prodadimhaski.eastory2.ui.testActivities.TestWindow;
 
 public class TestSelection extends AppCompatActivity implements  TypeOfTest {
 

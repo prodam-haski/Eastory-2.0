@@ -1,10 +1,6 @@
-package com.prodadimhaski.eastory2.ui;
+package com.prodadimhaski.eastory2.ui.networkActivities;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -13,17 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.prodadimhaski.eastory2.R;
-import com.prodadimhaski.eastory2.Room.entities.Question;
-import com.prodadimhaski.eastory2.Room.entities.Topic;
-import com.prodadimhaski.eastory2.rvadapters.ListOfTestsAdapter;
 import com.prodadimhaski.eastory2.rvadapters.TopicAdapter;
-import com.prodadimhaski.eastory2.rvadapters.UserTestAdapter;
 import com.prodadimhaski.eastory2.serverUtils.NetworkService;
-import com.prodadimhaski.eastory2.serverUtils.POJO.TestOTD;
 import com.prodadimhaski.eastory2.serverUtils.POJO.TopicOTD;
-import com.prodadimhaski.eastory2.utils.TestConstructorUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;

@@ -6,27 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.prodadimhaski.eastory2.R;
-import com.prodadimhaski.eastory2.Room.entities.Question;
-import com.prodadimhaski.eastory2.Room.entities.Topic;
-import com.prodadimhaski.eastory2.serverUtils.NetworkService;
-import com.prodadimhaski.eastory2.serverUtils.POJO.TestOTD;
 import com.prodadimhaski.eastory2.serverUtils.POJO.TopicOTD;
-import com.prodadimhaski.eastory2.ui.TestFromServerActivity;
-import com.prodadimhaski.eastory2.ui.TestWindow;
-import com.prodadimhaski.eastory2.ui.TestsFromServer;
-import com.prodadimhaski.eastory2.ui.UserTests;
+import com.prodadimhaski.eastory2.ui.testActivities.TestFromServerActivity;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static com.prodadimhaski.eastory2.rvadapters.ListOfTestsAdapter.ITEM_POSITION;
 

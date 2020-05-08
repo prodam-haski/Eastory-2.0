@@ -1,13 +1,11 @@
-package com.prodadimhaski.eastory2.ui;
+package com.prodadimhaski.eastory2.ui.testActivities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
@@ -27,17 +25,13 @@ import android.widget.Toast;
 import com.prodadimhaski.eastory2.R;
 import com.prodadimhaski.eastory2.interfaces.Name;
 import com.prodadimhaski.eastory2.interfaces.TypeOfTest;
-import com.prodadimhaski.eastory2.rvadapters.TopicAdapter;
 import com.prodadimhaski.eastory2.serverUtils.NetworkService;
 import com.prodadimhaski.eastory2.serverUtils.POJO.ResultDTO;
 import com.prodadimhaski.eastory2.serverUtils.POJO.TestOTD;
-import com.prodadimhaski.eastory2.serverUtils.POJO.TopicOTD;
 import com.prodadimhaski.eastory2.utils.Checking;
 import com.prodadimhaski.eastory2.utils.Task;
 import com.prodadimhaski.eastory2.utils.TaskManager;
 
-import java.io.IOException;
-import java.util.Calendar;
 import java.util.List;
 
 import okhttp3.ResponseBody;

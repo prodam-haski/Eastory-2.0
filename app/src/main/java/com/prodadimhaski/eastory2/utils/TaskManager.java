@@ -2,23 +2,35 @@ package com.prodadimhaski.eastory2.utils;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
 import com.prodadimhaski.eastory2.Room.Dao.LanguageDao;
+import com.prodadimhaski.eastory2.Room.Dao.QuestionDao;
 import com.prodadimhaski.eastory2.Room.Dao.TestDao;
 import com.prodadimhaski.eastory2.Room.Database;
 import com.prodadimhaski.eastory2.Room.entities.Question;
 import com.prodadimhaski.eastory2.interfaces.Language;
+import com.prodadimhaski.eastory2.interfaces.TempList;
 import com.prodadimhaski.eastory2.interfaces.TypeOfTest;
+import com.prodadimhaski.eastory2.serverUtils.NetworkService;
+import com.prodadimhaski.eastory2.serverUtils.POJO.TestOTD;
+import com.prodadimhaski.eastory2.serverUtils.POJO.TopicOTD;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class TaskManager implements Language, TypeOfTest {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class TaskManager implements Language, TypeOfTest, TempList {
 
     private Task[] listTask = new Task[setting.getSizeOfTest()];
     private Context context;
     private Database db;
     private TestDao testDao;
+    private QuestionDao questionDao;
 
     public Task[] createList() {
         db = Database.getInstance(context);
@@ -34,15 +46,48 @@ public class TaskManager implements Language, TypeOfTest {
         return listTask;
     }
 
-    public Task[] createListFromServer(int id){
+    public Task[] createListFromServer(int id) {
         db = Database.getInstance(context);
         testDao = db.testDao();
+        questionDao = db.questionDao();
         List<Question> questions = filterByLanguage(testDao.getTopicWithQuestionsById(id));
         setting.setSizeOfTest(questions.size());
         listTask = new Task[questions.size()];
         for (int i = 0; i < questions.size(); i++) {
             listTask[i] = createTask(questions.get(i));
         }
+
+
+       /* NetworkService.getInstance()
+                .getJSONApi()
+                .getTestByID(id)
+                .enqueue(new Callback<List<TestOTD>>() {
+                    @Override
+                    public void onResponse(@NonNull Call<List<TestOTD>> call, @NonNull Response<List<TestOTD>> response) {
+                        List<TestOTD> testOTDList = response.body();
+                        List<Question> questions = new ArrayList<Question>();
+                        for (TestOTD s : testOTDList
+                        ) {
+                            questions.add(questionDao.getQuestion(s.getQuestionId()));
+                        }
+                        setting.setSizeOfTest(questions.size());
+                        buffer.setBufferList(questions);
+
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<List<TestOTD>> call, @NonNull Throwable t) {
+                        System.out.println("fail");
+
+                    }
+                });
+
+        setting.setSizeOfTest(buffer.getBufferList().size());
+        listTask = new Task[buffer.getBufferList().size()];
+
+        for (int i = 0; i < buffer.getBufferList().size(); i++) {
+            listTask[i] = createTask(buffer.getBufferList().get(i));
+        }*/
         return listTask;
     }
 
@@ -108,7 +153,7 @@ public class TaskManager implements Language, TypeOfTest {
         LanguageDao languageDao = db.languageDao();
         List<Question> resultList = new ArrayList<>();
 
-        for(Question question: allQuestions) {
+        for (Question question : allQuestions) {
             System.out.println(question.getQuestion_id());
             if (languageDao.getLanguage(question.getLanguage_id()).equals(change.getLanguage())) {
                 resultList.add(question);

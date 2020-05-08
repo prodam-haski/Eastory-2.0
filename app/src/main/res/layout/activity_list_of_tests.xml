@@ -5,7 +5,7 @@
     android:id="@+id/list_of_test_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ListOfTestsActivity">
+    tools:context=".ui.constructorActivities.ListOfTestsActivity">
 
     <LinearLayout
         android:id="@+id/container1"

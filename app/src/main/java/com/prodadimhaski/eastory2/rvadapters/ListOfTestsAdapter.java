@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.prodadimhaski.eastory2.R;
-import com.prodadimhaski.eastory2.ui.UserTests;
+import com.prodadimhaski.eastory2.ui.constructorActivities.UserTests;
 
 import java.util.List;
 

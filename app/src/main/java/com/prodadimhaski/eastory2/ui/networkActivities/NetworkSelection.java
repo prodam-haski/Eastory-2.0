@@ -1,4 +1,4 @@
-package com.prodadimhaski.eastory2.ui;
+package com.prodadimhaski.eastory2.ui.networkActivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -16,8 +16,7 @@ import android.widget.Toast;
 
 import com.prodadimhaski.eastory2.R;
 import com.prodadimhaski.eastory2.interfaces.Name;
-
-import java.io.IOException;
+import com.prodadimhaski.eastory2.ui.constructorActivities.ListOfTestsActivity;
 
 public class NetworkSelection extends AppCompatActivity implements Name {
     Button createServer;
@@ -46,29 +45,11 @@ public class NetworkSelection extends AppCompatActivity implements Name {
         });
 
         createServer.setOnClickListener(v -> {
-            final AlertDialog nameDialog = new AlertDialog.Builder(NetworkSelection.this).create();
             LayoutInflater inflater = getLayoutInflater();
             View nameView = inflater.inflate(R.layout.create_window, null);
+            Intent intent = new Intent(NetworkSelection.this, ResultActivity.class);
+            startActivity(intent);
 
-            final TextView textView = nameView.findViewById(R.id.textView);
-            textView.setText(R.string.enterServerName);
-            final EditText testName = nameView.findViewById(R.id.editText);
-            final Button create = nameView.findViewById(R.id.buttonCreateTest);
-            final Button cancel = nameView.findViewById(R.id.buttonCancel);
-
-            cancel.setOnClickListener(v1 -> nameDialog.cancel());
-            create.setOnClickListener(v12 -> {
-                if (!testName.getText().toString().trim().equals("")) {
-                    nameDialog.dismiss();
-
-
-                } else
-                    Toast.makeText(NetworkSelection.this,
-                            R.string.enterServerName, Toast.LENGTH_SHORT).show();
-            });
-
-            nameDialog.setView(nameView);
-            nameDialog.show();
         });
 
         joinServer.setOnClickListener(v -> {
