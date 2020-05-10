@@ -60,7 +60,6 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
                     @Override
                     public void onFailure(@NonNull Call<TopicOTD> call, @NonNull Throwable t) {
                         System.out.println("fail");
-
                     }
                 });
 
@@ -68,7 +67,6 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
         holder.scoreField.setText(result.getRightAnswers().toString());
 
     }
-
 
     @Override
     public int getItemCount() {
@@ -87,6 +85,5 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ViewHolder
             scoreField = view.findViewById(R.id.scoreField);
         }
     }
-
 
 }

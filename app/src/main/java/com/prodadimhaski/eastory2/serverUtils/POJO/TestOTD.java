@@ -37,4 +37,10 @@ public class TestOTD {
     public void setQuestionId(int questionId) {
         this.questionId = questionId;
     }
+
+    public TestOTD(Integer id, Integer topicId, Integer questionId) {
+        this.id = id;
+        this.topicId = topicId;
+        this.questionId = questionId;
+    }
 }

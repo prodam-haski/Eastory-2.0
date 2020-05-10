@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.prodadimhaski.eastory2.R;
+import com.prodadimhaski.eastory2.interfaces.TempList;
 import com.prodadimhaski.eastory2.rvadapters.TopicAdapter;
 import com.prodadimhaski.eastory2.serverUtils.NetworkService;
 import com.prodadimhaski.eastory2.serverUtils.POJO.TopicOTD;
@@ -19,7 +20,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TestsFromServer extends AppCompatActivity {
+public class TestsFromServer extends AppCompatActivity implements TempList {
 
     List<TopicOTD> topics;
     RecyclerView topicsView;
@@ -37,12 +38,7 @@ public class TestsFromServer extends AppCompatActivity {
                     @Override
                     public void onResponse(@NonNull Call<List<TopicOTD>> call, @NonNull Response<List<TopicOTD>> response) {
                         topics = response.body();
-                        topicsView = findViewById(R.id.topics);
-                        topicsView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
-                        final TopicAdapter recyclerAdapter = new TopicAdapter(getApplicationContext(), topics);
-                        topicsView.setAdapter(recyclerAdapter);
-
+                        buffer.setTestOTDList(topics);
                     }
 
                     @Override
@@ -52,5 +48,11 @@ public class TestsFromServer extends AppCompatActivity {
                     }
                 });
 
+        topicsView = findViewById(R.id.topics);
+        topicsView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+        topics = buffer.getTestOTDList();
+        final TopicAdapter recyclerAdapter = new TopicAdapter(getApplicationContext(), topics);
+        topicsView.setAdapter(recyclerAdapter);
     }
 }
