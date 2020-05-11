@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity implements Language {
     public void onBackPressed() {
 
         if (backPressedTime + 2000 > System.currentTimeMillis()) {
-            backToast.cancel();
             super.onBackPressed();
             return;
         } else {

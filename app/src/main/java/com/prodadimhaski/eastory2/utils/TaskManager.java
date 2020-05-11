@@ -1,6 +1,7 @@
 package com.prodadimhaski.eastory2.utils;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
@@ -16,7 +17,9 @@ import com.prodadimhaski.eastory2.serverUtils.NetworkService;
 import com.prodadimhaski.eastory2.serverUtils.POJO.TestOTD;
 import com.prodadimhaski.eastory2.serverUtils.POJO.TopicOTD;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -46,48 +49,39 @@ public class TaskManager implements Language, TypeOfTest, TempList {
         return listTask;
     }
 
-    public Task[] createListFromServer(int id) {
-        db = Database.getInstance(context);
-        testDao = db.testDao();
-        questionDao = db.questionDao();
-        List<Question> questions = filterByLanguage(testDao.getTopicWithQuestionsById(id));
-        setting.setSizeOfTest(questions.size());
-        listTask = new Task[questions.size()];
-        for (int i = 0; i < questions.size(); i++) {
-            listTask[i] = createTask(questions.get(i));
-        }
+    public Task[] createListFromServer(int id) throws IOException {
 
+                    db = Database.getInstance(context);
+                    testDao = db.testDao();
+                    questionDao = db.questionDao();
 
-       /* NetworkService.getInstance()
-                .getJSONApi()
-                .getTestByID(id)
-                .enqueue(new Callback<List<TestOTD>>() {
-                    @Override
-                    public void onResponse(@NonNull Call<List<TestOTD>> call, @NonNull Response<List<TestOTD>> response) {
-                        List<TestOTD> testOTDList = response.body();
-                        List<Question> questions = new ArrayList<Question>();
-                        for (TestOTD s : testOTDList
-                        ) {
-                            questions.add(questionDao.getQuestion(s.getQuestionId()));
-                        }
-                        setting.setSizeOfTest(questions.size());
-                        buffer.setBufferList(questions);
+                    NetworkService.getInstance()
+                            .getJSONApi()
+                            .getTestByID(id)
+                            .enqueue(new Callback<List<TestOTD>>() {
+                                @Override
+                                public void onResponse(Call<List<TestOTD>> call, Response<List<TestOTD>> response) {
+                                    List<TestOTD> questions  = response.body();
+                                    List<Question> questionList = new LinkedList<>();
 
-                    }
+                                    for (TestOTD q: questions) {
+                                        questionList.add(questionDao.getQuestion(q.getQuestionId()));
+                                    }
+                                    setting.setSizeOfTest(questions.size());
+                                    buffer.setBufferList(questionList);
+                                }
 
-                    @Override
-                    public void onFailure(@NonNull Call<List<TestOTD>> call, @NonNull Throwable t) {
-                        System.out.println("fail");
+                                @Override
+                                public void onFailure(Call<List<TestOTD>> call, Throwable t) {
 
-                    }
-                });
+                                }
+                            });
 
-        setting.setSizeOfTest(buffer.getBufferList().size());
         listTask = new Task[buffer.getBufferList().size()];
-
         for (int i = 0; i < buffer.getBufferList().size(); i++) {
             listTask[i] = createTask(buffer.getBufferList().get(i));
-        }*/
+        }
+
         return listTask;
     }
 

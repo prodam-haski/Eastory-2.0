@@ -27,6 +27,12 @@ public interface JSONApi {
     @POST("/test/check_results")
     public Call<ResponseBody> sendResult(@Body ResultDTO data);
 
+    @POST("/topic")
+    public Call<ResponseBody> sendTopic(@Body TopicOTD data);
+
+    @POST("/test")
+    public Call<ResponseBody> sendTest(@Body List<TestOTD> data);
+
     @GET("/test/find_all_results")
     public Call<List<ResultDTO>> getResult();
 

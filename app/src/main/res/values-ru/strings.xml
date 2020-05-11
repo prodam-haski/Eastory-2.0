@@ -25,6 +25,7 @@
     <string name="next">Далее</string>
 
     <string name="buttonCreate"> Создать тест</string>
+    <string name="buttonUpload"> Загрузить на сервер</string>
     <string name="buttonChange"> Изменить тест</string>
 
     <string name="antiquity">История Беларуси с древнейших времен до середины ХІІІ в.</string>
@@ -42,6 +43,5 @@
     <string name="delete">Удалить</string>
     <string name="confirmationDelete">Хотите удалить тест?</string>
     <string name="rollUp">При сворачивании приложения будет выставлена оценка 0</string>
-
 
 </resources>

@@ -32,6 +32,7 @@ import com.prodadimhaski.eastory2.utils.Checking;
 import com.prodadimhaski.eastory2.utils.Task;
 import com.prodadimhaski.eastory2.utils.TaskManager;
 
+import java.io.IOException;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -91,7 +92,11 @@ public class TestFromServerActivity extends AppCompatActivity implements TypeOfT
 
         TaskManager manager = new TaskManager(getApplicationContext());
 
-        tasks = manager.createListFromServer(id);
+        try {
+            tasks = manager.createListFromServer(id);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         control = new Checking();
         progressBar.setMax(setting.getSizeOfTest());

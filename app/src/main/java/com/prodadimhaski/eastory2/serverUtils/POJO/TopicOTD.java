@@ -26,4 +26,9 @@ public class TopicOTD {
     public void setTopicText(String topicText) {
         this.topicText = topicText;
     }
+
+    public TopicOTD(Integer id, String topicText) {
+        this.id = id;
+        this.topicText = topicText;
+    }
 }
