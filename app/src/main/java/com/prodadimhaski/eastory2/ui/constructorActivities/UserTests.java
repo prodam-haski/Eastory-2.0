@@ -98,7 +98,6 @@ public class UserTests extends AppCompatActivity {
 
                                 @Override
                                 public void onFailure(Call<ResponseBody> call, Throwable t) {
-
                                 }
                             });
 
@@ -114,14 +113,13 @@ public class UserTests extends AppCompatActivity {
 
                                 @Override
                                 public void onFailure(Call<ResponseBody> call, Throwable t) {
-
                                 }
                             });
                         }
 
                         @Override
                         public void onFailure(Call<List<TopicOTD>> call, Throwable t) {
-                            System.out.println("fail");
+                            Toast.makeText(getApplicationContext(), "Ошибка подключения к серверу", Toast.LENGTH_SHORT).show();
                         }
                     });
         });

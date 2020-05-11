@@ -55,33 +55,34 @@ public class TaskManager implements Language, TypeOfTest, TempList {
                     testDao = db.testDao();
                     questionDao = db.questionDao();
 
-                    NetworkService.getInstance()
-                            .getJSONApi()
-                            .getTestByID(id)
-                            .enqueue(new Callback<List<TestOTD>>() {
-                                @Override
-                                public void onResponse(Call<List<TestOTD>> call, Response<List<TestOTD>> response) {
-                                    List<TestOTD> questions  = response.body();
-                                    List<Question> questionList = new LinkedList<>();
+//                    NetworkService.getInstance()
+//                            .getJSONApi()
+//                            .getTestByID(id)
+//                            .enqueue(new Callback<List<TestOTD>>() {
+//                                @Override
+//                                public void onResponse(Call<List<TestOTD>> call, Response<List<TestOTD>> response) {
+//                                    List<TestOTD> questions  = response.body();
+//                                    List<Question> questionList = new LinkedList<>();
+//
+//                                    for (TestOTD q: questions) {
+//                                        questionList.add(questionDao.getQuestion(q.getQuestionId()));
+//                                    }
+//                                    setting.setSizeOfTest(questions.size());
+//                                }
+//
+//                                @Override
+//                                public void onFailure(Call<List<TestOTD>> call, Throwable t) {
+//
+//                                }
+//                            });
+        List<Question> questions = filterByLanguage(testDao.getTopicWithQuestionsById(id));
 
-                                    for (TestOTD q: questions) {
-                                        questionList.add(questionDao.getQuestion(q.getQuestionId()));
-                                    }
-                                    setting.setSizeOfTest(questions.size());
-                                    buffer.setBufferList(questionList);
-                                }
+        listTask = new Task[questions.size()];
 
-                                @Override
-                                public void onFailure(Call<List<TestOTD>> call, Throwable t) {
-
-                                }
-                            });
-
-        listTask = new Task[buffer.getBufferList().size()];
-        for (int i = 0; i < buffer.getBufferList().size(); i++) {
-            listTask[i] = createTask(buffer.getBufferList().get(i));
+        setting.setSizeOfTest(questions.size());
+        for (int i = 0; i < setting.getSizeOfTest(); i++) {
+            listTask[i] = createTask(questions.get(i));
         }
-
         return listTask;
     }
 
