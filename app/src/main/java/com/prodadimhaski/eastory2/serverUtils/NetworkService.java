@@ -29,5 +29,9 @@ public class NetworkService {
         return mInstance;
     }
 
+    public static void destroy() {
+        if (mInstance != null)
+            mInstance = null;
+    }
 
 }

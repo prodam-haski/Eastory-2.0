@@ -1,6 +1,7 @@
 package com.prodadimhaski.eastory2.ui.networkActivities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -51,9 +52,5 @@ public class TestsFromServer extends AppCompatActivity implements TempList {
                              }
                          }
                 );
-
-
     }
-
-
 }

@@ -3,7 +3,7 @@ package com.prodadimhaski.eastory2.utils;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.MainThread;
 
 import com.prodadimhaski.eastory2.Room.Dao.LanguageDao;
 import com.prodadimhaski.eastory2.Room.Dao.QuestionDao;
@@ -15,16 +15,12 @@ import com.prodadimhaski.eastory2.interfaces.TempList;
 import com.prodadimhaski.eastory2.interfaces.TypeOfTest;
 import com.prodadimhaski.eastory2.serverUtils.NetworkService;
 import com.prodadimhaski.eastory2.serverUtils.POJO.TestOTD;
-import com.prodadimhaski.eastory2.serverUtils.POJO.TopicOTD;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 public class TaskManager implements Language, TypeOfTest, TempList {
@@ -34,6 +30,7 @@ public class TaskManager implements Language, TypeOfTest, TempList {
     private Database db;
     private TestDao testDao;
     private QuestionDao questionDao;
+    List<TestOTD> questions;
 
     public Task[] createList() {
         db = Database.getInstance(context);
@@ -49,32 +46,16 @@ public class TaskManager implements Language, TypeOfTest, TempList {
         return listTask;
     }
 
-    public Task[] createListFromServer(int id) throws IOException {
+    public Task[] createListFromServer(int id) throws InterruptedException {
 
-                    db = Database.getInstance(context);
-                    testDao = db.testDao();
-                    questionDao = db.questionDao();
+        db = Database.getInstance(context);
+        testDao = db.testDao();
+        questionDao = db.questionDao();
 
-//                    NetworkService.getInstance()
-//                            .getJSONApi()
-//                            .getTestByID(id)
-//                            .enqueue(new Callback<List<TestOTD>>() {
-//                                @Override
-//                                public void onResponse(Call<List<TestOTD>> call, Response<List<TestOTD>> response) {
-//                                    List<TestOTD> questions  = response.body();
-//                                    List<Question> questionList = new LinkedList<>();
-//
-//                                    for (TestOTD q: questions) {
-//                                        questionList.add(questionDao.getQuestion(q.getQuestionId()));
-//                                    }
-//                                    setting.setSizeOfTest(questions.size());
-//                                }
-//
-//                                @Override
-//                                public void onFailure(Call<List<TestOTD>> call, Throwable t) {
-//
-//                                }
-//                            });
+        Thread request = new Thread(() -> getList(id));
+        request.start();
+        request.join();
+
         List<Question> questions = filterByLanguage(testDao.getTopicWithQuestionsById(id));
 
         listTask = new Task[questions.size()];
@@ -84,6 +65,22 @@ public class TaskManager implements Language, TypeOfTest, TempList {
             listTask[i] = createTask(questions.get(i));
         }
         return listTask;
+
+    }
+
+    public void getList(int id) {
+        Response<List<TestOTD>> response = null;
+        try {
+            response = NetworkService
+                    .getInstance()
+                    .getJSONApi()
+                    .getTestByID(id)
+                    .execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        questions = response.body();
     }
 
     public Task[] createMixedList() {
@@ -149,7 +146,6 @@ public class TaskManager implements Language, TypeOfTest, TempList {
         List<Question> resultList = new ArrayList<>();
 
         for (Question question : allQuestions) {
-            System.out.println(question.getQuestion_id());
             if (languageDao.getLanguage(question.getLanguage_id()).equals(change.getLanguage())) {
                 resultList.add(question);
             }

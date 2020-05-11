@@ -35,7 +35,4 @@ public interface JSONApi {
 
     @GET("/test/find_all_results")
     public Call<List<ResultDTO>> getResult();
-
-
-
 }

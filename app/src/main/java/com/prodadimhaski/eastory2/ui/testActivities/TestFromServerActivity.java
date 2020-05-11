@@ -93,8 +93,12 @@ public class TestFromServerActivity extends AppCompatActivity implements TypeOfT
         TaskManager manager = new TaskManager(getApplicationContext());
 
         try {
-            tasks = manager.createListFromServer(id);
-        } catch (IOException e) {
+            try {
+                tasks = manager.createListFromServer(id);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
