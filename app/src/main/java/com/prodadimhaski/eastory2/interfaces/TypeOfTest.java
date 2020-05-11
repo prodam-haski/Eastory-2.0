@@ -12,6 +12,15 @@ public interface TypeOfTest {
         int type;
         String period;
         int sizeOfTest;
+        boolean testFromServer;
+
+        public boolean isTestFromServer() {
+            return testFromServer;
+        }
+
+        public void setTestFromServer(boolean testFromServer) {
+            this.testFromServer = testFromServer;
+        }
 
         public int getType() {
             return type;

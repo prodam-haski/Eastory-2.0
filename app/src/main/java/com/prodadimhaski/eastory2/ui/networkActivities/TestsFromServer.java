@@ -38,7 +38,10 @@ public class TestsFromServer extends AppCompatActivity implements TempList {
                     @Override
                     public void onResponse(@NonNull Call<List<TopicOTD>> call, @NonNull Response<List<TopicOTD>> response) {
                         topics = response.body();
-                        buffer.setTestOTDList(topics);
+                        topicsView = findViewById(R.id.topics);
+                        topicsView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        final TopicAdapter recyclerAdapter = new TopicAdapter(getApplicationContext(), topics);
+                        topicsView.setAdapter(recyclerAdapter);
                     }
 
                     @Override
@@ -47,12 +50,5 @@ public class TestsFromServer extends AppCompatActivity implements TempList {
                         Toast.makeText(TestsFromServer.this, "xuina", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-        topicsView = findViewById(R.id.topics);
-        topicsView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-
-        topics = buffer.getTestOTDList();
-        final TopicAdapter recyclerAdapter = new TopicAdapter(getApplicationContext(), topics);
-        topicsView.setAdapter(recyclerAdapter);
     }
 }

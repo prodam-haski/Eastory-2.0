@@ -1,5 +1,6 @@
 package com.prodadimhaski.eastory2.ui.testActivities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -21,19 +22,31 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.prodadimhaski.eastory2.interfaces.Name;
 import com.prodadimhaski.eastory2.interfaces.TypeOfTest;
+import com.prodadimhaski.eastory2.serverUtils.NetworkService;
+import com.prodadimhaski.eastory2.serverUtils.POJO.ResultDTO;
 import com.prodadimhaski.eastory2.utils.Checking;
 import com.prodadimhaski.eastory2.utils.Task;
 import com.prodadimhaski.eastory2.utils.TaskManager;
 import com.prodadimhaski.eastory2.R;
 
-public class TestWindow extends AppCompatActivity implements TypeOfTest {
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.prodadimhaski.eastory2.rvadapters.ListOfTestsAdapter.ITEM_POSITION;
+
+public class TestWindow extends AppCompatActivity implements TypeOfTest, Name {
 
     private Task[] tasks;
     private int taskNumber = 0;
     private int tapCounter = 0;
 
-    Checking control = new Checking();
+    Checking control;
 
     RadioGroup userAnswers;
     RadioButton userAnswer1;
@@ -49,11 +62,13 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest {
     Button buttonPrev;
     ImageView backgroundImage;
     ProgressBar progressBar;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_window);
+        id = getIntent().getIntExtra(ITEM_POSITION, 0);
 
         userAnswers = findViewById(R.id.radioButtons);
         userAnswer1 = findViewById(R.id.radioButton1);
@@ -70,18 +85,32 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest {
         buttonPrev = findViewById(R.id.buttonPrevios);
 
         backgroundImage = findViewById(R.id.testBackground);
-        backgroundImage.setImageResource(installBackground());
+        if (!setting.isTestFromServer()) {
+            backgroundImage.setImageResource(installBackground());
+        }
 
         progressBar = findViewById(R.id.progressBar);
-        progressBar.setMax(setting.getSizeOfTest());
 
 
         initButtons();
 
         TaskManager manager = new TaskManager(getApplicationContext());
-        if (setting.getType() == 0) tasks = manager.createMixedList();
-        else tasks = manager.createList();
+        if (setting.isTestFromServer()) {
+            try {
+                tasks = manager.createListFromServer(id);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Toast.makeText(this, R.string.rollUp, Toast.LENGTH_SHORT).show();
+            description.setVisibility(View.INVISIBLE);
+        } else {
 
+            if (setting.getType() == 0) tasks = manager.createMixedList();
+            else tasks = manager.createList();
+        }
+
+        control = new Checking();
+        progressBar.setMax(setting.getSizeOfTest());
         paint();
     }
 
@@ -117,14 +146,15 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest {
                 answer.setClickable(false);
                 progressBar.incrementProgressBy(1);
                 control.setUserIsRight();
+                if(setting.isTestFromServer()){toNext();};
             } else {
-                    Toast.makeText(TestWindow.this, R.string.hasAnswer, Toast.LENGTH_SHORT).show();
+                Toast.makeText(TestWindow.this, R.string.hasAnswer, Toast.LENGTH_SHORT).show();
             }
         });
 
         image.setOnClickListener(v -> {
             if (tasks[taskNumber].getImage() == null) {
-                    Toast.makeText(TestWindow.this, R.string.noImage, Toast.LENGTH_SHORT).show();
+                Toast.makeText(TestWindow.this, R.string.noImage, Toast.LENGTH_SHORT).show();
             } else {
                 Dialog imageWindow = new Dialog(TestWindow.this);
                 imageWindow.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -190,6 +220,14 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest {
     }
 
     @Override
+    public void onStop() {
+        if (setting.isTestFromServer()) {
+            control.setAlwaysZero();
+        }
+        super.onStop();
+    }
+
+    @Override
     public void onBackPressed() {
         finish();
     }
@@ -236,49 +274,52 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest {
         }
         userAnswers.setClickable(false);
         control.checkAnswer(userAnswer, taskNumber);
-        if (control.getUserIsRight()) {
-            switch (userAnswers.getCheckedRadioButtonId()) {
-                case R.id.radioButton1:
-                    userAnswer1.setBackgroundResource(R.drawable.style_btn_right);
-                    break;
-                case R.id.radioButton2:
-                    userAnswer2.setBackgroundResource(R.drawable.style_btn_right);
-                    break;
-                case R.id.radioButton3:
-                    userAnswer3.setBackgroundResource(R.drawable.style_btn_right);
-                    break;
-                case R.id.radioButton4:
-                    userAnswer4.setBackgroundResource(R.drawable.style_btn_right);
-                    break;
-            }
-        } else {
-            switch (userAnswers.getCheckedRadioButtonId()) {
-                case R.id.radioButton1:
-                    userAnswer1.setBackgroundResource(R.drawable.style_btn_false);
-                    break;
-                case R.id.radioButton2:
-                    userAnswer2.setBackgroundResource(R.drawable.style_btn_false);
-                    break;
-                case R.id.radioButton3:
-                    userAnswer3.setBackgroundResource(R.drawable.style_btn_false);
-                    break;
-                case R.id.radioButton4:
-                    userAnswer4.setBackgroundResource(R.drawable.style_btn_false);
-                    break;
-            }
-            switch (control.getRightAnswer()) {
-                case 1:
-                    userAnswer1.setBackgroundResource(R.drawable.style_btn_right);
-                    break;
-                case 2:
-                    userAnswer2.setBackgroundResource(R.drawable.style_btn_right);
-                    break;
-                case 3:
-                    userAnswer3.setBackgroundResource(R.drawable.style_btn_right);
-                    break;
-                case 4:
-                    userAnswer4.setBackgroundResource(R.drawable.style_btn_right);
-                    break;
+
+        if(!setting.isTestFromServer()) {
+            if (control.getUserIsRight()) {
+                switch (userAnswers.getCheckedRadioButtonId()) {
+                    case R.id.radioButton1:
+                        userAnswer1.setBackgroundResource(R.drawable.style_btn_right);
+                        break;
+                    case R.id.radioButton2:
+                        userAnswer2.setBackgroundResource(R.drawable.style_btn_right);
+                        break;
+                    case R.id.radioButton3:
+                        userAnswer3.setBackgroundResource(R.drawable.style_btn_right);
+                        break;
+                    case R.id.radioButton4:
+                        userAnswer4.setBackgroundResource(R.drawable.style_btn_right);
+                        break;
+                }
+            } else {
+                switch (userAnswers.getCheckedRadioButtonId()) {
+                    case R.id.radioButton1:
+                        userAnswer1.setBackgroundResource(R.drawable.style_btn_false);
+                        break;
+                    case R.id.radioButton2:
+                        userAnswer2.setBackgroundResource(R.drawable.style_btn_false);
+                        break;
+                    case R.id.radioButton3:
+                        userAnswer3.setBackgroundResource(R.drawable.style_btn_false);
+                        break;
+                    case R.id.radioButton4:
+                        userAnswer4.setBackgroundResource(R.drawable.style_btn_false);
+                        break;
+                }
+                switch (control.getRightAnswer()) {
+                    case 1:
+                        userAnswer1.setBackgroundResource(R.drawable.style_btn_right);
+                        break;
+                    case 2:
+                        userAnswer2.setBackgroundResource(R.drawable.style_btn_right);
+                        break;
+                    case 3:
+                        userAnswer3.setBackgroundResource(R.drawable.style_btn_right);
+                        break;
+                    case 4:
+                        userAnswer4.setBackgroundResource(R.drawable.style_btn_right);
+                        break;
+                }
             }
         }
         userAnswers.clearCheck();
@@ -286,22 +327,38 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest {
     }
 
     private void finishTest() {
-        Dialog descriptionDialog = new Dialog(TestWindow.this);
-        descriptionDialog.getWindow();
-        descriptionDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        descriptionDialog.setContentView(R.layout.result_window);
+        if (setting.isTestFromServer()) {
+            ResultDTO resultDTO = new ResultDTO(nameOfStudent.getName(), id, control.getScore());
+            NetworkService.getInstance().getJSONApi().sendResult(resultDTO).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
 
-        TextView descriptionText = descriptionDialog.findViewById(R.id.textResult);
-        descriptionText.setText(R.string.result);
-        descriptionText.append(" " + control.getScore() + "/" + setting.getSizeOfTest());
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                    Toast.makeText(getApplicationContext(), "error", Toast.LENGTH_SHORT).show();
+                }
+            });
+            finish();
+        } else {
+            Dialog descriptionDialog = new Dialog(TestWindow.this);
+            descriptionDialog.getWindow();
+            descriptionDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            descriptionDialog.setContentView(R.layout.result_window);
+
+            TextView descriptionText = descriptionDialog.findViewById(R.id.textResult);
+            descriptionText.setText(R.string.result);
+            descriptionText.append(" " + control.getScore() + "/" + setting.getSizeOfTest());
 
 
-        Button buttonFinish = descriptionDialog.findViewById(R.id.buttonFinish);
-        buttonFinish.setText(R.string.finish);
-        buttonFinish.setVisibility(View.VISIBLE);
-        buttonFinish.setOnClickListener(v -> finish());
+            Button buttonFinish = descriptionDialog.findViewById(R.id.buttonFinish);
+            buttonFinish.setText(R.string.finish);
+            buttonFinish.setVisibility(View.VISIBLE);
+            buttonFinish.setOnClickListener(v -> finish());
 
-        descriptionDialog.show();
+            descriptionDialog.show();
+        }
 
     }
 }

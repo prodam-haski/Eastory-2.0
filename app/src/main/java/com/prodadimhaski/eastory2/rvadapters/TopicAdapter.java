@@ -11,14 +11,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.prodadimhaski.eastory2.R;
+import com.prodadimhaski.eastory2.interfaces.TypeOfTest;
 import com.prodadimhaski.eastory2.serverUtils.POJO.TopicOTD;
-import com.prodadimhaski.eastory2.ui.testActivities.TestFromServerActivity;
+import com.prodadimhaski.eastory2.ui.testActivities.TestWindow;
 
 import java.util.List;
 
 import static com.prodadimhaski.eastory2.rvadapters.ListOfTestsAdapter.ITEM_POSITION;
 
-public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> {
+public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> implements TypeOfTest {
 
     private LayoutInflater inflater;
     private List<TopicOTD> topicOTDS;
@@ -42,7 +43,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
         TopicOTD topic = topicOTDS.get(position);
         holder.nameView.setText(topic.getTopicText());
         holder.nameView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, TestFromServerActivity.class);
+            Intent intent = new Intent(context, TestWindow.class);
+            setting.setTestFromServer(true);
             intent.putExtra(ITEM_POSITION, topic.getId());
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             context.startActivity(intent);

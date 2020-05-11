@@ -44,6 +44,7 @@ public class TestSelection extends AppCompatActivity implements  TypeOfTest {
         return v -> {
             setting.setType(type);
             setting.setPeriod();
+            setting.setTestFromServer(false);
             Intent intent = new Intent(getApplicationContext(), TestWindow.class);
             startActivity(intent);
         };

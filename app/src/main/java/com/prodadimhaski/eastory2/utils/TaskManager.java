@@ -55,7 +55,7 @@ public class TaskManager implements Language, TypeOfTest, TempList {
                     testDao = db.testDao();
                     questionDao = db.questionDao();
 
-                    NetworkService.getInstance()
+                   /* NetworkService.getInstance()
                             .getJSONApi()
                             .getTestByID(id)
                             .enqueue(new Callback<List<TestOTD>>() {
@@ -80,8 +80,15 @@ public class TaskManager implements Language, TypeOfTest, TempList {
         listTask = new Task[buffer.getBufferList().size()];
         for (int i = 0; i < buffer.getBufferList().size(); i++) {
             listTask[i] = createTask(buffer.getBufferList().get(i));
-        }
+        }*/
+        List<Question> questions = filterByLanguage(testDao.getTopicWithQuestionsById(id));
 
+        setting.setSizeOfTest(questions.size());
+
+        listTask = new Task[setting.getSizeOfTest()];
+        for (int i = 0; i < setting.getSizeOfTest(); i++) {
+            listTask[i] = createTask(questions.get(i));
+        }
         return listTask;
     }
 
