@@ -241,7 +241,7 @@ public class TestFromServerActivity extends AppCompatActivity implements TypeOfT
 
             @Override
             public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
-                Toast.makeText(getApplicationContext(), "xuina", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Ошибка подключения к серверу", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -48,8 +48,7 @@ public class ResultActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(@NonNull Call<List<ResultDTO>> call, @NonNull Throwable t) {
-                        System.out.println("fail");
-                        Toast.makeText(ResultActivity.this, "xuina", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Ошибка подключения к серверу", Toast.LENGTH_SHORT).show();
                     }
                 });
 
