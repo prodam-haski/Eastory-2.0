@@ -124,6 +124,7 @@ public class UserTests extends AppCompatActivity {
                             System.out.println("fail");
                         }
                     });
+            finish();
         });
     }
 }

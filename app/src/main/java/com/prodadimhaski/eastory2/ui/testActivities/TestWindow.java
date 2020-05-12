@@ -98,7 +98,7 @@ public class TestWindow extends AppCompatActivity implements TypeOfTest, Name {
         if (setting.isTestFromServer()) {
             try {
                 tasks = manager.createListFromServer(id);
-            } catch (IOException e) {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             Toast.makeText(this, R.string.rollUp, Toast.LENGTH_SHORT).show();

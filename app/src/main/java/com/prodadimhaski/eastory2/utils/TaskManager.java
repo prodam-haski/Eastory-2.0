@@ -16,6 +16,7 @@ import com.prodadimhaski.eastory2.interfaces.TypeOfTest;
 import com.prodadimhaski.eastory2.serverUtils.NetworkService;
 import com.prodadimhaski.eastory2.serverUtils.POJO.TestOTD;
 import com.prodadimhaski.eastory2.serverUtils.POJO.TopicOTD;
+import com.prodadimhaski.eastory2.serverUtils.TestFromServer;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,6 +36,7 @@ public class TaskManager implements Language, TypeOfTest, TempList {
     private Database db;
     private TestDao testDao;
     private QuestionDao questionDao;
+    List<TestOTD> quest;
 
     public Task[] createList() {
         db = Database.getInstance(context);
@@ -49,47 +52,48 @@ public class TaskManager implements Language, TypeOfTest, TempList {
         return listTask;
     }
 
-    public Task[] createListFromServer(int id) throws IOException {
+    public Task[] createListFromServer(int id) throws InterruptedException {
 
-                    db = Database.getInstance(context);
-                    testDao = db.testDao();
-                    questionDao = db.questionDao();
+        db = Database.getInstance(context);
+        testDao = db.testDao();
+        questionDao = db.questionDao();
 
-                   /* NetworkService.getInstance()
-                            .getJSONApi()
-                            .getTestByID(id)
-                            .enqueue(new Callback<List<TestOTD>>() {
-                                @Override
-                                public void onResponse(Call<List<TestOTD>> call, Response<List<TestOTD>> response) {
-                                    List<TestOTD> questions  = response.body();
-                                    List<Question> questionList = new LinkedList<>();
 
-                                    for (TestOTD q: questions) {
-                                        questionList.add(questionDao.getQuestion(q.getQuestionId()));
-                                    }
-                                    setting.setSizeOfTest(questions.size());
-                                    buffer.setBufferList(questionList);
-                                }
+        Thread request = new Thread(() ->quest = getList(id));
+        request.start();
+        request.join();
 
-                                @Override
-                                public void onFailure(Call<List<TestOTD>> call, Throwable t) {
-
-                                }
-                            });
-
-        listTask = new Task[buffer.getBufferList().size()];
-        for (int i = 0; i < buffer.getBufferList().size(); i++) {
-            listTask[i] = createTask(buffer.getBufferList().get(i));
-        }*/
-        List<Question> questions = filterByLanguage(testDao.getTopicWithQuestionsById(id));
-
+        List<Question> questions = new ArrayList<>();
+        for (TestOTD t:quest
+             ) {
+            System.out.println(t.getQuestionId());
+            questions.add(questionDao.getQuestion(t.getQuestionId()));
+        }
         setting.setSizeOfTest(questions.size());
 
         listTask = new Task[setting.getSizeOfTest()];
         for (int i = 0; i < setting.getSizeOfTest(); i++) {
             listTask[i] = createTask(questions.get(i));
+           
         }
+
         return listTask;
+    }
+
+    public List<TestOTD> getList(int id) {
+        Response<List<TestOTD>> response = null;
+        try {
+            response = NetworkService
+                    .getInstance()
+                    .getJSONApi()
+                    .getTestByID(id)
+                    .execute();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+         ;
+        return response.body();
     }
 
     public Task[] createMixedList() {
